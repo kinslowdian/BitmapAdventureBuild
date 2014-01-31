@@ -1,0 +1,768 @@
+@charset "UTF-8";
+	
+	#dev
+	{
+		position: absolute;
+		
+		top: 10px;
+		left: 10px;
+		
+		color: #fff;
+		
+		font-family: sans-serif;
+		font-weight: bold;
+		
+		z-index: 100;
+		
+	}
+	
+	.mapTitle
+	{
+		width: 320px;
+		height: 100%;
+		
+		color: #fff;
+		
+		position: absolute;
+		left:0; right:0; top:0; bottom:0;
+		
+		margin: 100px auto 0 auto;
+		
+		visibility: hidden;
+		
+		z-index: 1;
+	}
+	
+	.mapTitleText
+	{
+		width: inherit;
+		
+		text-align: center;
+		font-size: 70px;
+		letter-spacing: 0.10em;
+	}
+	
+	.levelTitleText
+	{
+		width: inherit;
+		
+		text-align: center;
+		font-size: 28px;
+		letter-spacing: 0.10em;
+	}
+	
+	.tweenMapTitle
+	{
+		-webkit-transition	: -webkit-transform 0.4s ease-in-out, opacity 0.4s ease-out;
+		transition			: transform 0.4s ease-in-out, opacity 0.4s ease-out;		
+	}
+	
+	.hideMapTitle
+	{
+		opacity: 1;
+		-webkit-transform	: translateY(-480px);
+		transform			: translateY(-480px);
+	}
+	
+	.showMapTitle
+	{
+		-webkit-transform	: translateY(0px);
+		transform			: translateY(0px);		
+	}
+	
+	
+	
+/*
+	.font-dosis
+	{
+		font-family: 'Dosis', sans-serif;
+	}
+*/
+	
+	#wrapper-roam
+	{
+		width: 100%;
+		height: 100%;
+		
+		position: absolute;
+		
+		overflow: hidden;
+		
+		z-index: 0;
+	}
+	
+	#wrapper-roam div
+	{
+		-webkit-backface-visibility: hidden;
+		backface-visibility: hidden;
+		
+		-webkit-touch-callout: none;
+		-webkit-user-select: none;
+		
+		touch-callout: none;
+		user-select: none;
+		
+		pointer-events: none;
+		
+	}
+	
+	
+/*
+	.fader
+	{
+		width: 100%;
+		height: 100%;
+		
+		position: absolute;
+		
+		pointer-events: none;
+		
+		z-index: 1;
+	}
+*/
+	
+/*
+	.fader div
+	{
+		pointer-events: none;
+	}
+*/
+	
+/*
+	.fadeBlock
+	{
+		width: inherit;
+		height: inherit;
+	}
+*/
+	
+/*
+	.fadeBlock-green
+	{
+		background: #e5ffb2;
+		
+		opacity: 1;
+	}
+*/
+	
+/*
+	.tween-fadeBlock
+	{
+		-webkit-transition	: opacity 0.6s ease-out;
+		transition			: opacity 0.6s ease-out;
+	}
+*/
+	
+	#stage-roam
+	{
+		width: inherit;
+		height: inherit;
+		
+		position: absolute;
+		
+		top: 0; left: 0; right:0; bottom: 0;
+		
+		margin: 0 auto;
+		
+		/* background: #7d7d76; */
+	
+		/* background: #dfdfd5; */
+		
+		background: #7d7d76;
+	}
+	
+	.stageCenter-x, .stageCenter-y
+	{
+		/* width: inherit; */
+		width: 1280px;
+		height: inherit;
+		
+		position: absolute;
+		
+		top: 0; left: 0; right:0; bottom: 0;
+		
+		margin: 0 auto;
+	}
+	
+	.stageCenter-x
+	{
+		-webkit-transition	: -webkit-transform 0.4s ease-in-out;
+		transition 			: transform 0.4s ease-in-out;
+	}
+	
+	.woodland
+	{
+		width: 1280px;
+		/* height: inherit; */
+		height: 0;
+		
+		position: absolute;
+		
+		top: 0; left: 0; right:0; bottom: 0;
+		
+		margin: 0 auto;
+		
+		z-index: 0;
+	}
+	
+	.woodland-bg
+	{
+/*
+		width: auto;
+		height: auto;
+*/
+		width: inherit;
+		height: inherit;
+		
+		position: absolute;
+		top: 0; left: 0; right:0; bottom: 0;
+		
+		z-index: 0;
+	}
+	
+	.woodland-bg .woodland-bg-basic
+	{
+		width: inherit;
+		height: inherit;
+		
+		position: absolute;
+		
+		z-index: 0;		
+	}
+	
+	.woodland-bg .woodland-bg-border
+	{
+		width: 480px;
+		
+		position: absolute;
+		top: 0; left: 0; right:0; bottom: 0;
+		margin: 0 auto;
+		
+		z-index: 1;
+	}
+	
+	.woodland-bg .woodland-bg-levelFinish
+	{
+		width: 480px;
+		height: 120px;
+		
+		background-position: center top;
+		
+		position: absolute;
+		top: 0; left: 0; right:0; bottom: 0;
+		margin: 0 auto;
+		
+		z-index: 1;
+	}
+	
+	.woodland-darkness
+	{
+		width: 100px;
+		/* height: auto; */
+		height: inherit;
+		
+		position: absolute;
+		
+		top: 0;
+		bottom: 0;
+		
+		z-index: 2;	
+	}
+	
+	.woodland-darkness:nth-child(1)
+	{
+		left: 0;
+		
+		background-position: 0 0;
+	}
+	
+	.woodland-darkness:nth-child(2)
+	{
+		right: 0;
+		
+		background-position: -100px 0;
+	}
+	
+	.woodland-bottom
+	{
+		width: inherit;
+		height: 160px;
+		
+		position: absolute;
+		
+		left: 0;
+		bottom: 0;
+		
+		z-index: 1;
+		
+		/* background: rgba(255, 0, 51, 0.4); */
+	}
+	
+	.woodland-areas
+	{
+		width: inherit;
+		height: inherit;
+		
+		position: absolute;
+		left:0; top:0; right:0; bottom:0;
+		
+		
+		z-index: 1;
+	}
+	
+	
+	.field
+	{
+		width: 320px;
+		height: 0;
+		/* height: 1200px; */
+		
+		position: relative;
+		
+		margin: 0 0 0 480px;
+		
+/*
+		position: fixed;
+		
+		top: 0; left: 0; right: 0; bottom: 0;
+		
+		margin: 0 auto;
+*/
+		
+		z-index: 1;
+	}
+	
+	.field-floor
+	{
+		width: inherit;
+		height: inherit;
+		
+		position: absolute;
+		
+		background: #dfdfd5;
+	
+		z-index: 0;
+	}
+	
+	.field-area, .enemy-area, .portal-area, .player-area, .fieldEdge, .preHitTest
+	{
+		width: inherit;
+		height: inherit;
+		
+		position: absolute;
+	}
+	
+	.fieldEdge
+	{
+		z-index: 3;
+	}
+	
+	.player-area
+	{
+		z-index: 3;
+		
+		-webkit-transition	: opacity 0.5s ease;
+		transition 		 	: opacity 0.5s ease;
+	}
+	
+	.preHitTest
+	{
+		z-index: 3;
+	}
+	
+	.field-area
+	{
+		z-index: 1;
+	}
+	
+	.portal-area
+	{
+		z-index: 2;
+	}
+	
+	.enemy-area
+	{
+		z-index: 2;
+	}
+	
+	#space
+	{
+		width: inherit;
+		height: inherit;
+		
+		/* background: rgba(255, 255, 255, 0.4); */
+		
+		position: absolute;
+		
+		top:0; left:0; right:0; bottom:0;
+		
+		z-index: 2;
+	}
+	
+	.atmosphere
+	{
+		width: inherit;
+		height: inherit;
+		
+		position: absolute;
+		top:0; left:0; right:0; bottom:0;
+		
+		z-index: 0;
+	}
+	
+	.atmosphere .dayLight
+	{
+		width: inherit;
+		height: inherit;
+		
+		position: absolute;
+		top:0; left:0; right:0; bottom:0;
+		
+		-webkit-transition	: all 4s ease;
+		transition			: all 4s ease;
+	
+		z-index: 4;		
+	}
+	
+	
+	.atmosphere .weather-fog
+	{
+		width: inherit;
+		height: inherit;
+		
+		position: absolute;
+		top:0; left:0; right:0; bottom:0;
+	
+		z-index: 3;
+	}
+	
+	.atmosphere .weather-rain
+	{
+		width: inherit;
+		height: inherit;
+		
+		position: absolute;
+		top:0; left:0; right:0; bottom:0;
+	
+		z-index: 2;
+	}
+	
+	.atmosphere .weather-wind
+	{
+		width: inherit;
+		height: inherit;
+		
+		position: absolute;
+		top:0; left:0; right:0; bottom:0;
+		
+		z-index: 1;
+	}
+	
+	.atmosphere .weather-snow
+	{
+		width: inherit;
+		height: inherit;
+		
+		position: absolute;
+		top: 0; left: 0; bottom: 0; right: 0;
+		
+		z-index: 0;
+	}
+	
+	.dayLight-DAY
+	{
+		opacity: 0;
+	}
+	
+	.dayLight-EVENING
+	{
+		opacity: 0.2;
+		background: rgb(255, 0, 51);
+	}
+	
+	.dayLight-MORNING
+	{
+		opacity: 0.1;
+		background: #FFFF00;
+	}
+	
+	.dayLight-NIGHT
+	{
+		opacity: 0.3;
+		background: #004680;
+	}
+	
+	.weather-fog-cloud
+	{
+		background: #fff;
+		
+		opacity: 0.2;		
+	}
+	
+	
+	.tween_weather-fog
+	{
+		-webkit-animation	: tweenWeatherFogFrames 6s ease-in-out infinite;
+		animation			: tweenWeatherFogFrames 6s ease-in-out infinite;
+	}
+	
+	
+	@-webkit-keyframes tweenWeatherFogFrames
+	{
+		0%		{ opacity: 0.10; }
+		25%		{ opacity: 0.22; }
+		50%		{ opacity: 0.14; }
+		75%		{ opacity: 0.18; }
+		100%	{ opacity: 0.10; }
+	}
+	
+	@keyframes tweenWeatherFogFrames
+	{
+		0%		{ opacity: 0.10; }
+		25%		{ opacity: 0.22; }
+		50%		{ opacity: 0.14; }
+		75%		{ opacity: 0.18; }
+		100%	{ opacity: 0.10; }
+	}
+	
+	.mapCloud-btm, .mapCloud-top
+	{
+		width: 100%;
+		height: 360px;
+		
+		position: absolute;
+		
+		left: 0; right: 0;
+		
+		/* z-index: 1; */
+		z-index: 2;
+	}
+	
+	.mapCloud-btm
+	{
+		bottom: -255px;
+	}
+	
+	.mapCloud-top
+	{
+		left: 0; right: 0; bottom: 0; top: 0;
+		
+		margin: -255px auto 0 auto;
+	}
+	
+	@media (max-height: 600px)
+	{
+		.mapCloud-btm, .mapCloud-top
+		{
+			visibility: hidden;
+		}
+	}
+	
+	
+	.mapCloud-sprite
+	{
+		width: inherit;
+		height: 360px;
+		
+		z-index: 2;
+	}
+	
+	.tween_mapCloud-btm-sprite
+	{
+		-webkit-animation	: tweenMapCloudBtmSpriteFrames 1s ease-in-out infinite;
+		animation			: tweenMapCloudBtmSpriteFrames 1s ease-in-out infinite;
+	}
+	
+	@-webkit-keyframes tweenMapCloudBtmSpriteFrames
+	{
+		0%		{ -webkit-transform: translateY(0px); }
+		50%		{ -webkit-transform: translateY(16px); }
+		100%	{ -webkit-transform: translateY(0px); }
+	}
+	
+	@keyframes tweenMapCloudBtmSpriteFrames
+	{
+		0%		{ transform: translateY(0px); }
+		50%		{ transform: translateY(16px); }
+		100%	{ transform: translateY(0px); }
+	}
+	
+	.tween_mapCloud-top-sprite
+	{
+		-webkit-animation	: tweenMapCloudTopSpriteFrames 1s ease-in-out infinite;
+		animation			: tweenMapCloudTopSpriteFrames 1s ease-in-out infinite;
+	}
+	
+	@-webkit-keyframes tweenMapCloudTopSpriteFrames
+	{
+		0%		{ -webkit-transform: translateY(0px); }
+		50%		{ -webkit-transform: translateY(-16px); }
+		100%	{ -webkit-transform: translateY(0px); }
+	}
+	
+	@keyframes tweenMapCloudTopSpriteFrames
+	{
+		0%		{ transform: translateY(0px); }
+		50%		{ transform: translateY(-16px); }
+		100%	{ transform: translateY(0px); }
+	}
+	
+	.fieldEdge-T, .fieldEdge-B
+	{
+		width: inherit;
+		height: 40px;
+		
+		position: absolute;
+		
+		left: 0px;
+	}
+	
+	.fieldEdge-R, .fieldEdge-L
+	{
+		width: 40px;
+		height: inherit;
+		
+		position: absolute;
+		
+		top: 0px;
+	}
+	
+	.fieldEdge-T
+	{
+		top: -40px;
+	}
+	
+	.fieldEdge-B
+	{
+		/* bottom: -40px; */
+	}
+	
+	.fieldEdge-R
+	{
+		right: -40px;
+	}
+	
+	.fieldEdge-L
+	{
+		left: -40px;
+	}
+	
+	
+	#touchPad
+	{
+		width: 130px;
+		height: 150px;
+		
+		position: absolute;
+		
+		left: 10px;
+		bottom: 10px;
+		
+		z-index: 100;
+		
+		/* background: rgba(0, 255, 0, 0.5); */
+		
+		-webkit-transition: opacity 0.4s ease;	
+		transition: opacity 0.4s ease;		
+	}
+	
+	.touchPad-surface
+	{
+		width: 130px;
+		height: 150px;
+		
+		position: absolute;
+		
+		z-index: 2;			
+	}
+	
+	.touchPad-surface div
+	{
+		width: 50px;
+		height: 50px;
+		
+		/* background: red; */
+		
+		-webkit-border-radius: 25px;
+		border-radius: 25px;
+		
+		-webkit-touch-callout: none;
+		-webkit-user-select: none;
+		
+		touch-callout: none;
+		user-select: none;
+		
+		position: absolute;		
+	}
+	
+	#touchPad-U
+	{
+		-webkit-transform	: translate(40px, 25px);
+		transform			: translate(40px, 25px);	
+	}
+	
+	#touchPad-D
+	{
+		-webkit-transform	: translate(40px, 95px);
+		transform			: translate(40px, 95px);	
+	}
+	
+	#touchPad-L
+	{
+		-webkit-transform	: translate(5px, 60px);
+		transform			: translate(5px, 60px);	
+	}
+	
+	#touchPad-R
+	{
+		-webkit-transform	: translate(75px, 60px);
+		transform			: translate(75px, 60px);	
+	}
+	
+	.touchPad-crab-body
+	{
+		width: 130px;
+		height: 150px;
+		
+		background-position: 0 0;
+		
+		position: absolute;
+		
+		z-index: 1;		
+	}
+	
+	.touchPad-crab-eyes
+	{
+		width: 130px;
+		height: 150px;
+		
+		background-position: -130px 0;
+		
+		position: absolute;
+		
+		z-index: 0;			
+	}
+		
+	.tween_touchCrabEyes
+	{
+		-webkit-animation	: tweenCrabEyesFrames 0.4s ease infinite;
+		animation			: tweenCrabEyesFrames 0.4s ease infinite;
+	}
+	
+	@-webkit-keyframes tweenCrabEyesFrames
+	{
+		0%		{ -webkit-transform	: translateY(0px); }
+		50%		{ -webkit-transform	: translateY(6px); }
+		100%	{ -webkit-transform	: translateY(0px); }
+	}
+	
+	@keyframes tweenCrabEyesFrames
+	{
+		0%		{ transform	: translateY(0px); }
+		50%		{ transform	: translateY(6px); }
+		100%	{ transform	: translateY(0px); }		
+	}
+	
+
+	
+	

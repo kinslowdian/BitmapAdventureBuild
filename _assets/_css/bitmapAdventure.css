@@ -1,0 +1,292 @@
+@charset "UTF-8";
+@import url(http://fonts.googleapis.com/css?family=Dosis);
+@import url(reset.css);
+@import url(pixels.css);
+
+@import url(_battle/start.css);
+@import url(_battle/intro.css);
+@import url(_battle/nav.css);
+@import url(_battle/notice.css);
+
+
+@import url(_roam/clearing.css);
+@import url(_roam/enemy.css);
+@import url(_roam/map_player.css);
+@import url(_roam/portal.css);
+@import url(_roam/tile.css);
+@import url(_roam/weather.css);
+
+/* MUST BE IMPORTED LAST */
+@import url(MEDIA_QUERIES_ALL.css);
+
+
+	body, html
+	{
+		width: 100%;
+		height: 100%;
+				
+		overflow: hidden;
+	}
+			
+	:root
+	{
+		/* background: rgb(191, 172, 153); */
+	}
+	
+	#fader
+	{
+		position: fixed;
+				
+		visibility: hidden;
+				
+		overflow: hidden;
+				
+		z-index: 100;
+				
+		opacity: 0;
+				
+		-webkit-transition	: opacity 0.5s linear;
+		transition			: opacity 0.5s linear;
+	}
+	
+	#battles
+	{
+		width: 100%;
+		
+		position: fixed;
+		
+		z-index: 2;
+	}
+	
+	#eventFill
+	{
+		position: fixed;
+				
+		visibility: hidden;
+				
+		overflow: hidden;
+				
+		opacity: 0;
+				
+		-webkit-transition	: opacity 0.5s ease;
+		transition			: opacity 0.5s ease;
+				
+		z-index: 1;
+	}
+	
+	
+	
+	
+	.wrapper
+	{
+		width: 100%;
+		/* height: 300px; */
+		height: 100%;
+				
+				
+		position: fixed;
+				
+		z-index: 0;
+				
+		overflow: hidden;		
+	}
+	
+	.stage
+	{
+		width: 100%;
+				
+		height: 100%;
+				
+		position: absolute;
+			
+		z-index: 0;
+				
+		left:0; right:0; top:0; bottom: 0;
+		margin: 0 auto;			
+	}
+	
+	
+	
+	
+	
+	
+/*
+	#wrapper
+	{
+		width: 100%;
+		height: 100%;
+				
+				
+		position: fixed;
+				
+		z-index: 0;
+				
+		overflow: hidden;
+	}
+*/
+	
+/*
+	#stage
+	{
+		width: 100%;
+				
+		height: 100%;
+				
+		position: absolute;
+			
+		z-index: 0;
+				
+		left:0; right:0; top:0; bottom: 0;
+		margin: 0 auto;				
+	}
+*/
+			
+			
+	.font-dosis
+	{
+		font-family: 'Dosis', sans-serif;
+		font-weight: lighter;
+	}
+	
+	.font-dosis, p
+	{
+		-webkit-font-smoothing	: antialiased;
+		font-smoothing			: antialiased;
+	}
+	
+	#memory
+	{
+		width: 0;
+		height: 0;
+		visibility: hidden;
+	}
+			
+	
+	.flood-full
+	{
+		width: 100%;
+		height: 100%;
+	}
+			
+	.eventFill-color-dark
+	{
+		background: rgba(0, 0, 0, 0.5);
+	}
+			
+	.fader-fill-white
+	{
+		background: #fff;
+	}
+			
+	.fader-fill-green
+	{
+		background: #e5ffb2;
+	}
+			
+			
+	.fallOff
+	{
+		width: 100%;
+				
+		height: 100%;
+				
+		position: absolute;
+				
+		left: 0; top:800px ; right: 0; bottom: 0;
+				
+		z-index: 1; /* 200 */
+	
+		overflow: hidden;
+		
+		visibility: hidden;
+	}
+			
+	.fallOff-TOP
+	{
+		width: 100%;
+		height: 150px;
+	}
+			
+	.fallOff-BTM
+	{	
+		width: 100%;
+				
+		height: 100%;
+	}
+	
+	.fallOff-255-255-255
+	{
+		background-position: 0 0;
+	}
+			
+	.fallOff-0-0-0
+	{
+		background-position: 0px -150px;
+	}
+	
+	.fallOff-basic-255-255-255
+	{
+		background: rgb(255, 255, 255);
+	}
+			
+	.fallOff-basic-0-0-0
+	{
+		background: rgb(0, 0, 0);
+	}
+	
+	
+	.tween-fallOff
+	{
+		-webkit-animation	: tweenFallOffFrames 2s ease-in-out infinite;
+		animation			: tweenFallOffFrames 2s ease-in-out infinite;
+	}
+	
+	@-webkit-keyframes tweenFallOffFrames
+	{
+		0%		{ -webkit-transform: translateY(0); }
+		50%		{ -webkit-transform: translateY(20px); }
+		100%	{ -webkit-transform: translateY(0); }
+	}
+	
+	@keyframes tweenFallOffFrames
+	{
+		0%		{ transform: translateY(0); }
+		50%		{ transform: translateY(20px); }
+		100%	{ transform: translateY(0); }
+	}
+	
+	.FX_Flash
+	{
+		width: 100%;
+		height: 100%;
+		
+		position: absolute;
+		
+		background: #fff;
+		
+		opacity: 0;
+		
+		visibility: hidden;
+	}
+	
+	.tween-FX_Flash
+	{
+		-webkit-animation	: tweenFX_FlashFrames 0.1s linear forwards;
+		animation			: tweenFX_FlashFrames 0.1s linear forwards;
+	}
+	
+	@-webkit-keyframes tweenFX_FlashFrames
+	{
+		0%		{ visibility: visible; opacity: 0; }
+		50%		{ opacity: 1; }
+		100%	{ visibility: hidden; opacity: 0; }
+	}
+	
+	@keyframes tweenFX_FlashFrames
+	{
+		0%		{ visibility: visible; opacity: 0; }
+		50%		{ opacity: 1; }
+		100%	{ visibility: hidden; opacity: 0; }
+	}
+	
+	

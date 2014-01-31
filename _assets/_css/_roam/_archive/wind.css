@@ -1,0 +1,27 @@
+@charset "UTF-8";
+	
+	.weather-wind-cloud-x
+	{
+		width: 116px;
+		height: 108px;
+		
+		position: absolute;
+		
+		/* -webkit-transform: translateX(200px); */
+	}
+	
+	.weather-wind-cloud-y
+	{
+		width: inherit;
+		height: inherit;
+		
+		/* -webkit-transform: translateY(200px); */
+	}
+	
+	.weather-wind-shadow-cloud-x
+	{
+		width: 116px;
+		height: 138px;
+		
+		position: absolute;
+	}

@@ -1,0 +1,156 @@
+@charset "UTF-8";
+
+	.player-x
+	{
+		width: 320px;
+		position: absolute;		
+	}
+	
+	.player-y
+	{
+		width:320px;
+		position: absolute;
+		
+		/* -webkit-transform: translateY(280px); */
+	}
+	
+	.player-block
+	{
+		width: 40px;
+		height: 40px;
+		
+		position: absolute;
+		
+		/* outline: 1px solid white; */
+	}
+	
+	.map-goat
+	{
+		width: 12px;
+		height: 21px;
+		
+		position: absolute;
+	
+		top: 0; left: 0; right: 0; bottom: 0;
+		
+		margin: auto;		
+	}
+	
+	.map-goat-top
+	{
+		width: 12px;
+		
+		position: absolute;
+		
+		z-index: 1;		
+	}
+	
+	.map-goat-head
+	{
+		width: 12px;
+		height: 14px;
+		
+		position: absolute;
+		
+		background-position: 0px 0px;
+		
+		z-index: 0;		
+	}
+	
+	.map-goat-body
+	{
+		width: 8px;
+		height: 7px;
+		
+		position: absolute;
+		top: 0; left: 0; right: 0; bottom: 0;
+		
+		background-position: -12px 0px;
+		
+		margin: 10px auto 0 auto;
+		
+		z-index: 1;				
+	}
+	
+	.map-goat-btm
+	{
+		width: 12px;
+		height: 4px;
+		
+		position: absolute;
+		top: 0; left: 0; right: 0; bottom: 0;
+		
+		margin: 15px auto 0 auto;
+		
+		z-index: 0;			
+	}
+	
+	.map-goat-legs
+	{
+		width: 8px;
+		height: 6px;
+		
+		position: absolute;
+		top: 0; left: 0; right: 0; bottom: 0;
+		
+		margin: 0px auto 0 auto;
+		
+		background-position: -12px -8px;		
+	}
+	
+	.tween-map-goat-head
+	{
+		-webkit-animation	: tweenMapGoatHeadFrames 0.4s ease-in-out infinite;
+		animation			: tweenMapGoatHeadFrames 0.4s ease-in-out infinite;		
+	}
+	
+	@-webkit-keyframes tweenMapGoatHeadFrames
+	{
+		0%		{ -webkit-transform: translateY(0px);}
+		50%		{ -webkit-transform: translateY(-2px);}
+		100%	{ -webkit-transform: translateY(0px);}
+	}
+	
+	@keyframes tweenMapGoatHeadFrames
+	{
+		0%		{ transform: translateY(0px);}
+		50%		{ transform: translateY(-2px);}
+		100%	{ transform: translateY(0px);}
+	}
+	
+	.tween-map-goat-legs
+	{
+		/* -webkit-animation: tweenMapGoatLegsFrames 0.2s ease-in-out infinite; */
+		-webkit-animation	: tweenMapGoatLegsFrames 0.2s linear infinite;
+		animation			: tweenMapGoatLegsFrames 0.2s linear infinite;
+	}	
+	
+	@-webkit-keyframes tweenMapGoatLegsFrames
+	{
+		0%		{ -webkit-transform: translateY(0px); }
+		50%		{ -webkit-transform: translateY(-4px); }
+		100%	{ -webkit-transform: translateY(0px); }
+	}
+	
+	@keyframes tweenMapGoatLegsFrames
+	{
+		0%		{ transform: translateY(0px); }
+		50%		{ transform: translateY(-4px); }
+		100%	{ transform: translateY(0px); }
+	}
+	
+	.tween-map-goat-tile
+	{
+		-webkit-transition 	: -webkit-transform 0.4s linear;
+		transition 			: transform 0.4s linear;
+	}
+	
+	.preHitTestBlock
+	{
+		width: 40px;
+		height: 40px;
+		
+		position: absolute;
+		
+		/* background: rgba(255, 0, 51, 0.5); */
+	}

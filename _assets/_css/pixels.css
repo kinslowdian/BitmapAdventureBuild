@@ -1,0 +1,797 @@
+@charset "UTF-8";
+
+/* FLICKKER FIX */
+			
+	div[class*='tween-']
+	{
+		-webkit-backface-visibility	: hidden;
+		backface-visibility			: hidden;
+					
+		/* TRY */
+		-webkit-transform-style		: preserve-3d;
+		-webkit-transform			: translateZ(0);
+					
+		transform-style				: preserve-3d;
+		transform					: translateZ(0);
+	}
+
+/* BASIC */
+
+	
+	/* ---------------------------------------------------START */
+	
+	.startPixels
+	{
+		background-image: url(../_img/0_start/startSprite_1x.png);
+		background-repeat: no-repeat;
+		background-size: 240px 203px;
+	}
+	
+	.colour-navPink-Pixels
+	{
+		background-image: url(../_img/0_start/col_nav-pink_1x.png);
+		background-repeat: repeat;
+		background-size: 100px 100px;
+	}
+	
+
+	/* ---------------------------------------------------CHARACTERS */
+	
+	/* BABY GOAT */
+			
+	.babyPixels
+	{
+		background-image: url(../_img/_characters/_intro/_baby/babySprite_1x.png);
+		background-repeat: no-repeat;
+		background-size: 42px 37px;
+	}
+	
+	/* BOSS */
+			
+	.bossPixels
+	{
+		background-image: url(../_img/_characters/_intro/_boss/bossSprite_1x.png);
+		background-repeat: no-repeat;
+		background-size: 361px 216px;
+	}
+	
+	/* GOAT */
+	
+	.goatPixels
+	{
+		background-image: url(../_img/_characters/_intro/_goat/goatSprite_1x.png);
+		background-repeat: no-repeat;
+		background-size: 56px 44px;			
+	}
+
+	
+	/* ---------------------------------------------------BACKGROUNDS */
+	
+	.grassPixels
+	{
+		background-image: url(../_img/_scene/grassTile_1x.png);
+		background-repeat: repeat-x;
+		background-position: left top;
+		background-size: 8px 4px;
+	}
+	
+	.skyPixels
+	{
+		background-image: url(../_img/_scene/bg0_1x.png);
+		background-repeat: repeat;
+		background-size: 8px 8px;				
+	}
+	
+	.punchCloudPixels
+	{
+		background-image: url(../_img/1_intro/cloudSprite_1x.png);
+		background-repeat: no-repeat;
+		background-size: 320px 965px;				
+	}
+	
+	.punchCloudTilePixels
+	{
+		background-image: url(../_img/1_intro/bossCloudTile_1x.png);
+		background-repeat: repeat-x;
+		background-size: 288px 400px;			
+	}
+	
+	.fallOffPixels
+	{
+		background-image: url(../_img/_scene/worldEdge_1x.png);
+		background-repeat: repeat-x;
+		background-size: 320px 600px;			
+	}
+	
+	.groundChipsPixels
+	{
+		background-image: url(../_img/_scene/groundTexture_1x.png);
+		background-repeat: repeat;
+		background-size: 300px 300px;		
+	}
+	
+	.introWallBreaksPixels
+	{
+		background-image: url(../_img/1_intro/introEndBG_1x.png);
+		background-repeat: repeat-x;
+		/* background-position: center top; */
+		background-size: 872px 482px;
+	}
+	
+	/* ---------------------------------------------------BATTLE NAV */
+	
+	.battleNavVectors
+	{
+		background: url(../_img/_battleNav/battleNavOptions.svg) no-repeat left top;
+	}
+	
+
+	.battleCloudPixels
+	{
+		background-image: url(../_img/_battleNav/battleNavCloud_1x.png);
+		background-repeat: repeat-x;
+		background-size: 72px 211px;
+		background-position: center top;				
+	}
+	
+	.battleFlowPixels
+	{
+		background-image: url(../_img/_battleNav/battleNavSprite_1x.png);
+		background-repeat: no-repeat;
+		background-size: 371px 400px;				
+	}
+	
+	.stepsPixels
+	{
+		background-image: url(../_img/_scene/steps_1x.png);
+		background-repeat: repeat-y;
+		background-size: 50px 20px;
+		background-position: left top; 
+	}
+	
+	
+	/* ---------------------------------------------------NOTICE */
+	
+	.noticeRaccoonPixels
+	{	
+		background-image: url(../_img/_notice/notice_raccoon_1x.png);
+		background-repeat: no-repeat;
+		background-size: 520px 221px;
+	}
+	
+	
+	/* ---------------------------------------------------ROAM */
+	
+	
+	.pixels_field
+	{
+		background-image: url(../_img/_tiles/tile_floor_1x.png);
+		background-repeat: repeat;
+		background-position: center top;
+		background-size: 80px 80px;
+	}
+	
+	.pixels_mapCloudBtm
+	{
+		background-image: url(../_img/_mapBlend/cloudMergeBTM_1x.png);
+		background-repeat: repeat-x;
+		background-position: center top;
+		background-size: 145px 360px;
+		
+	}
+	
+	.pixels_mapCloudTop
+	{
+		background-image: url(../_img/_mapBlend/cloudMergeTOP_1x.png);
+		background-repeat: repeat-x;
+		background-position: center top;
+		background-size: 145px 360px;
+		
+	}
+	
+	.pixels_weather-snow
+	{
+		background-image: url(../_img/_fx/snow_1x.png);
+		background-repeat: no-repeat;
+		background-position: 0 0;
+		background-size: 3px 3px;
+	}
+	
+	.pixels_weatherWindShadowCloud
+	{
+		background-image: url(../_img/_fx/cloudWindShadow_1x.png);
+		background-repeat: no-repeat;
+		background-size: 116px 138px;
+	}
+	
+	.pixels_bush
+	{
+		background-image	: url(../_img/_tiles/tile_bush_1x.png);
+		background-repeat	: repeat;
+		background-size: 80px 80px;
+	}
+	
+	.pixels_btm_bg_grass
+	{
+		background-image: url(../_img/_tiles/tile_btm_bg_grass_1x.png);
+		background-repeat: repeat;
+		background-size: 80px 80px;
+	}
+	
+	.pixels_btm_bg_bushBorder
+	{
+		background-image: url(../_img/_tiles/tile_btm_bg_bushBorder_1x.png);
+		background-repeat: repeat;
+		background-size: 120px 80px;
+	}
+	
+	.pixels_btm_bg_levelFinish
+	{
+		background-image: url(../_img/_mapBlend/levelFinish_1x.png);
+		background-repeat: no-repeat;
+		background-size: 400px 120px;
+	}
+	
+	.pixels_darkEdge
+	{
+		background-image: url(../_img/_mapBlend/blackEdge_1x.png);
+		background-repeat: repeat-y;
+		background-size: 200px 320px;
+	}
+	
+	.pixels_flowerLight
+	{
+		background-image: url(../_img/_tiles/tile_flowersLight_1x.png);
+		background-position: 0 0;
+		background-repeat: repeat;
+		background-size: 80px 80px;
+	}
+	
+	.pixels_flowerHeavy
+	{
+		background-image: url(../_img/_tiles/tile_flowersHeavy_1x.png);
+		background-position: 0 0;
+		background-repeat: repeat;
+		background-size: 80px 80px;
+	}
+	
+	.pixels_flowerRichCross
+	{
+		background-image: url(../_img/_tiles/tile_flowersRich_+_1x.png);
+		background-position: 0 0;
+		background-repeat: no-repeat;
+		background-size: 120px 120px;
+	}
+	
+	.pixels_griz
+	{
+		background: url(../_img/_characters/_roam/_griz/griz_1x.png);
+		background-repeat: no-repeat;
+		background-position: 0 0;
+		background-size: 40px 42px;
+	}
+	
+	.pixels_mapGoat
+	{
+		background-image: url(../_img/_characters/_roam/_goat/goatSprite.png);
+		background-repeat: no-repeat;
+		background-size: 20px 14px;		
+	}
+	
+	.pixels_portalTile
+	{
+		background-image: url(../_img/_portal/portal_1x.png);
+		background-repeat: no-repeat;
+		background-position: 0 0;
+		background-size: 80px 80px;
+	}
+	
+	.pixels_touchyCrab
+	{
+		background-image: url(../_img/_nav/touchy.svg);
+		background-repeat: no-repeat;
+		background-position: 0 0;
+		background-size: 130px 150px;
+	}
+	
+	.pixels_touchyCrab
+	{
+		background-image: url(../_img/_nav/touchySplit.svg);
+		background-repeat: no-repeat;
+		background-position: 0 0;
+		background-size: 260px 150px;
+	}
+	
+	.pixels_woodlandBottom
+	{
+		background-image: url(../_img/_mapBlend/bottomEnd_1x.png);
+		background-repeat: repeat-x;
+		background-position: left top;
+		background-size: 240px 160px;
+	}
+	
+	.pixels_flame
+	{
+		background-image: url(../_img/_fx/fire_1x.png);
+		background-repeat: no-repeat;
+		background-size: 20px 60px;
+	}
+	
+	@-webkit-keyframes pixels_tweenRainFrames
+	{
+		0%		{background-image: url(../_img/_fx/rainTile0_1x.png);}
+		25%		{background-image: url(../_img/_fx/rainTile1_1x.png);}
+		50%		{background-image: url(../_img/_fx/rainTile2_1x.png);}
+		75%		{background-image: url(../_img/_fx/rainTile1_1x.png);}
+		100%	{background-image: url(../_img/_fx/rainTile0_1x.png);}
+	}
+			
+	@keyframes pixels_tweenRainFrames
+	{
+		0%		{background-image: url(../_img/_fx/rainTile0_1x.png);}
+		25%		{background-image: url(../_img/_fx/rainTile1_1x.png);}
+		50%		{background-image: url(../_img/_fx/rainTile2_1x.png);}
+		75%		{background-image: url(../_img/_fx/rainTile1_1x.png);}
+		100%	{background-image: url(../_img/_fx/rainTile0_1x.png);}
+	}
+	
+	.pixels_forest
+	{
+		background-image: url(../_img/_tiles/tile_pineTrees_1x.png);
+		background-repeat: repeat;
+		background-size: 80px 80px;
+	}
+	
+	.pixels_forestMass
+	{
+		background-image: url(../_img/_tiles/tile_pineTreesMass_1x.png);
+		background-repeat: repeat;
+		background-size: 240px 240px;		
+	}
+	
+	
+
+/* 1x */
+	
+	@media all and (-webkit-min-device-pixel-ratio: 1), all and (min-device-pixel-ratio: 1)
+	{
+		.startPixels
+		{
+			background-image: url(../_img/0_start/startSprite_1x.png);
+		}
+		
+		.colour-navPink-Pixels
+		{
+			background-image: url(../_img/0_start/col_nav-pink_1x.png);
+		}
+		
+		.babyPixels
+		{
+			background-image: url(../_img/_characters/_intro/_baby/babySprite_1x.png);
+		}
+		
+		.bossPixels
+		{
+			background-image: url(../_img/_characters/_intro/_boss/bossSprite_1x.png);
+		}
+		
+		.goatPixels
+		{
+			background-image: url(../_img/_characters/_intro/_goat/goatSprite_2x.png);
+		}
+		
+		.grassPixels
+		{
+			background-image: url(../_img/_scene/grassTile_1x.png);
+		}
+		
+		.skyPixels
+		{
+			background-image: url(../_img/_scene/bg0_1x.png);			
+		}
+		
+		.punchCloudPixels
+		{
+			background-image: url(../_img/1_intro/cloudSprite_1x.png);			
+		}
+		
+		.punchCloudTilePixels
+		{
+			background-image: url(../_img/1_intro/bossCloudTile_1x.png);
+		}
+		
+		.fallOffPixels
+		{
+			background-image: url(../_img/_scene/worldEdge_1x.png);		
+		}
+		
+		.groundChipsPixels
+		{
+			background-image: url(../_img/_scene/groundTexture_1x.png);	
+		}
+		
+		.introWallBreaksPixels
+		{
+			background-image: url(../_img/1_intro/introEndBG_1x.png);
+		}
+		
+		.battleCloudPixels
+		{
+			background-image: url(../_img/_battleNav/battleNavCloud_1x.png);
+		}
+		
+		.battleFlowPixels
+		{
+			background-image: url(../_img/_battleNav/battleNavSprite_1x.png);
+		}
+		
+		.stepsPixels
+		{
+			background-image: url(../_img/_scene/steps_1x.png);
+		}
+		
+		.noticeRaccoonPixels
+		{	
+			background-image: url(../_img/_notice/notice_raccoon_1x.png);
+		}
+		
+		
+		
+		
+		.pixels_field
+		{
+			background-image: url(../_img/_tiles/tile_floor_1x.png);
+		}
+		
+		.pixels_mapCloudBtm
+		{
+			background-image: url(../_img/_mapBlend/cloudMergeBTM_1x.png);
+		}
+		
+		.pixels_mapCloudTop
+		{
+			background-image: url(../_img/_mapBlend/cloudMergeTOP_1x.png);
+		}
+		
+		.pixels_weather-snow
+		{
+			background-image: url(../_img/_fx/snow_1x.png);
+		}
+		
+		.pixels_weatherWindShadowCloud
+		{
+			background-image: url(../_img/_fx/cloudWindShadow_1x.png);
+		}
+		
+		.pixels_bush
+		{
+			background-image	: url(../_img/_tiles/tile_bush_1x.png);
+		}
+		
+		.pixels_btm_bg_grass
+		{
+			background-image: url(../_img/_tiles/tile_btm_bg_grass_1x.png);
+		}
+		
+		.pixels_btm_bg_bushBorder
+		{
+			background-image: url(../_img/_tiles/tile_btm_bg_bushBorder_1x.png);
+		}
+		
+		.pixels_btm_bg_levelFinish
+		{
+			background-image: url(../_img/_mapBlend/levelFinish_1x.png);
+		}
+		
+		.pixels_darkEdge
+		{
+			background-image: url(../_img/_mapBlend/blackEdge_1x.png);
+		}
+		
+		.pixels_flowerLight
+		{
+			background-image: url(../_img/_tiles/tile_flowersLight_1x.png);
+		}
+		
+		.pixels_flowerHeavy
+		{
+			background-image: url(../_img/_tiles/tile_flowersHeavy_1x.png);
+		}
+		
+		.pixels_flowerRichCross
+		{
+			background-image: url(../_img/_tiles/tile_flowersRich_+_1x.png);
+		}
+		
+		.pixels_griz
+		{
+			background: url(../_img/_characters/_roam/_griz/griz_1x.png);
+		}
+		
+		.pixels_mapGoat
+		{
+			background-image: url(../_img/_characters/_roam/_goat/mapChar_goat_1x.png);	
+		}
+		
+		.pixels_portalTile
+		{
+			background-image: url(../_img/_portal/portal_1x.png);
+		}
+		
+		.pixels_woodlandBottom
+		{
+			background-image: url(../_img/_mapBlend/bottomEnd_1x.png);
+		}
+		
+		.pixels_flame
+		{
+			background-image: url(../_img/_fx/fire_1x.png);
+		}
+
+		@-webkit-keyframes pixels_tweenRainFrames
+		{
+			0%		{background-image: url(../_img/_fx/rainTile0_1x.png); background-size: 100px 100px;}
+			50%		{background-image: url(../_img/_fx/rainTile1_1x.png); background-size: 100px 100px;}
+			100%	{background-image: url(../_img/_fx/rainTile2_1x.png); background-size: 100px 100px;}
+		}
+				
+		@keyframes pixels_tweenRainFrames
+		{
+			0%		{background-image: url(../_img/_fx/rainTile0_1x.png); background-size: 100px 100px;}
+			50%		{background-image: url(../_img/_fx/rainTile1_1x.png); background-size: 100px 100px;}
+			100%	{background-image: url(../_img/_fx/rainTile2_1x.png); background-size: 100px 100px;}
+		}
+		
+		.pixels_forest
+		{
+			background-image: url(../_img/_tiles/tile_pineTrees_1x.png);
+		}
+		
+		.pixels_forestMass
+		{
+			background-image: url(../_img/_tiles/tile_pineTreesMass_1x.png);		
+		}
+
+		
+/*
+		@-webkit-keyframes pixels_tweenRainFrames
+		{
+			0%		{background-image: url(../_img/_fx/rainTile0_1x.png); background-size: 100px 100px;}
+			25%		{background-image: url(../_img/_fx/rainTile1_1x.png); background-size: 100px 100px;}
+			50%		{background-image: url(../_img/_fx/rainTile2_1x.png); background-size: 100px 100px;}
+			75%		{background-image: url(../_img/_fx/rainTile1_1x.png); background-size: 100px 100px;}
+			100%	{background-image: url(../_img/_fx/rainTile0_1x.png); background-size: 100px 100px;}
+		}
+				
+		@keyframes pixels_tweenRainFrames
+		{
+			0%		{background-image: url(../_img/_fx/rainTile0_1x.png); background-size: 100px 100px;}
+			25%		{background-image: url(../_img/_fx/rainTile1_1x.png); background-size: 100px 100px;}
+			50%		{background-image: url(../_img/_fx/rainTile2_1x.png); background-size: 100px 100px;}
+			75%		{background-image: url(../_img/_fx/rainTile1_1x.png); background-size: 100px 100px;}
+			100%	{background-image: url(../_img/_fx/rainTile0_1x.png); background-size: 100px 100px;}
+		}
+*/	
+	}
+
+/* 2x */
+
+	@media all and (-webkit-min-device-pixel-ratio: 2), all and (min-device-pixel-ratio: 2)
+	{
+		.startPixels
+		{
+			background-image: url(../_img/0_start/startSprite_2x.png);
+		}
+		
+		.colour-navPink-Pixels
+		{
+			background-image: url(../_img/0_start/col_nav-pink_2x.png);
+		}
+		
+		.babyPixels
+		{
+			background-image: url(../_img/_characters/_intro/_baby/babySprite_2x.png);
+		}
+		
+		.bossPixels
+		{
+			background-image: url(../_img/_characters/_intro/_boss/bossSprite_2x.png);
+		}
+		
+		.goatPixels
+		{
+			background-image: url(../_img/_characters/_intro/_goat/goatSprite_2x.png);
+		}
+		
+		.grassPixels
+		{
+			background-image: url(../_img/_scene/grassTile_2x.png);
+		}
+		
+		.skyPixels
+		{
+			background-image: url(../_img/_scene/bg0_2x.png);			
+		}
+		
+		.punchCloudPixels
+		{
+			background-image: url(../_img/1_intro/cloudSprite_2x.png);			
+		}
+		
+		.punchCloudTilePixels
+		{
+			background-image: url(../_img/1_intro/bossCloudTile_2x.png);
+		}
+		
+		.fallOffPixels
+		{
+			background-image: url(../_img/_scene/worldEdge_2x.png);		
+		}
+		
+		.groundChipsPixels
+		{
+			background-image: url(../_img/_scene/groundTexture_2x.png);	
+		}
+		
+		.introWallBreaksPixels
+		{
+			background-image: url(../_img/1_intro/introEndBG_2x.png);
+		}
+		
+		.battleCloudPixels
+		{
+			background-image: url(../_img/_battleNav/battleNavCloud_2x.png);
+		}
+		
+		.battleFlowPixels
+		{
+			background-image: url(../_img/_battleNav/battleNavSprite_2x.png);
+		}
+		
+		.stepsPixels
+		{
+			background-image: url(../_img/_scene/steps_2x.png);
+		}
+		
+		.noticeRaccoonPixels
+		{	
+			background-image: url(../_img/_notice/notice_raccoon_2x.png);
+		}
+		
+		
+		
+		
+		.pixels_field
+		{
+			background-image: url(../_img/_tiles/tile_floor_2x.png);
+		}
+		
+		.pixels_mapCloudBtm
+		{
+			background-image: url(../_img/_mapBlend/cloudMergeBTM_2x.png);
+		}
+		
+		.pixels_mapCloudTop
+		{
+			background-image: url(../_img/_mapBlend/cloudMergeTOP_2x.png);
+		}
+		
+		.pixels_weather-snow
+		{
+			background-image: url(../_img/_fx/snow_2x.png);
+		}
+		
+		.pixels_weatherWindShadowCloud
+		{
+			background-image: url(../_img/_fx/cloudWindShadow_2x.png);
+		}
+		
+		.pixels_bush
+		{
+			background-image	: url(../_img/_tiles/tile_bush_2x.png);
+		}
+		
+		.pixels_btm_bg_grass
+		{
+			background-image: url(../_img/_tiles/tile_btm_bg_grass_2x.png);
+		}
+		
+		.pixels_btm_bg_bushBorder
+		{
+			background-image: url(../_img/_tiles/tile_btm_bg_bushBorder_2x.png);
+		}
+		
+		.pixels_btm_bg_levelFinish
+		{
+			background-image: url(../_img/_mapBlend/levelFinish_2x.png);
+		}
+		
+		.pixels_darkEdge
+		{
+			background-image: url(../_img/_mapBlend/blackEdge_2x.png);
+		}
+		
+		.pixels_flowerLight
+		{
+			background-image: url(../_img/_tiles/tile_flowersLight_2x.png);
+		}
+		
+		.pixels_flowerHeavy
+		{
+			background-image: url(../_img/_tiles/tile_flowersHeavy_2x.png);
+		}
+		
+		.pixels_flowerRichCross
+		{
+			background-image: url(../_img/_tiles/tile_flowersRich_+_2x.png);
+		}
+		
+		.pixels_griz
+		{
+			background: url(../_img/_characters/_roam/_griz/griz_2x.png);
+		}
+		
+		.pixels_mapGoat
+		{
+			background-image: url(../_img/_characters/_roam/_goat/mapChar_goat_2x.png);	
+		}
+		
+		.pixels_portalTile
+		{
+			background-image: url(../_img/_portal/portal_2x.png);
+		}
+		
+		.pixels_woodlandBottom
+		{
+			background-image: url(../_img/_mapBlend/bottomEnd_2x.png);
+		}
+		
+		.pixels_flame
+		{
+			background-image: url(../_img/_fx/fire_2x.png);
+		}
+
+		@-webkit-keyframes pixels_tweenRainFrames
+		{
+			0%		{background-image: url(../_img/_fx/rainTile0_2x.png); background-size: 100px 100px;}
+			50%		{background-image: url(../_img/_fx/rainTile1_2x.png); background-size: 100px 100px;}
+			100%	{background-image: url(../_img/_fx/rainTile2_2x.png); background-size: 100px 100px;}
+		}
+				
+		@keyframes pixels_tweenRainFrames
+		{
+			0%		{background-image: url(../_img/_fx/rainTile0_2x.png); background-size: 100px 100px;}
+			50%		{background-image: url(../_img/_fx/rainTile1_2x.png); background-size: 100px 100px;}
+			100%	{background-image: url(../_img/_fx/rainTile2_2x.png); background-size: 100px 100px;}
+		}
+		
+		.pixels_forest
+		{
+			background-image: url(../_img/_tiles/tile_pineTrees_2x.png);
+		}
+		
+		.pixels_forestMass
+		{
+			background-image: url(../_img/_tiles/tile_pineTreesMass_2x.png);		
+		}
+		
+/*
+		@-webkit-keyframes pixels_tweenRainFrames
+		{
+			0%		{background-image: url(../_img/_fx/rainTile0_2x.png); background-size: 100px 100px;}
+			25%		{background-image: url(../_img/_fx/rainTile1_2x.png); background-size: 100px 100px;}
+			50%		{background-image: url(../_img/_fx/rainTile2_2x.png); background-size: 100px 100px;}
+			75%		{background-image: url(../_img/_fx/rainTile1_2x.png); background-size: 100px 100px;}
+			100%	{background-image: url(../_img/_fx/rainTile0_2x.png); background-size: 100px 100px;}
+		}
+				
+		@keyframes pixels_tweenRainFrames
+		{
+			0%		{background-image: url(../_img/_fx/rainTile0_2x.png); background-size: 100px 100px;}
+			25%		{background-image: url(../_img/_fx/rainTile1_2x.png); background-size: 100px 100px;}
+			50%		{background-image: url(../_img/_fx/rainTile2_2x.png); background-size: 100px 100px;}
+			75%		{background-image: url(../_img/_fx/rainTile1_2x.png); background-size: 100px 100px;}
+			100%	{background-image: url(../_img/_fx/rainTile0_2x.png); background-size: 100px 100px;}
+		}
+*/			
+	}

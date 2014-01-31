@@ -1,0 +1,109 @@
+<!DOCTYPE HTML>
+<html lang="en">
+
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=320, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+		
+		<meta name="description" content="A tale of rock, paper, and scissors eternally told...">
+		<meta name="keywords" content="kinslowdian, Simon Kinslow, browser game" />
+		<meta name="revised" content="Simon Kinslow, 02/01/2014" />
+	
+		<title>BITMAP ADVENTURE by Simon Kinslow</title>
+	
+		<link rel="icon" type="image/png" href="fav.png" />
+		<link rel="apple-touch-icon" href="iPhone.png" />
+		<link rel="apple-touch-icon" sizes="72x72" href="iPad.png" />
+		<link rel="apple-touch-icon" sizes="114x114" href="iPhone4.png" />
+		
+		<link href="_assets/_css/bitmapAdventure.css" rel="stylesheet" type="text/css">
+		
+		<script type="text/javascript" src="_assets/_js/_jquery/jquery-2.0.3.js"></script>
+		<script type="text/javascript" src="_assets/_js/_collision/jquery-collision.js"></script>
+	
+		<script type="text/javascript" src="_assets/_js/BitmapAdventure.js"></script>
+		
+		<script type="text/javascript" src="_assets/_js/_battle/Intro.js"></script>
+		<script type="text/javascript" src="_assets/_js/_battle/Nav.js"></script>
+		<script type="text/javascript" src="_assets/_js/_battle/Notice.js"></script>
+		
+		<script type="text/javascript" src="_assets/_js/_roam/Control.js"></script>
+		<script type="text/javascript" src="_assets/_js/_roam/Portal.js"></script>
+		<script type="text/javascript" src="_assets/_js/_roam/Tile.js"></script>
+		<script type="text/javascript" src="_assets/_js/_roam/Time.js"></script>
+		<script type="text/javascript" src="_assets/_js/_roam/Weather.js"></script>
+	
+	</head>
+
+	<body onorientationchange="phoneRotate(event);"> <!-- class="introBG" -->
+	
+		<div id="fader"></div>
+		
+		<div id="battles"></div>
+		
+		<div id="eventFill"></div>
+		
+		<div id="gameDisp">
+		
+			<div id="wrapper-startIntro" class="wrapper">
+		
+				<div class="fallOff tween-fallOff">
+								
+					<div class="fallOff-TOP fallOffPixels"></div>
+					<div class="fallOff-BTM"></div>
+				
+				</div>
+		
+				<div id="stage-startIntro" class="stage viewer"> <!-- class="viewer" -->
+					
+					<div id="START">
+						
+						<div id="START-goat" class="startPixels tween-start-goat"></div>
+						
+						<!-- <header class="font-dosis">DIREVERSION</header> -->
+						<header class="font-dosis">BITMAP ADVENTURE</header>
+						
+						<div id="START-content">
+							
+							<div id="introDetail0">
+												
+								<p class="font-dosis">AN EPIC<br>ROCK, PAPER, SCISSORS<br>GAME</p>
+												
+								
+								
+								<div class="trigger-holder">
+									
+									<button id="trigger-gameBegin" class="font-dosis" onclick="userPresent(event);">BEGIN</button>
+									
+								</div>
+												
+								<p class="font-dosis">DESIGNED &amp; DEVELOPED BY<br><a href="http://www.simonkinslow.com" target="_blank" alt="My Portfolio">SIMON KINSLOW 2013</a></p>
+											
+							</div>
+							
+							
+							<div id="START-boss" class="colour-navPink-Pixels"> <!-- class="colour-navPink-Pixels" -->
+								
+								<div id="START-boss-head" class="startPixels tween-boss-head-start"></div>
+								<div id="START-boss-body" class="startPixels"></div>
+								<div id="START-boss-hand-L" class="startPixels startBossHand"></div>
+								<div id="START-boss-hand-R" class="startPixels startBossHand"></div>
+								
+							</div>
+							
+						</div>
+						
+						
+					</div> <!-- #START -->
+					
+				</div> <!-- #stage -->
+			
+			</div> <!-- #wrapper -->
+		
+		</div> <!-- #gameDisp -->
+	
+		<div id="memory"></div>
+		
+	</body>
+
+</html>
