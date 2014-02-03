@@ -179,12 +179,25 @@
 	
 	function controlPlug()
 	{
+		alert("controlPlug();");
+		
 		$(window)[0].addEventListener("keydown", registerKey, false);
+		
+/*
+		$("#touchPad #touchPad-U").css("pointer-events", "auto");
+		$("#touchPad #touchPad-D").css("pointer-events", "auto");
+		$("#touchPad #touchPad-L").css("pointer-events", "auto");
+		$("#touchPad #touchPad-R").css("pointer-events", "auto");
+*/
+		
+		
+		// $("#touchPad .touchPad-surface div")[0].addEventListener("touchstart", findInteraction, false);
 		
 		$("#touchPad #touchPad-U")[0].addEventListener("touchstart", registerTouch, false);
 		$("#touchPad #touchPad-D")[0].addEventListener("touchstart", registerTouch, false);
 		$("#touchPad #touchPad-L")[0].addEventListener("touchstart", registerTouch, false);
 		$("#touchPad #touchPad-R")[0].addEventListener("touchstart", registerTouch, false);
+		
 		
 		$("#touchPad #touchPad-U")[0].addEventListener("touchend", registerTouch, false);
 		$("#touchPad #touchPad-D")[0].addEventListener("touchend", registerTouch, false);
@@ -195,6 +208,13 @@
 	function controlUnplug()
 	{
 		$(window)[0].removeEventListener("keydown", registerKey, false);
+		
+/*
+		$("#touchPad #touchPad-U").css("pointer-events", "none");
+		$("#touchPad #touchPad-D").css("pointer-events", "none");
+		$("#touchPad #touchPad-L").css("pointer-events", "none");
+		$("#touchPad #touchPad-R").css("pointer-events", "none");
+*/
 		
 		$("#touchPad #touchPad-U")[0].removeEventListener("touchstart", registerTouch, false);
 		$("#touchPad #touchPad-D")[0].removeEventListener("touchstart", registerTouch, false);

@@ -4123,8 +4123,14 @@
 		touch-callout: none;
 		user-select: none;
 		
-		pointer-events: none;
+		/* TOUCH ISSUE */
+		/* pointer-events: none; */
 		
+	}
+	
+	.ignoreInteraction div
+	{
+		pointer-events: none;		
 	}
 	
 	
@@ -4692,6 +4698,11 @@
 	{
 		-webkit-transform	: translate(75px, 60px);
 		transform			: translate(75px, 60px);	
+	}
+	
+	#touchPad-U, #touchPad-D, #touchPad-L, #touchPad-R
+	{
+		pointer-events: auto;
 	}
 	
 	.touchPad-crab-body
