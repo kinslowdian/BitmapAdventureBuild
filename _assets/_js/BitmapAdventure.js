@@ -182,6 +182,10 @@
 		
 	var fallOff;
 	
+	var skipBtnUp = false;
+	var skipRequest = false;
+	var skipCancel = false;
+	
 	function phoneRotate(event)
 	{
 		if(window.orientation === 0)
@@ -379,4 +383,68 @@
 	function gameAreaClear()
 	{
 		$("#gameDisp").html("");
+	}
+	
+	function skipBtn_init()
+	{
+		if(!skipBtnUp)
+		{
+			skipBtnUp = true;
+			
+			$("#skipIntro").css("opacity", 1);
+			$("#skipIntro").bind("click", skipBtn_event);
+		}
+	}
+	
+	function skipBtn_event(event)
+	{
+		var cancel_css;
+		
+		if(!skipRequest && !skipCancel)
+		{
+			skipRequest = true;
+			$("#skipIntro").unbind("click", skipBtn_event);
+			
+			cancel_css = 	{
+								"pointer-events"	:	"auto",
+								"cursor"			:	"pointer"								
+							};
+			
+			$("#skipIntro").css(cancel_css);
+			
+			globalFade_IN("green", skipButtonUsed);
+			
+			
+		}
+	}
+	
+	function skipBtn_cancel()
+	{
+		var cancel_css;
+		
+		skipCancel = true;
+		
+		cancel_css = 	{
+							"pointer-events"	:	"auto",
+							"cursor"			:	"pointer",								
+							"opacity"			:	"0"
+						};
+			
+		$("#skipIntro").css(cancel_css);
+		
+		$("#skipIntro")[0].addEventListener("webkitTransitionEnd", skipBtn_faded, false);
+		$("#skipIntro")[0].addEventListener("transitionend", skipBtn_faded, false);
+	}
+	
+	function  skipBtn_faded(event)
+	{
+		$("#skipIntro")[0].removeEventListener("webkitTransitionEnd", skipBtn_faded, false);
+		$("#skipIntro")[0].removeEventListener("transitionend", skipBtn_faded, false);
+		
+		skipBtn_remove();
+	}
+	
+	function skipBtn_remove()
+	{
+		$("#skipIntro").remove();
 	}

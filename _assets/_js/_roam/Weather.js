@@ -216,6 +216,8 @@
 	
 // --------------------------------------------- SNOW
 			
+	var _SNOW;
+	
 	var SnowMain = function(target, pixel_PNG, pixel_MAP)
 	{
 		this.snow_ARR = new Array();
@@ -346,7 +348,23 @@
 			}
 		}
 	}
+
+	function snowingHardEnd()
+	{
+		if(_SNOW != null || _SNOW != undefined)
+		{
+			_SNOW.snow_run = false;
+			
+			for(var i in _SNOW.snow_ARR)
+			{
+				snowingMoveCancel(_SNOW.snow_ARR[i]);
+			}
+			
+			_SNOW.snow_ARR.length = 0;
+		}
+	}
 	
+/*
 	function snowingHardEnd()
 	{
 		_SNOW.snow_run = false;
@@ -358,6 +376,7 @@
 		
 		_SNOW.snow_ARR.length = 0;
 	}
+*/
 	
 // --------------------------------------------- SNOW
 

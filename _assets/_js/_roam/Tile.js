@@ -10,12 +10,19 @@
 	
 	var BUILD_PORTAL;
 	
-	var PORTAL_LEVEL_TRAVEL;
-	
 	var mapSnapShot_html;
 	
 	var action_map_fadeInto;
 	var action_map_fadeOut;
+	
+	function start_bitmapAdventure()
+	{
+		gameAreaClear();
+		
+		prepGameMapInit();
+		
+		portalTravelCheckReset();
+	}
 	
 	function prepGameMapInit()
 	{

@@ -605,10 +605,10 @@
 			{
 				"x": 11,
 				"y": 23,
-				"w": 2,
-				"h": 2,
+				"w": 1,
+				"h": 1,
 				"n": "level0_clearing4",
-				"t": "clearing_cross" 
+				"t": "clearing_wolfGod" 
 			},
 			
 			"CLEARING_5":

@@ -62,6 +62,7 @@
 		$("#memory").html("");
 		
 		// part1
+		INTRO.showState = "PART1";
 		INTRO.part1_id = $("#introPart1");
 		INTRO.part1_html = $("#introPart1").html();
 		
@@ -116,13 +117,47 @@
 		
 			
 		var action = new AnimationTimer();
-		action.time(2, bossDrop);		
+		action.time(2, bossDrop);
+		
+		skipButtonShow();		
+	}
+	
+	function skipButtonShow()
+	{
+		skipBtn_init();
+	}
+	
+	function skipButtonUsed()
+	{
+		
+		switch(INTRO.showState)
+		{
+			case "PART1":
+			{
+			
+				break;
+			}
+			
+			case "PART2":
+			{
+				// end_intro();
+				
+				break;
+			}
+			
+			default:
+			{
+				
+			}
+		}
 	}
 	
  	function bossDrop()
  	{
- 		$("#bossCont1 .boss").get(0).addEventListener("webkitAnimationEnd", event_bossDrop, false);
- 		$("#bossCont1 .boss").get(0).addEventListener("animationend", event_bossDrop, false);
+ 		// $("#bossCont1 .boss").get(0).addEventListener("webkitAnimationEnd", event_bossDrop, false);
+ 		// $("#bossCont1 .boss").get(0).addEventListener("animationend", event_bossDrop, false);
+ 		
+ 		animationEventManager("#bossCont1 .boss", "ANIMATION", "event_bossDrop");
  				
 	 	$("#bossCont1 .boss").addClass("tween-boss-appear");
  	}
@@ -130,15 +165,22 @@
  			
  	function event_bossDrop(event)
  	{
- 		$("#bossCont1 .boss").get(0).removeEventListener("webkitAnimationEnd", event_bossDrop, false);
- 		$("#bossCont1 .boss").get(0).removeEventListener("animationend", event_bossDrop, false);
+ 		// $("#bossCont1 .boss").get(0).removeEventListener("webkitAnimationEnd", event_bossDrop, false);
+ 		// $("#bossCont1 .boss").get(0).removeEventListener("animationend", event_bossDrop, false);
+	 	
+	 	if($(event.target).attr("data-animationlink"))
+	 	{
+			animationEventKill($(event.target).attr("data-animationlink"));
+		}	
 	 	
 	 	flashActionInit($("#intro-part-1-flash"));
 	 			
 	 	$("#backGround").addClass("tween-backGround-shake");
 	 			
-	 	$("#introPunchCloud").get(0).addEventListener("webkitAnimationEnd", event_punchCloud, false);
-	 	$("#introPunchCloud").get(0).addEventListener("animationend", event_punchCloud, false);
+	 	// $("#introPunchCloud").get(0).addEventListener("webkitAnimationEnd", event_punchCloud, false);
+	 	// $("#introPunchCloud").get(0).addEventListener("animationend", event_punchCloud, false);
+	 	
+	 	animationEventManager("#introPunchCloud", "ANIMATION", "event_punchCloud");
 	 	
 	 	var action0 = new AnimationTimer();		
 	 	var action1 = new AnimationTimer();
@@ -217,21 +259,33 @@
 	 				
 	 		case "tweenPunchCloudRiseFrames":
 	 		{
-		 		$("#introPunchCloud").get(0).removeEventListener("webkitAnimationEnd", event_punchCloud, false);
-		 		$("#introPunchCloud").get(0).removeEventListener("animationend", event_punchCloud, false);			 				
+		 		// $("#introPunchCloud").get(0).removeEventListener("webkitAnimationEnd", event_punchCloud, false);
+		 		// $("#introPunchCloud").get(0).removeEventListener("animationend", event_punchCloud, false);			 				
+		 		
+				if($(event.target).attr("data-animationlink"))
+				{
+					animationEventKill($(event.target).attr("data-animationlink"));
+				}		 		
 		 				
 		 		$(".punchCloud-boss-inside").css("opacity", 1);
 		 				
-		 		$(".punchCloud-boss-inside").get(0).addEventListener("webkitTransitionEnd", event_innerPunchCloud, false);
-		 		$(".punchCloud-boss-inside").get(0).addEventListener("transitionend", event_innerPunchCloud, false);
+		 		// $(".punchCloud-boss-inside").get(0).addEventListener("webkitTransitionEnd", event_innerPunchCloud, false);
+		 		// $(".punchCloud-boss-inside").get(0).addEventListener("transitionend", event_innerPunchCloud, false);
+		 		
+		 		animationEventManager(".punchCloud-boss-inside", "TRANSITION", "event_innerPunchCloud");
 		 				
 		 		break;
 	 		}
 	 				
 	 		case "tweenPunchCloudGiantFoot":
 	 		{
-		 		$(".punchCloud-giantFoot").get(0).removeEventListener("webkitAnimationEnd", event_punchCloud, false);
-				$(".punchCloud-giantFoot").get(0).removeEventListener("animationend", event_punchCloud, false);
+		 		// $(".punchCloud-giantFoot").get(0).removeEventListener("webkitAnimationEnd", event_punchCloud, false);
+				// $(".punchCloud-giantFoot").get(0).removeEventListener("animationend", event_punchCloud, false);
+		 		
+				if($(event.target).attr("data-animationlink"))
+				{
+					animationEventKill($(event.target).attr("data-animationlink"));
+				}
 		 				
 		 		$("#backGround .groundDamage").css("opacity", "1");
 		 				
@@ -240,8 +294,10 @@
 		 		flashActionInit($("#intro-part-1-flash"));
 		 		/* $(":root").addClass("tween-introflash"); */
 		 		
-		 		$("#foreGround").get(0).addEventListener("webkitAnimationEnd", endPart1, false);
-		 		$("#foreGround").get(0).addEventListener("animationend", endPart1, false);
+		 		// $("#foreGround").get(0).addEventListener("webkitAnimationEnd", endPart1, false);
+		 		// $("#foreGround").get(0).addEventListener("animationend", endPart1, false);
+		 		
+		 		animationEventManager("#foreGround", "ANIMATION", "endPart1");
 		 		
 		 		var delay_defaultStagePos = new AnimationTimer();
 		 		delay_defaultStagePos.time(0.5, function(){ $("#stage-startIntro").removeClass("position3").addClass("position1"); });
@@ -265,8 +321,13 @@
 	 			
 	 	if(TWEEN_CALLER != null || TWEEN_CALLER != undefined)
 	 	{
-		 	$("." + TWEEN_CALLER).get(0).removeEventListener("webkitTransitionEnd", event_innerPunchCloud, false);
-		 	$("." + TWEEN_CALLER).get(0).removeEventListener("transitionend", event_innerPunchCloud, false);	
+		 	// $("." + TWEEN_CALLER).get(0).removeEventListener("webkitTransitionEnd", event_innerPunchCloud, false);
+		 	// $("." + TWEEN_CALLER).get(0).removeEventListener("transitionend", event_innerPunchCloud, false);
+		 	
+			if($(event.target.classList[0]).attr("data-animationlink"))
+			{
+				animationEventKill($(event.target.classList[0]).attr("data-animationlink"));
+			}	
 	 	}
 	 			
 	 	switch(TWEEN_CALLER)
@@ -282,8 +343,10 @@
 				 						
 				 	$(".punchCloud-boss").css(new_css);
 				 			
-			 		$(".punchCloud-boss").get(0).addEventListener("webkitTransitionEnd", event_innerPunchCloud, false);
-			 		$(".punchCloud-boss").get(0).addEventListener("transitionend", event_innerPunchCloud, false);
+			 		// $(".punchCloud-boss").get(0).addEventListener("webkitTransitionEnd", event_innerPunchCloud, false);
+			 		// $(".punchCloud-boss").get(0).addEventListener("transitionend", event_innerPunchCloud, false);
+			 		
+			 		animationEventManager(".punchCloud-boss", "TRANSITION", "event_innerPunchCloud");
 			 	}
 			 			
 			 	else if(introBossCloud.intoGiant)
@@ -293,8 +356,10 @@
 				 		$(".punchCloud-giantFoot").addClass("tween-punchCloud-giantFoot");
 				 	}, 0.5 * 1000);
 				 			
-				 	$(".punchCloud-giantFoot").get(0).addEventListener("webkitAnimationEnd", event_punchCloud, false);
-				 	$(".punchCloud-giantFoot").get(0).addEventListener("animationend", event_punchCloud, false);
+				 	// $(".punchCloud-giantFoot").get(0).addEventListener("webkitAnimationEnd", event_punchCloud, false);
+				 	// $(".punchCloud-giantFoot").get(0).addEventListener("animationend", event_punchCloud, false);
+				 	
+				 	animationEventManager(".punchCloud-giantFoot", "ANIMATION", "event_punchCloud");
 				 	
 				 	$("#stage-startIntro").removeClass("position2").addClass("position3");					 			
 			 	}
@@ -318,8 +383,11 @@
 					 						
 					 	$(".punchCloud-boss").css(new_css);
 					 			
-				 		$(".punchCloud-boss").get(0).addEventListener("webkitTransitionEnd", event_innerPunchCloud, false);
-				 		$(".punchCloud-boss").get(0).addEventListener("transitionend", event_innerPunchCloud, false);		 					
+				 		// $(".punchCloud-boss").get(0).addEventListener("webkitTransitionEnd", event_innerPunchCloud, false);
+				 		// $(".punchCloud-boss").get(0).addEventListener("transitionend", event_innerPunchCloud, false);		 					
+				 		
+				 		animationEventManager(".punchCloud-boss", "TRANSITION", "event_innerPunchCloud");
+		 			
 		 			}, 2 * 1000);
 		 				
 		 		}
@@ -328,8 +396,10 @@
 		 		{
 			 		$(".punchCloud-boss-inside").css("opacity", 0);
 			 				
-			 		$(".punchCloud-boss-inside").get(0).addEventListener("webkitTransitionEnd", event_innerPunchCloud, false);
-			 		$(".punchCloud-boss-inside").get(0).addEventListener("transitionend", event_innerPunchCloud, false);
+			 		// $(".punchCloud-boss-inside").get(0).addEventListener("webkitTransitionEnd", event_innerPunchCloud, false);
+			 		// $(".punchCloud-boss-inside").get(0).addEventListener("transitionend", event_innerPunchCloud, false);
+			 		
+			 		animationEventManager(".punchCloud-boss-inside", "TRANSITION", "event_innerPunchCloud");
 		 		}
 			 			
 		 		break;
@@ -344,8 +414,13 @@
  	
  	function endPart1(event)
  	{
- 		$("#foreGround").get(0).removeEventListener("webkitAnimationEnd", endPart1, false);
-		$("#foreGround").get(0).removeEventListener("animationend", endPart1, false);
+ 		// $("#foreGround").get(0).removeEventListener("webkitAnimationEnd", endPart1, false);
+		// $("#foreGround").get(0).removeEventListener("animationend", endPart1, false);
+		
+		if($(event.target).attr("data-animationlink"))
+		{
+			animationEventKill($(event.target).attr("data-animationlink"));
+		}		
 		
 		globalFade_IN("white", formPart2);
 	 	
@@ -419,8 +494,10 @@
 	 				
 	 	$("#bossCont2").css(boss_css);		
 		
-		$("#bossCont2").get(0).addEventListener("webkitTransitionEnd", bossAttackEnd, false);
-		$("#bossCont2").get(0).addEventListener("transitionend", bossAttackEnd, false);
+		// $("#bossCont2").get(0).addEventListener("webkitTransitionEnd", bossAttackEnd, false);
+		// $("#bossCont2").get(0).addEventListener("transitionend", bossAttackEnd, false);
+		
+		animationEventManager("#bossCont2", "TRANSITION", "bossAttackEnd");
 		
 		
 		//$("#bossCont2 .boss").addClass("tween-boss-attack");
@@ -431,8 +508,14 @@
 	
 	function bossAttackEnd(event)
 	{
-		$("#bossCont2").get(0).removeEventListener("webkitTransitionEnd", bossAttackEnd, false);
-		$("#bossCont2").get(0).removeEventListener("transitionend", bossAttackEnd, false);
+		// $("#bossCont2").get(0).removeEventListener("webkitTransitionEnd", bossAttackEnd, false);
+		// $("#bossCont2").get(0).removeEventListener("transitionend", bossAttackEnd, false);
+		
+		if($(event.target).attr("data-animationlink"))
+		{
+			animationEventKill($(event.target).attr("data-animationlink"));
+		}		
+		
 		
 		//$("#bossCont2 .boss").get(0).removeEventListener("webkitAnimationEnd", bossAttackEnd, false);
 		//$("#bossCont2 .boss").get(0).removeEventListener("animationend", bossAttackEnd, false);
@@ -470,38 +553,59 @@
 	{
 		$("#bossCont2 .boss-legR").addClass("tween-boss-legR-bash");
 	
-		$("#bossCont2 .boss-legR").get(0).addEventListener("webkitAnimationEnd", boss_finishHimEnd, false);
-		$("#bossCont2 .boss-legR").get(0).addEventListener("animationend", boss_finishHimEnd, false);
+		// $("#bossCont2 .boss-legR").get(0).addEventListener("webkitAnimationEnd", boss_finishHimEnd, false);
+		// $("#bossCont2 .boss-legR").get(0).addEventListener("animationend", boss_finishHimEnd, false);
+	
+		animationEventManager("#bossCont2 .boss-legR", "ANIMATION", "boss_finishHimEnd");
 	}
 	
 	function boss_finishHimEnd(event)
 	{
-		$("#bossCont2 .boss-legR").get(0).removeEventListener("webkitAnimationEnd", boss_finishHimEnd, false);
-		$("#bossCont2 .boss-legR").get(0).removeEventListener("animationend", boss_finishHimEnd, false);		
+		// $("#bossCont2 .boss-legR").get(0).removeEventListener("webkitAnimationEnd", boss_finishHimEnd, false);
+		// $("#bossCont2 .boss-legR").get(0).removeEventListener("animationend", boss_finishHimEnd, false);		
+		
+		if($(event.target).attr("data-animationlink"))
+		{
+			animationEventKill($(event.target).attr("data-animationlink"));
+		}
 		
 		flashActionInit($("#intro-part-2-flash"));
 		
 		$("#worldEdge-btm").addClass("tween-worldEdge-btm-drop-a");
 	
-		$("#worldEdge-btm").get(0).addEventListener("webkitAnimationEnd", goat_finished, false);
-		$("#worldEdge-btm").get(0).addEventListener("animationend", goat_finished, false);
+		// $("#worldEdge-btm").get(0).addEventListener("webkitAnimationEnd", goat_finished, false);
+		// $("#worldEdge-btm").get(0).addEventListener("animationend", goat_finished, false);
+		
+		animationEventManager("#worldEdge-btm", "ANIMATION", "goat_finished");
 	}
 	
 	function goat_finished(event)
 	{
-		$("#worldEdge-btm").get(0).removeEventListener("webkitAnimationEnd", goat_finished, false);
-		$("#worldEdge-btm").get(0).removeEventListener("animationend", goat_finished, false);
+		// $("#worldEdge-btm").get(0).removeEventListener("webkitAnimationEnd", goat_finished, false);
+		// $("#worldEdge-btm").get(0).removeEventListener("animationend", goat_finished, false);
+		
+		if($(event.target).attr("data-animationlink"))
+		{
+			animationEventKill($(event.target).attr("data-animationlink"));
+		}		
 		
 		$("#worldEdge-btm").addClass("tween-worldEdge-btm-drop-b");
 		
-		$("#worldEdge-btm").get(0).addEventListener("webkitAnimationEnd", endPart2Init, false);
-		$("#worldEdge-btm").get(0).addEventListener("animationend", endPart2Init, false);		
+		// $("#worldEdge-btm").get(0).addEventListener("webkitAnimationEnd", endPart2Init, false);
+		// $("#worldEdge-btm").get(0).addEventListener("animationend", endPart2Init, false);
+		
+		animationEventManager("#worldEdge-btm", "ANIMATION", "endPart2Init");		
 	}
 	
 	function endPart2Init(event)
 	{
-		$("#worldEdge-btm").get(0).removeEventListener("webkitAnimationEnd", endPart2Init, false);
-		$("#worldEdge-btm").get(0).removeEventListener("animationend", endPart2Init, false);
+		// $("#worldEdge-btm").get(0).removeEventListener("webkitAnimationEnd", endPart2Init, false);
+		// $("#worldEdge-btm").get(0).removeEventListener("animationend", endPart2Init, false);
+		
+		if($(event.target).attr("data-animationlink"))
+		{
+			animationEventKill($(event.target).attr("data-animationlink"));
+		}		
 		
 		var endPart2Delay = new AnimationTimer();
 		endPart2Delay.time(2, endPart2);		
@@ -517,11 +621,26 @@
  	{
 		// snow cleanup
 		
+		// SKIP FIX
+		
 		snowingHardEnd();
 		
 		// clear intro HTML
 		
 		$(INTRO.part2_id).remove();
+		
+		// SKIP FIX
+		
+		INTRO = null;
+		
+		introFinishWithNotice();
+		
+		// purge_intro();	 	
+ 	}
+ 	
+ 	function purge_intro()
+ 	{
+		snowingHardEnd();
 		
 		INTRO = null;
 		
@@ -571,9 +690,11 @@
 	{	
 		$(".noticeWrapper").remove();
 		
-		gameAreaClear();
+		start_bitmapAdventure();
 		
-		prepGameMapInit();
+		// gameAreaClear();
+		
+		// prepGameMapInit();
 	}
  	
 	
@@ -583,6 +704,8 @@
 		
 		$(flashDiv).get(0).addEventListener("webkitAnimationEnd", flashActionPurge, false);
 		$(flashDiv).get(0).addEventListener("animationend", flashActionPurge, false);
+	
+		//animationEventManager(flashDiv, "ANIMATION", "flashActionPurge");
 	}
 	
 	function flashActionPurge(event)
@@ -591,6 +714,13 @@
 		
 		$("#" + TARG).get(0).removeEventListener("webkitAnimationEnd", flashActionPurge, false);
 		$("#" + TARG).get(0).removeEventListener("animationend", flashActionPurge, false);
+		
+/*
+		if($(event.target).attr("data-animationlink"))
+		{
+			animationEventKill($(event.target).attr("data-animationlink"));
+		}	
+*/	
 		
 		$("#" + TARG).removeClass("tween-FX_Flash");
 	}

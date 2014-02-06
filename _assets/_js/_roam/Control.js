@@ -1,4 +1,39 @@
 	
+	var testControl = true;
+	
+	var testControlOb = {
+							run_com		:	null,
+							
+							run_temp	:	"",
+							
+							run_state	:	"",
+							
+							run_init	: 	function()
+											{
+												this.run_com = setInterval(this.run_do, 20, this);
+											},
+											
+							run_cancel	:	function()
+											{
+												clearInterval(this.run_com);
+											},
+											
+							run_post	:	function(s)
+											{
+												this.run_temp = s;	
+											},
+											
+							run_do		:	function(main)
+											{
+												if(main.run_temp !== main.run_state)
+												{
+													main.run_state = main.run_temp;
+													
+													$("#CONTROL_CHECK p").text(main.run_state);
+												}
+											}
+						};
+	
 	var MAP_PLAYER;
 	
 	var HIT_TEST;
@@ -168,6 +203,9 @@
 	
 	function controlSetup()
 	{
+		// alert("controlSetup();");
+		
+		
 		hitTest_build();
 		
 		
@@ -179,7 +217,7 @@
 	
 	function controlPlug()
 	{
-		alert("controlPlug();");
+		// alert("controlPlug();");
 		
 		$(window)[0].addEventListener("keydown", registerKey, false);
 		
@@ -233,12 +271,10 @@
 			MAP_PLAYER.crabEyes = false;
 				
 			$("#touchPad .touchPad-crab-eyes").removeClass("tween_touchCrabEyes");
-		}		
-	}
-	
-	function founder(event)
-	{
-		alert("ok");
+		}
+			
+		
+		// alert("controlUnplug();");	
 	}
 	
 	function registerTouch(event)
@@ -539,6 +575,8 @@
 				
 			controlSetup();	
 		}
+		
+		// alert("controlEnd_axis(); " + MAP_PLAYER.enter);
 		
 		
 		if(DISPLAY.userTouchPad)

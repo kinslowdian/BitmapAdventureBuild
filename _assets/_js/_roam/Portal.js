@@ -5,6 +5,8 @@
 	
 	var PORTAL_TRAVEL;
 	
+	var PORTAL_LEVEL_TRAVEL;
+	
 	var Portal = function(div)
 	{
 		this.id			= $(div).attr("id");
@@ -114,6 +116,15 @@
 	{
 		this.d = setTimeout(starApply, 20, this);
 	};
+	
+	function portalTravelCheckReset()
+	{
+		alert("portalTravelCheckReset();");
+		
+		PORTAL_TRAVEL = false;
+	
+		PORTAL_LEVEL_TRAVEL = false;		
+	}
 	
 	function readPortals()
 	{
@@ -395,7 +406,9 @@
 		
 		controlPlug();
 		
-		$("#dev_fu").text("portalComplete();");		
+		$("#dev_fu").text("portalComplete();");
+		
+		alert("portalComplete();");		
 	}
 	
 	
