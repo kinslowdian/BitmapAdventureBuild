@@ -6,6 +6,7 @@
 	
  	// --------------------------------------------- TIMER
  	
+/*
  	var AnimationTimer = function()
  	{
  		this._AT;
@@ -20,6 +21,7 @@
  	{
 	 	clearTimeout(this._AT);	
  	};
+*/
 	
 	// --------------------------------------------- TIMER
 	
@@ -412,9 +414,7 @@
 			
 			$("#skipIntro").css(cancel_css);
 			
-			globalFade_IN("green", skipButtonUsed);
-			
-			
+			skipButtonUsed();			
 		}
 	}
 	

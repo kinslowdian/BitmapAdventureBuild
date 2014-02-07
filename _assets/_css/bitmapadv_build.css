@@ -126,15 +126,17 @@
 	
 	#skipIntro
 	{
-		width: 110px;
-		height: 40px;
+		width: 150px;
+		height: 20px;
 		
 		position: absolute;
 		
-		top: 15px;
-		left: 15px;
+		top: 0px;
+		left: 0px;
 		
-		background: black;
+		padding: 5px 10px;
+		
+		background: #ff0273;
 		
 		z-index: 99;
 		
@@ -146,6 +148,41 @@
 		
 		-webkit-transition: all 0.4s ease-in-out;
 		transition: all 0.4s ease-in-out;
+	}
+	
+	.skipIntroIcon
+	{
+		width: 25px;
+		height: 10px;
+		
+		position: relative;
+		
+		margin: 5px 0px 0px 0px;
+		
+		background-position: -200px -107px;
+	
+		float: left;
+	}
+	
+	.skipIntroText
+	{
+		width: inherit;
+		height: 10px;
+		
+		margin: 5px 0;
+		
+		position: relative;
+		
+		color: #fff;
+		font-size: 14px;
+		text-align: right;
+		/* clear: left; */
+	}
+	
+	.skipIntroText p
+	{
+		line-height: 10px;
+		height: 10px;
 	}
 	
 	#memory
