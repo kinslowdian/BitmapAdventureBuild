@@ -174,10 +174,12 @@
 			"w": 4,
 			"h": 25,
 			"w": [{"weather": "WIND"}],
-			"t": true,
+			"t": false,
 			"entry_x": 2,
 			"entry_y": 1,
-			"title": "level a" 
+			"act": "act i",
+			"title": "level a"
+			 
 		},
 		
 		"texture":
@@ -678,9 +680,10 @@
 			"w": 4,
 			"h": 25,
 			"w": [{"weather": "SNOW"}],
-			"t": true,
+			"t": false,
 			"entry_x": 2,
 			"entry_y": 1,
+			"act": "act ii",
 			"title": "level b" 
 		},
 		
@@ -1206,9 +1209,10 @@
 			"w": 4,
 			"h": 25,
 			"w": [{"weather": "RAIN"}],
-			"t": true,
+			"t": false,
 			"entry_x": 2,
 			"entry_y": 1,
+			"act": "act iii",
 			"title": "level c" 
 		},
 		
@@ -1454,9 +1458,10 @@
 			"w": 4,
 			"h": 25,
 			"w": [{"weather": "SNOW"}],
-			"t": true,
+			"t": false,
 			"entry_x": 2,
 			"entry_y": 1,
+			"act": "act iv",
 			"title": "level d" 
 		},
 		

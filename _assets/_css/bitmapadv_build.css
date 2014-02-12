@@ -23,6 +23,8 @@
 	
 	/* NOTICE */
 	
+	/* LEVEL NOTICE */
+	
 	/* CLEARING */
 	
 	/* WEATHER */
@@ -124,17 +126,20 @@
 		margin: 0 auto;			
 	}
 	
+/*
 	#skipIntro
 	{
-		width: 110px;
-		height: 40px;
+		width: 150px;
+		height: 20px;
 		
 		position: absolute;
 		
-		top: 15px;
-		left: 15px;
+		top: 0px;
+		left: 0px;
 		
-		background: black;
+		padding: 5px 10px;
+		
+		background: #ff0273;
 		
 		z-index: 99;
 		
@@ -146,6 +151,71 @@
 		
 		-webkit-transition: all 0.4s ease-in-out;
 		transition: all 0.4s ease-in-out;
+	}
+*/
+
+	#skipIntro
+	{
+		width: 150px;
+		height: 20px;
+		
+		position: absolute;
+		
+		top: 0px;
+		left: 0px;
+		
+		padding: 5px 10px;
+		
+		background: #ff0273;
+		
+		z-index: 99;
+		
+		/* opacity: 0; */
+		
+		
+		pointer-events: auto;
+		cursor: pointer;
+		
+		-webkit-transform	: translateY(-40px);
+		transform			: translateY(-40px);
+		
+		-webkit-transition	: -webkit-transform 0.4s ease-in-out;
+		transition			: transform 0.4s ease-in-out;
+	}
+	
+	.skipIntroIcon
+	{
+		width: 25px;
+		height: 10px;
+		
+		position: relative;
+		
+		margin: 5px 0px 0px 0px;
+		
+		background-position: -200px -107px;
+	
+		float: left;
+	}
+	
+	.skipIntroText
+	{
+		width: inherit;
+		height: 10px;
+		
+		margin: 5px 0;
+		
+		position: relative;
+		
+		color: #fff;
+		font-size: 14px;
+		text-align: right;
+		/* clear: left; */
+	}
+	
+	.skipIntroText p
+	{
+		line-height: 10px;
+		height: 10px;
 	}
 	
 	#memory
@@ -3672,6 +3742,259 @@
 
 /* ------------------------------------------------------------------- NOTICE */
 /* ------------------------------------------------------------------- NOTICE */
+
+
+
+
+/* ------------------------------------------------------------------- LEVEL NOTICE */
+/* ------------------------------------------------------------------- LEVEL NOTICE */
+
+
+#stage-levelNotice
+{
+	width: inherit;
+	height: inherit;
+	
+	position: absolute;
+	
+	
+	/* background: lime; */
+	
+	z-index: 200;
+	
+	pointer-events: none;
+}
+
+/*
+.pixels_levelNotice
+{
+	background-image: url(../_img/levelTitle_1x.png);
+	background-repeat: no-repeat;
+	background-size: 80px 105px;
+}
+
+*
+{
+	padding: 0;
+	margin: 0;
+	outline: none;
+	padding: none;
+	pointer-events: none;
+	-webkit-touch-callout: none;
+	touch-callout: none;
+}
+*/
+
+/*
+#wrapper
+{
+	width: 100%;
+	height: 100%;
+	
+	position: relative;
+}
+*/
+
+.content-levelNotice
+{
+	width: 100%;
+	height: 100%;
+	
+	background: #dfdfd5;
+	
+	position: absolute;
+	
+	margin: 0 auto 0 auto;
+
+	overflow: hidden;
+	
+	-webkit-transition	: -webkit-transform 0.6s ease-in;	
+	transition			: -webkit-transform 0.6s ease-in;
+
+	z-index: 1;
+}
+
+.content-levelNoticeShadow
+{
+	width: 100%;
+	height: 100%;
+	
+	background: rgba(0, 0, 0, 0.8);
+	
+	position: absolute;
+	
+	margin: 0 auto 0 auto;
+	
+	-webkit-transition	: opacity 0.6s ease-in;	
+	transition			: opacity 0.6s ease-in;
+	
+	z-index: 0;
+}
+
+.levelNoticeBlock
+{
+	width: 100%;
+	height: 100%;
+	
+	margin: 20% auto 0 auto;
+	
+	position: relative;
+}
+
+.levelNotice_wildLife
+{
+	width: 38px;
+	height: 26px;
+	
+	position: absolute;
+	
+	left: 20%;
+	top: -26px;
+	
+	background-position: 0 -79px;
+	
+	z-index: 1;
+}
+
+.tween-levelNotice_wildLife
+{
+	-webkit-animation	: tweenLevelNoticeWildLifeFrames 0.6s ease-in-out infinite;
+	animation			: tweenLevelNoticeWildLifeFrames 0.6s ease-in-out infinite;
+}
+
+@-webkit-keyframes tweenLevelNoticeWildLifeFrames
+{
+	0%		{ -webkit-transform: translateY(0px); }
+	50%		{ -webkit-transform: translateY(2px); }
+	100%	{ -webkit-transform: translateY(0px); }
+}
+
+@keyframes tweenLevelNoticeWildLifeFrames
+{
+	0%		{ transform: translateY(0px); }
+	50%		{ transform: translateY(6px); }
+	100%	{ transform: translateY(0px); }
+}
+
+.levelNotice_trees
+{
+	width: 80px;
+	height: 38px;
+	
+	position: absolute;
+	
+	right: 20%;
+	top: -38px;
+	
+	background-position: 0 -40px;
+	
+	z-index: 1;
+}
+
+.levelNotice_moon
+{
+	width: 80px;
+	height: 55px;
+	
+	position: absolute;
+	
+	right: 20%;
+	top: -55px;
+	
+	z-index: 0;
+}
+
+.levelNotice_moonSprite
+{
+	width: 110px;
+	height: 55px;
+	
+	position: absolute;
+	
+	top: 0;
+	left: -15px;
+	
+	/* background: url(../_img/sunMoon.svg) no-repeat left top; */
+	
+	-webkit-transform	: translateY(55px);
+	transform			: translateY(55px);
+}
+
+.tween-levelNotice_moonSprite
+{
+	-webkit-animation	: tweenLevelNoticeMoonSpriteFrames 4s ease-in-out forwards;
+	animation			: tweenLevelNoticeMoonSpriteFrames 4s ease-in-out forwards;
+}
+
+@-webkit-keyframes tweenLevelNoticeMoonSpriteFrames
+{
+	from 	{ -webkit-transform: translateY(55px); }
+	to		{ -webkit-transform: translateY(0px); }
+}
+
+@keyframes tweenLevelNoticeMoonSpriteFrames
+{
+	from 	{ transform: translateY(55px); }
+	to		{ transform: translateY(0px); }
+}
+
+.levelNotice_fill
+{
+	width: inherit;
+	height: inherit;
+	
+	position: relative;
+	
+	background: #7d7c76;
+}
+
+.levelNotice_text
+{
+	width: 86%;
+	
+	position: absolute;
+	
+	top: 0; left:0; bottom:0; right:0;
+	
+	margin: 4% auto 0 auto;
+	
+	z-index: 1;
+	
+	/* outline: 1px solid white; */
+	
+	text-align: center;
+	/* color: #e5ffb2; */
+	color: #dfdfd5;
+	
+	letter-spacing: 0.1em;
+	font-weight: 400;
+}
+
+.levelNotice_text_act
+{
+	font-size: 1em;
+	margin-bottom: 0.4em;
+}
+
+.levelNotice_text_title
+{
+	font-size: 2em;
+	line-height: 1.4em;
+}
+
+.levelNotice_grass
+{
+	width: 40px;
+	height: 40px;
+	
+	background-position: 0 0;
+	
+	margin: 1.6em auto 0 auto;
+}
+
+
+/* ------------------------------------------------------------------- LEVEL NOTICE */
+/* ------------------------------------------------------------------- LEVEL NOTICE */
 
 
 

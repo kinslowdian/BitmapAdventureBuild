@@ -39,6 +39,7 @@
 		$("#gameDisp").append($("#memory").html());
 		$("#memory").html("");
 		
+		
 		prepGameMapRest();
 	}
 	
@@ -324,8 +325,16 @@
 		trace(LEVEL_MAIN);
 	}
 	
+	
 	function levelInit_field()
 	{
+		
+		//---------------------- LEVEL_INFO_DISPLAY
+		
+		levelInfoBuild();
+		
+		//---------------------- LEVEL_INFO_DISPLAY
+		
 		if(NEW_LEVELER)
 		{
 
@@ -369,6 +378,20 @@
 		}
 		
 		levelInit_weather();
+	}
+	
+	function levelInfoBuild()
+	{
+		
+		// "file_lib"
+	
+		// Logic.dat_ROM["level" + GAME.mapLevel]["levelSettings"])
+		
+		
+		var levelInfo_html = html_data_use(LIB_DATA, "_content-levelNotice");
+		
+		
+		$("#stage-levelNotice").html(levelInfo_html);
 	}
 	
 	function levelInit_weather()
@@ -503,6 +526,7 @@
 		this.buildData.useTime		= this.settings.t;
 		this.buildData.entry_x		= this.settings.entry_x;
 		this.buildData.entry_y		= this.settings.entry_y;
+		this.buildData.act			= this.settings.act;
 		this.buildData.title		= this.settings.title;
 	
 		delete this.settings;
@@ -743,12 +767,18 @@
 		// use main fade
 		// map_fadeIntoRun(0, "GET_WEATHER_TITLE");
 		
+		
+		levelInfoDisplay();
+		
 		globalFade_OUT(dayTimeTitleUseCheck);
 	}
 	
 	function dayTimeTitleUseCheck()
 	{
+
+//---------------------- LEVEL_INFO_DISPLAY
 		
+/*
 		if(NEW_LEVELER)
 		{
 
@@ -762,8 +792,61 @@
 		else
 		{
 			playerEnterMap();
-		}		
+		}
+*/
+		
+		levelInfoDisplayInit();		
 	}
+	
+	//---------------------- LEVEL_INFO_DISPLAY
+
+
+	function levelInfoDisplay()
+	{
+		$("#stage-levelNotice .content-levelNotice")[0].addEventListener("webkitTransitionEnd", levelInfoDisplayEvent, false);
+		$("#stage-levelNotice .content-levelNotice")[0].addEventListener("transitionend", levelInfoDisplayEvent, false);
+		
+		$("#stage-levelNotice .levelNotice_text_act").text(LEVEL_MAIN.buildData.act.toUpperCase());
+		$("#stage-levelNotice .levelNotice_text_title").text(LEVEL_MAIN.buildData.title.toUpperCase());
+	}
+	
+	function levelInfoDisplayInit()
+	{
+		var levelInfoDisplaydelay;
+		
+		levelInfoDisplaydelay = setTimeout(levelInfoDisplayRemove, 2.5 * 1000);		
+	}
+	
+	function levelInfoDisplayRemove()
+	{
+		var levelInfoDisplay_css;
+		
+		levelInfoDisplay_css	= 	{
+										"-webkit-transform"	: "translateY(" + -DISPLAY._height + "px)",
+										"transform"			: "translateY(" + -DISPLAY._height + "px)"
+									};
+		
+		$("#stage-levelNotice .content-levelNotice").css(levelInfoDisplay_css);
+		
+		$("#stage-levelNotice .content-levelNoticeShadow").css("opacity", "0");
+	}
+	
+	function levelInfoDisplayEvent(event)
+	{
+		$("#stage-levelNotice .content-levelNotice")[0].removeEventListener("webkitTransitionEnd", levelInfoDisplayEvent, false);
+		$("#stage-levelNotice .content-levelNotice")[0].removeEventListener("transitionend", levelInfoDisplayEvent, false);		
+	
+	
+		$("#stage-levelNotice .content-levelNotice").remove();
+		$("#stage-levelNotice .content-levelNoticeShadow").remove();
+		
+		
+		playerEnterMap();
+	}
+
+	//---------------------- LEVEL_INFO_DISPLAY
+
+	
 	
 	function dayTimeTitleInit()
 	{

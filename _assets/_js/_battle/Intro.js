@@ -61,6 +61,10 @@
 		$("#stage-startIntro").append($("#memory").html());
 		$("#memory").html("");
 		
+		timerList_init();
+		
+		INTRO.viewerPosition = 0;
+		
 		// part1
 		INTRO.showState = "PART1";
 		INTRO.part1_id = $("#introPart1");
@@ -70,6 +74,7 @@
 		INTRO.part2_id = $("#introPart2");
 		INTRO.part2_html = $("#introPart2").html();
 		INTRO.part2_delay = new AnimationTimer();
+		timerList_add(INTRO.part2_delay);
 		
 		$(INTRO.part1_id).html("");
 		$(INTRO.part2_id).html("");
@@ -115,8 +120,11 @@
 		
 		$("#stage-startIntro").addClass("position0");
 		
+		INTRO.viewerPosition = 0;
+		
 			
 		var action = new AnimationTimer();
+		timerList_add(action);
 		action.time(2, bossDrop);
 		
 		skipButtonShow();		
@@ -129,27 +137,9 @@
 	
 	function skipButtonUsed()
 	{
-		
-		switch(INTRO.showState)
-		{
-			case "PART1":
-			{
-			
-				break;
-			}
-			
-			case "PART2":
-			{
-				// end_intro();
-				
-				break;
-			}
-			
-			default:
-			{
-				
-			}
-		}
+		timerList_stopAll();
+		animationEventKillAll("#introPart1");
+		globalFade_IN("white", formPart2);
 	}
 	
  	function bossDrop()
@@ -186,6 +176,10 @@
 	 	var action1 = new AnimationTimer();
 	 	var action2 = new AnimationTimer();
 	 	
+		timerList_add(action0);
+		timerList_add(action1);
+		timerList_add(action2);
+	 	
 	 	action0.time(1, quickly, 0);		
 	 	action1.time(2, quickly, 1);
 	 	action2.time(3.5, quickly, 2);
@@ -211,6 +205,8 @@
 	 		{
 	 			$("#stage-startIntro").removeClass("position0").addClass("position1");
 	 			
+	 			INTRO.viewerPosition = 1;
+	 			
 		 		break;
 	 		}
 	 		
@@ -228,6 +224,8 @@
 		 		$("#introPunchCloud").addClass("tween-punchCloud-down");
 		 		
 		 		$("#stage-startIntro").removeClass("position1").addClass("position2");
+		 		
+		 		INTRO.viewerPosition = 2;
 		 				
 		 		break;
 	 		}
@@ -300,7 +298,8 @@
 		 		animationEventManager("#foreGround", "ANIMATION", "endPart1");
 		 		
 		 		var delay_defaultStagePos = new AnimationTimer();
-		 		delay_defaultStagePos.time(0.5, function(){ $("#stage-startIntro").removeClass("position3").addClass("position1"); });
+		 		timerList_add(delay_defaultStagePos);
+		 		delay_defaultStagePos.time(0.5, function(){ $("#stage-startIntro").removeClass("position3").addClass("position1");  INTRO.viewerPosition = 1; });
 		 				
 		 		break;
 	 		}
@@ -361,7 +360,9 @@
 				 	
 				 	animationEventManager(".punchCloud-giantFoot", "ANIMATION", "event_punchCloud");
 				 	
-				 	$("#stage-startIntro").removeClass("position2").addClass("position3");					 			
+				 	$("#stage-startIntro").removeClass("position2").addClass("position3");
+				 	
+				 	INTRO.viewerPosition = 3;					 			
 			 	}
 			 			
 			 	break;
@@ -430,6 +431,16 @@
  	function formPart2()
  	{	 	
 		
+		skipBtn_remove();
+		
+		if(INTRO.viewerPosition !== 1)
+		{
+			$("#stage-startIntro").removeClass("position" + INTRO.viewerPosition).addClass("position1");
+		
+			INTRO.viewerPosition = 1;
+		}
+		
+		
 		$(":root").removeClass("color-intro").addClass("color-night");
 		
 		
@@ -454,6 +465,7 @@
 		
 		INTRO.part2_delay.time(0.5, init_part2);
 		
+		alert("formPart2();");
 		
 		snowingInit("#introPart2 #snow-intro-part2", "punchCloudPixels", "snowFlake-pink"); 
 		
@@ -478,6 +490,7 @@
  	function event_init_part2()
  	{	
 		var bossAttackDelay = new AnimationTimer();
+		timerList_add(bossAttackDelay);
 		bossAttackDelay.time(1.5, bossAttack);	 	 	
  	}
 	
@@ -536,6 +549,7 @@
 		// call battle nav
 		
 		var cloudDisplayDelay = new AnimationTimer();
+		timerList_add(cloudDisplayDelay);
 		cloudDisplayDelay.time(2, cloudDisplay);
 		
 		// cloudDisplay();
@@ -546,6 +560,7 @@
 	function endIntroBattle()
 	{
 		var finishingMoveDelay = new AnimationTimer();
+		timerList_add(finishingMoveDelay);
 		finishingMoveDelay.time(1, boss_finishHim);
 	}
 	
@@ -608,6 +623,7 @@
 		}		
 		
 		var endPart2Delay = new AnimationTimer();
+		timerList_add(endPart2Delay);
 		endPart2Delay.time(2, endPart2);		
 	}
 	

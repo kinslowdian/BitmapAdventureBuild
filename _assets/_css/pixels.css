@@ -34,6 +34,8 @@
 		background-size: 100px 100px;
 	}
 	
+	
+	
 
 	/* ---------------------------------------------------CHARACTERS */
 	
@@ -349,6 +351,19 @@
 		background-size: 240px 240px;		
 	}
 	
+	.pixels_levelNotice
+	{
+		background-image: url(../_img/_notice/levelTitle_1x.png);
+		background-repeat: no-repeat;
+		background-size: 80px 105px;
+	}
+	
+	.pixels_levelNoticeMoon
+	{
+		background: url(../_img/_notice/sunMoon.svg) no-repeat left top;
+		background-size: 110px 55px;
+	}
+	
 	
 
 /* 1x */
@@ -550,6 +565,11 @@
 		.pixels_forestMass
 		{
 			background-image: url(../_img/_tiles/tile_pineTreesMass_1x.png);		
+		}
+		
+		.pixels_levelNotice
+		{
+			background-image: url(../_img/_notice/levelTitle_1x.png);
 		}
 
 		
@@ -773,6 +793,11 @@
 		.pixels_forestMass
 		{
 			background-image: url(../_img/_tiles/tile_pineTreesMass_2x.png);		
+		}
+		
+		.pixels_levelNotice
+		{
+			background-image: url(../_img/_notice/levelTitle_2x.png);
 		}
 		
 /*

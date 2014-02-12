@@ -6,6 +6,7 @@
 	
  	// --------------------------------------------- TIMER
  	
+/*
  	var AnimationTimer = function()
  	{
  		this._AT;
@@ -20,6 +21,7 @@
  	{
 	 	clearTimeout(this._AT);	
  	};
+*/
 	
 	// --------------------------------------------- TIMER
 	
@@ -387,11 +389,21 @@
 	
 	function skipBtn_init()
 	{
+		var skipBtn_css;
+		
 		if(!skipBtnUp)
 		{
 			skipBtnUp = true;
 			
-			$("#skipIntro").css("opacity", 1);
+			skipBtn_css = 	{
+								"-webkit-transform"	: "translateY(0px)",
+								"transform"			: "translateY(0px)"
+							};
+			
+			// $("#skipIntro").css("opacity", 1);
+			
+			$("#skipIntro").css(skipBtn_css);
+			
 			$("#skipIntro").bind("click", skipBtn_event);
 		}
 	}
@@ -412,9 +424,7 @@
 			
 			$("#skipIntro").css(cancel_css);
 			
-			globalFade_IN("green", skipButtonUsed);
-			
-			
+			skipButtonUsed();			
 		}
 	}
 	
@@ -425,21 +435,22 @@
 		skipCancel = true;
 		
 		cancel_css = 	{
-							"pointer-events"	:	"auto",
-							"cursor"			:	"pointer",								
-							"opacity"			:	"0"
+							"pointer-events"	: "auto",
+							"cursor"			: "pointer",								
+							"-webkit-transform"	: "translateY(0px)",
+							"transform"			: "translateY(0px)"
 						};
 			
 		$("#skipIntro").css(cancel_css);
 		
-		$("#skipIntro")[0].addEventListener("webkitTransitionEnd", skipBtn_faded, false);
-		$("#skipIntro")[0].addEventListener("transitionend", skipBtn_faded, false);
+		$("#skipIntro")[0].addEventListener("webkitTransitionEnd", skipBtn_tweenEnd, false);
+		$("#skipIntro")[0].addEventListener("transitionend", skipBtn_tweenEnd, false);
 	}
 	
-	function  skipBtn_faded(event)
+	function  skipBtn_tweenEnd(event)
 	{
-		$("#skipIntro")[0].removeEventListener("webkitTransitionEnd", skipBtn_faded, false);
-		$("#skipIntro")[0].removeEventListener("transitionend", skipBtn_faded, false);
+		$("#skipIntro")[0].removeEventListener("webkitTransitionEnd", skipBtn_tweenEnd, false);
+		$("#skipIntro")[0].removeEventListener("transitionend", skipBtn_tweenEnd, false);
 		
 		skipBtn_remove();
 	}
