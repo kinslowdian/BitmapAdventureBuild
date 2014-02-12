@@ -63,8 +63,11 @@
 		
 		timerList_init();
 		
+<<<<<<< HEAD
 		INTRO.viewerPosition = 0;
 		
+=======
+>>>>>>> 23a8b485e4c093300a6d62d91b8b0935b4f10479
 		// part1
 		INTRO.showState = "PART1";
 		INTRO.part1_id = $("#introPart1");
@@ -299,7 +302,11 @@
 		 		
 		 		var delay_defaultStagePos = new AnimationTimer();
 		 		timerList_add(delay_defaultStagePos);
+<<<<<<< HEAD
 		 		delay_defaultStagePos.time(0.5, function(){ $("#stage-startIntro").removeClass("position3").addClass("position1");  INTRO.viewerPosition = 1; });
+=======
+		 		delay_defaultStagePos.time(0.5, function(){ $("#stage-startIntro").removeClass("position3").addClass("position1"); });
+>>>>>>> 23a8b485e4c093300a6d62d91b8b0935b4f10479
 		 				
 		 		break;
 	 		}

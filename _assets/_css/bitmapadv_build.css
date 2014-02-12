@@ -218,6 +218,41 @@
 		height: 10px;
 	}
 	
+	.skipIntroIcon
+	{
+		width: 25px;
+		height: 10px;
+		
+		position: relative;
+		
+		margin: 5px 0px 0px 0px;
+		
+		background-position: -200px -107px;
+	
+		float: left;
+	}
+	
+	.skipIntroText
+	{
+		width: inherit;
+		height: 10px;
+		
+		margin: 5px 0;
+		
+		position: relative;
+		
+		color: #fff;
+		font-size: 14px;
+		text-align: right;
+		/* clear: left; */
+	}
+	
+	.skipIntroText p
+	{
+		line-height: 10px;
+		height: 10px;
+	}
+	
 	#memory
 	{
 		width: 0;
