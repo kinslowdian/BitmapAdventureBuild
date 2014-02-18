@@ -669,7 +669,11 @@
 				"jump": 1,
 				"jump_portal": 0
 			}
-		}
+		},
+		
+		"decay_L":[{"cut":"landDecay_l_0"}, {"cut":"landDecay_l_1"}, {"cut":"landDecay_l_2"}, {"cut":"landDecay_l_3"}, {"cut":"landDecay_l_4"}, {"cut":"landDecay_l_2"}],
+		
+		"decay_R":[{"cut":"landDecay_r_0"}, {"cut":"landDecay_r_1"}, {"cut":"landDecay_r_2"}, {"cut":"landDecay_r_3"}, {"cut":"landDecay_r_4"}, {"cut":"landDecay_r_2"}]
 	},
 	
 	"level1":
@@ -1198,7 +1202,11 @@
 				"jump": 2,
 				"jump_portal": 0
 			}
-		}
+		},
+		
+		"decay_L":[{"cut":"landDecay_l_0"}, {"cut":"landDecay_l_1"}, {"cut":"landDecay_l_2"}, {"cut":"landDecay_l_3"}, {"cut":"landDecay_l_4"}, {"cut":"landDecay_l_2"}],
+		
+		"decay_R":[{"cut":"landDecay_r_0"}, {"cut":"landDecay_r_1"}, {"cut":"landDecay_r_2"}, {"cut":"landDecay_r_3"}, {"cut":"landDecay_r_4"}, {"cut":"landDecay_r_2"}]
 	},
 	
 	"level2":
@@ -1447,7 +1455,11 @@
 				"jump_portal": 0
 			}
 			
-		}
+		},
+		
+		"decay_L":[{"cut":"landDecay_l_0"}, {"cut":"landDecay_l_1"}, {"cut":"landDecay_l_2"}, {"cut":"landDecay_l_3"}, {"cut":"landDecay_l_4"}, {"cut":"landDecay_l_2"}],
+		
+		"decay_R":[{"cut":"landDecay_r_0"}, {"cut":"landDecay_r_1"}, {"cut":"landDecay_r_2"}, {"cut":"landDecay_r_3"}, {"cut":"landDecay_r_4"}, {"cut":"landDecay_r_2"}]
 	},
 	
 	"level3":
@@ -1769,6 +1781,10 @@
 				"jump": 2,
 				"jump_portal": 2
 			}
-		}
+		},
+		
+		"decay_L":[{"cut":"landDecay_l_0"}, {"cut":"landDecay_l_1"}, {"cut":"landDecay_l_2"}, {"cut":"landDecay_l_3"}, {"cut":"landDecay_l_4"}, {"cut":"landDecay_l_2"}],
+		
+		"decay_R":[{"cut":"landDecay_r_0"}, {"cut":"landDecay_r_1"}, {"cut":"landDecay_r_2"}, {"cut":"landDecay_r_3"}, {"cut":"landDecay_r_4"}, {"cut":"landDecay_r_2"}]
 	}
 }

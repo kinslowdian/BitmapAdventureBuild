@@ -15,6 +15,8 @@
 	var action_map_fadeInto;
 	var action_map_fadeOut;
 	
+	// var levelWarping = false;
+	
 	function start_bitmapAdventure()
 	{
 		gameAreaClear();
@@ -423,7 +425,7 @@
 				
 				case "SNOW":
 				{
-					snowingInit(".weather-snow", "pixels_weather-snow", "snowFlake-white");
+					snowingInit(".weather-snow", "punchCloudPixels", "snowFlake-pink"); // "pixels_weather-snow", snowFlake-white"
 					
 					break;
 				}
@@ -432,7 +434,10 @@
 				{
 					//windInit();
 					
-					windInit(6, 8);
+					// windInit(6, 8);
+					
+					// 2, 4
+					windInit(3, 1.5);
 					
 					break;
 				}
@@ -504,11 +509,36 @@
 			i++;
 		});	
 		
+		decayBuild();
 		
 		// call once all html data has been used
 		html_data_purge();
 		
 		run();
+	}
+	
+	function decayBuild()
+	{
+		var decayLength = Logic.dat_ROM["level" + GAME.mapLevel]["decay_L"].length;
+		
+		// alert(Logic.dat_ROM["level" + GAME.mapLevel]["decay_L"][1].cut + " " + Logic.dat_ROM["level" + GAME.mapLevel]["decay_L"].length);
+		
+		for(var i = 0; i < decayLength; i++)
+		{
+			var final_class_L = Logic.dat_ROM["level" + GAME.mapLevel]["decay_L"][i].cut;
+			var final_class_R = Logic.dat_ROM["level" + GAME.mapLevel]["decay_R"][i].cut;
+			
+			$(".woodland-darkness-left .landDecayBlock_" + i).addClass(final_class_L);
+			
+			$(".woodland-darkness-right .landDecayBlock_" + i).addClass(final_class_R);
+			
+			// $(".stage-roam .woodland .woodland-darkness-left :nth-child(" + (i + 1) + ")").addClass(final_class_L);
+			// $(".stage-roam .woodland .woodland-darkness-right :nth-child(" + (i + 1) + ")").addClass(final_class_R);
+		}
+		
+		// alert(decayLength + " " + $(".woodland-darkness-left .landDecayBlock_" + 0));
+		
+		// alert($(".woodland-darkness-left :nth-child(" + 2 + ")").html());
 	}
 	
 	var LEVEL = function(settings)
@@ -803,8 +833,8 @@
 
 	function levelInfoDisplay()
 	{
-		$("#stage-levelNotice .content-levelNotice")[0].addEventListener("webkitTransitionEnd", levelInfoDisplayEvent, false);
-		$("#stage-levelNotice .content-levelNotice")[0].addEventListener("transitionend", levelInfoDisplayEvent, false);
+		// $("#stage-levelNotice .content-levelNotice")[0].addEventListener("webkitTransitionEnd", levelInfoDisplayEvent, false);
+		// $("#stage-levelNotice .content-levelNotice")[0].addEventListener("transitionend", levelInfoDisplayEvent, false);
 		
 		$("#stage-levelNotice .levelNotice_text_act").text(LEVEL_MAIN.buildData.act.toUpperCase());
 		$("#stage-levelNotice .levelNotice_text_title").text(LEVEL_MAIN.buildData.title.toUpperCase());
@@ -814,11 +844,36 @@
 	{
 		var levelInfoDisplaydelay;
 		
-		levelInfoDisplaydelay = setTimeout(levelInfoDisplayRemove, 2.5 * 1000);		
+		// levelInfoDisplaydelay = setTimeout(levelInfoDisplayRemove, 2.5 * 1000);		
+	
+		levelInfoDisplaydelay = setTimeout(levelInfoDisplayTextRemove, 2.5 * 1000);
 	}
 	
-	function levelInfoDisplayRemove()
+	function levelInfoDisplayTextRemove()
 	{
+		$("#stage-levelNotice .levelNotice_text_title")[0].addEventListener("webkitTransitionEnd", levelInfoDisplayTextRemoveEnd, false);
+		$("#stage-levelNotice .levelNotice_text_title")[0].addEventListener("transitionend", levelInfoDisplayTextRemoveEnd, false);
+		
+		$("#stage-levelNotice .levelNotice_text p").css("opacity", "0");
+	}
+	
+	function levelInfoDisplayTextRemoveEnd(event)
+	{
+		$("#stage-levelNotice .levelNotice_text_title")[0].removeEventListener("webkitTransitionEnd", levelInfoDisplayTextRemoveEnd, false);
+		$("#stage-levelNotice .levelNotice_text_title")[0].removeEventListener("transitionend", levelInfoDisplayTextRemoveEnd, false);
+		
+		var fullRemoveDelay = setTimeout(levelInfoDisplayRemove, 500);		
+	}
+	
+	function levelInfoDisplayRemove(event)
+	{
+		// $("#stage-levelNotice .levelNotice_text_title")[0].removeEventListener("webkitTransitionEnd", levelInfoDisplayRemove, false);
+		// $("#stage-levelNotice .levelNotice_text_title")[0].removeEventListener("transitionend", levelInfoDisplayRemove, false);
+		
+		
+		$("#stage-levelNotice .content-levelNotice")[0].addEventListener("webkitTransitionEnd", levelInfoDisplayEvent, false);
+		$("#stage-levelNotice .content-levelNotice")[0].addEventListener("transitionend", levelInfoDisplayEvent, false);		
+		
 		var levelInfoDisplay_css;
 		
 		levelInfoDisplay_css	= 	{
@@ -907,7 +962,7 @@
 	
 	function refreshRebuildLevel()
 	{
-		alert("refreshRebuildLevel();");
+		// alert("refreshRebuildLevel();");
 		
 		// clear weather
 		
