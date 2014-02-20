@@ -176,7 +176,8 @@
 			"w": [{"weather": "WIND"}],
 			"t": false,
 			"entry_x": 2,
-			"entry_y": 1,
+			"entry_y": -0.5,
+			"entry_d": "DOWN",
 			"act": "act i",
 			"title": "level a"
 			 

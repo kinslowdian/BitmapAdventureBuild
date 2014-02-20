@@ -298,8 +298,10 @@
 			$(".player-area .player-x").css(travel_css_x);
 			$(".player-area .player-y").css(travel_css_y);				
 			
-			MAP_PLAYER.current_x = MAP_PLAYER.x = PORTAL_TRAVEL.x;	
-			MAP_PLAYER.current_y = MAP_PLAYER.y = PORTAL_TRAVEL.y;
+			// CONTROL UPDATER
+			
+			// MAP_PLAYER.current_x = MAP_PLAYER.x = PORTAL_TRAVEL.x;	
+			// MAP_PLAYER.current_y = MAP_PLAYER.y = PORTAL_TRAVEL.y;
 			
 			moveStageTest();
 	}
@@ -312,36 +314,46 @@
 		var exit_css_y;
 		var exit_css_h;
 		
+		// CONTROL UPDATER
+		
 		switch(PORTAL_TRAVEL.exit)
 		{
 			case "UP":
 			{
+/*
 				x = PORTAL_TRAVEL.x;
 				y = PORTAL_TRAVEL.y - (MAP_PLAYER.moveUnit * 0.5);
+*/
 				
 				break;
 			}
 			
 			case "DOWN":
 			{
+/*
 				x = PORTAL_TRAVEL.x;
 				y = PORTAL_TRAVEL.y + MAP_PLAYER.moveUnit;
+*/
 								
 				break;
 			}
 			
 			case "LEFT":
 			{
+/*
 				x = PORTAL_TRAVEL.x - (MAP_PLAYER.moveUnit * 0.5);
 				y = PORTAL_TRAVEL.y;
+*/
 								
 				break;
 			}
 			
 			case "RIGHT":
 			{
+/*
 				x = PORTAL_TRAVEL.x + MAP_PLAYER.moveUnit;
 				y = PORTAL_TRAVEL.y;
+*/
 								
 				break;
 			}
@@ -391,8 +403,10 @@
 			$(".player-area")[0].removeEventListener("transitionend", portalTravelExitEnd, false);
 			
 			
-			MAP_PLAYER.current_x = MAP_PLAYER.x = PORTAL_TRAVEL.save_x;	
-			MAP_PLAYER.current_y = MAP_PLAYER.y = PORTAL_TRAVEL.save_y;
+			// CONTROL UPDATER
+			
+			// MAP_PLAYER.current_x = MAP_PLAYER.x = PORTAL_TRAVEL.save_x;	
+			// MAP_PLAYER.current_y = MAP_PLAYER.y = PORTAL_TRAVEL.save_y;
 			
 			exitFrame = setTimeout(portalComplete, 20);
 			

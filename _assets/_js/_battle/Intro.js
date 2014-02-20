@@ -465,7 +465,7 @@
 		
 		INTRO.part2_delay.time(0.5, init_part2);
 		
-		alert("formPart2();");
+		// alert("formPart2();");
 		
 		snowingInit("#introPart2 #snow-intro-part2", "punchCloudPixels", "snowFlake-pink"); 
 		

@@ -24,6 +24,10 @@
 		prepGameMapInit();
 		
 		portalTravelCheckReset();
+		
+		// CONTROL UPDATER
+		
+		controlNewLevel();
 	}
 	
 	function prepGameMapInit()
@@ -556,6 +560,7 @@
 		this.buildData.useTime		= this.settings.t;
 		this.buildData.entry_x		= this.settings.entry_x;
 		this.buildData.entry_y		= this.settings.entry_y;
+		this.buildData.entry_d		= this.settings.entry_d;
 		this.buildData.act			= this.settings.act;
 		this.buildData.title		= this.settings.title;
 	
@@ -792,11 +797,15 @@
 	{
 		readPortals();
 		
-		controlInit();
+		// NEW CONTROLLER
+		
+		// controlInit();
 		
 		// use main fade
 		// map_fadeIntoRun(0, "GET_WEATHER_TITLE");
 		
+		
+		mapPlayerPlace();
 		
 		levelInfoDisplay();
 		
@@ -895,8 +904,11 @@
 		$("#stage-levelNotice .content-levelNotice").remove();
 		$("#stage-levelNotice .content-levelNoticeShadow").remove();
 		
+		// NEW CONTROLLER
 		
-		playerEnterMap();
+		// playerEnterMap();
+		
+		mapPlayerStartQuest();
 	}
 
 	//---------------------- LEVEL_INFO_DISPLAY
@@ -986,7 +998,9 @@
 		
 		LEVEL_MAIN = null;
 		
-		MAP_PLAYER.enter = true;
+		// CONTROLLER UPDATE
+		
+		// MAP_PLAYER.enter = true;
 		
 		html_lib_reuse();
 	}
