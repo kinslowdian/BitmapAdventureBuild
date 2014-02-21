@@ -304,6 +304,8 @@
 			// MAP_PLAYER.current_y = MAP_PLAYER.y = PORTAL_TRAVEL.y;
 			
 			moveStageTest();
+			
+			alert("CONFLICT");
 	}
 	
 	function portalTravelExit()

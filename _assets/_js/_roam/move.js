@@ -8,6 +8,7 @@
 	var listenForQuestEntry = true;
 	
 	var playerInPortal = false;
+	var playerExitPortal = false;
 	
 	var portalTravelType = "";
 	
@@ -189,7 +190,7 @@
 			
 			revert_XY();
 			
-			alert(MAP_PLAYER.block_x + " " + MAP_PLAYER.block_y);
+			// alert(MAP_PLAYER.block_x + " " + MAP_PLAYER.block_y);
 			
 			
 			
@@ -339,8 +340,10 @@
 		{
 			if(portalTravelType === "STAGE")
 			{
-				playerInPortal = false;
-				portalTravelType = "";
+				moveStageTest();
+				
+				// playerInPortal = false;
+				// portalTravelType = "";
 				
 				// FAULT
 				
@@ -488,6 +491,11 @@
 		$(".player-area .player-x")[0].addEventListener("transitionend", mapPlayerAxisX_End, false);
 		
 		$(".player-area .player-x").css(css_x);
+		
+		if(playerExitPortal)
+		{
+			$(".player-area").css("opacity", 1);
+		}
 	}
 	
 	function mapPlayerAxisX_End(event)
@@ -510,7 +518,18 @@
 		else
 		{
 			MAP_PLAYER.allowControl = true;			
-		}			
+		}
+		
+		if(playerExitPortal)
+		{
+			playerExitPortal = false;
+			
+			MAP_PLAYER.allowControl = true;
+			
+			// control plug
+			
+			controlPort(true);
+		}				
 	}
 	
 	
@@ -550,6 +569,11 @@
 		$(".player-area .player-y")[0].addEventListener("transitionend", mapPlayerAxisY_End, false);
 		
 		$(".player-area .player-y").css(css_y);
+		
+		if(playerExitPortal)
+		{
+			$(".player-area").css("opacity", 1);
+		}
 	}
 	
 	function mapPlayerAxisY_End(event)
@@ -564,6 +588,8 @@
 		
 		questEntryCheck();
 		
+		moveStageTest();
+		
 		if(playerInPortal)
 		{
 			portalTravelSort();
@@ -572,9 +598,20 @@
 		else
 		{
 			MAP_PLAYER.allowControl = true;
+		}
+		
+		if(playerExitPortal)
+		{
+			playerExitPortal = false;
+			
+			MAP_PLAYER.allowControl = true;
+			
+			// control plug
+			
+			controlPort(true);
 		}		
 		
-		moveStageTest();		
+		// moveStageTest();		
 	}
 	
 	function mapPlayerAxisEventCancel()
@@ -631,7 +668,7 @@
 		// catch new level without stage screen move
 		
 		if(!triggered)
-		{
+		{				
 			if(MAP_PLAYER.enterPortal)
 			{
 				// ADD BACK IN
@@ -672,13 +709,30 @@
 		{
 			// ADD BACK IN
 			// exitFrame = setTimeout(portalTravelExit, 1000);
+		}
+		
+		if(playerInPortal)
+		{
+			if(portalTravelType === "STAGE")
+			{
+				playerInPortal = false;
+				portalTravelType = "";
+				
+				// PORTAL EXIT CHECK
+				playerExitPortal = true;
+				
+				exitFrame = setTimeout(mapPlayerEntry, 1000, true);
+			}
 		}	
 	}
 	
 	
 	
+/*
 	function portalEntry(hitPortal)
 	{
+		var foundPortal;
+		
 		for(var i in portals)
 		{
 			if(portals[i].id === hitPortal)
@@ -698,12 +752,53 @@
 			
 			for(var j in portals)
 			{
+				trace(portals[i].travel + " " + portals[j].name);
+				
+				
 				if(portals[i].travel === portals[j].name)
 				{
 					MAP_PLAYER.portalObj = portals[j];	
 				}
 			}
 		}
+	}
+*/
+	
+	function portalEntry(hitPortal)
+	{
+		for(var i in portals)
+		{
+			if(portals[i].id === hitPortal)
+			{
+				if(portals[i].j_type === "LEVEL")
+				{
+					portalTravelType = "LEVEL";
+				}
+				
+				if(portals[i].j_type === "STAGE")
+				{
+					portalTravelType = "STAGE";
+					
+					portalExit(portals[i]);
+				}	
+			}
+		}
+	}
+
+	
+	function portalExit(portalObj)
+	{
+		// NEXT PORTAL FIND
+			
+		for(var i in portals)
+		{
+			// trace(portals[i].travel + " " + portals[j].name);
+				
+			if(portalObj.travel === portals[i].name)
+			{
+				MAP_PLAYER.portalObj = portals[i];	
+			}
+		}		
 	}
 	
 	function portalTravelSort()
@@ -722,7 +817,25 @@
 			trace(MAP_PLAYER);
 			// stage shift
 			
-			mapPlayerPlace();
+			portalPlayerFadeOut();
+			
+			// mapPlayerPlace();
 		}
+	}
+	
+	function portalPlayerFadeOut()
+	{
+		$(".player-area")[0].addEventListener("webkitTransitionEnd", portalPlayerFadeOutEnd, false);
+		$(".player-area")[0].addEventListener("transitionend", portalPlayerFadeOutEnd, false);
+		
+		$(".player-area").css("opacity", 0);
+	}
+	
+	function portalPlayerFadeOutEnd(event)
+	{
+		$(".player-area")[0].removeEventListener("webkitTransitionEnd", portalPlayerFadeOutEnd, false);
+		$(".player-area")[0].removeEventListener("transitionend", portalPlayerFadeOutEnd, false);
+		
+		mapPlayerPlace();		
 	}	
 	
