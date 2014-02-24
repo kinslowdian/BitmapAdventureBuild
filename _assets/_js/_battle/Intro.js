@@ -2,8 +2,6 @@
 	
 	var introBossCloud;
 	
-	//var fader = new Object();
-	
 	var INTRO = new Object();
 	
 	var introBossAttackPosY = -260;
@@ -14,35 +12,7 @@
 	 	
 	 	introBossCloud = new Object();
 	 			
-	 	introBossCloud.intoGiant = false;	
-
-		
-/*
-		// part1
-		INTRO.part1_id = $("#introPart1");
-		INTRO.part1_html = $("#introPart1").html();
-		
-		// part2
-		INTRO.part2_id = $("#introPart2");
-		INTRO.part2_html = $("#introPart2").html();
-		INTRO.part2_delay = new AnimationTimer();
-		
-		$(INTRO.part1_id).html("");
-		$(INTRO.part2_id).html("");
-*/
-
-		
-		
-		// init_intro();
-		
-		trace("setup(); / init");
-		
-		trace($("#stage-startIntro").width() + " x " + screen.height);
-	
-/*
-		var catchUp = new AnimationTimer();
-		catchUp.time(1, init_intro);
-*/
+	 	introBossCloud.intoGiant = false;
 	}
 	
 	function prepIntroDataInit()
@@ -91,13 +61,6 @@
 	
 	function init_intro()
 	{
-/*
-		fader.obj = $("#fader");
-		
-		$(fader.obj).css("visibility", "visible");
-		$(fader.obj).addClass("flood-full");	
-*/
-		
 		$(INTRO.part1_id).html(INTRO.part1_html);
 		
 		$(":root").addClass("color-intro");
@@ -144,9 +107,6 @@
 	
  	function bossDrop()
  	{
- 		// $("#bossCont1 .boss").get(0).addEventListener("webkitAnimationEnd", event_bossDrop, false);
- 		// $("#bossCont1 .boss").get(0).addEventListener("animationend", event_bossDrop, false);
- 		
  		animationEventManager("#bossCont1 .boss", "ANIMATION", "event_bossDrop");
  				
 	 	$("#bossCont1 .boss").addClass("tween-boss-appear");
@@ -155,9 +115,6 @@
  			
  	function event_bossDrop(event)
  	{
- 		// $("#bossCont1 .boss").get(0).removeEventListener("webkitAnimationEnd", event_bossDrop, false);
- 		// $("#bossCont1 .boss").get(0).removeEventListener("animationend", event_bossDrop, false);
-	 	
 	 	if($(event.target).attr("data-animationlink"))
 	 	{
 			animationEventKill($(event.target).attr("data-animationlink"));
@@ -166,9 +123,6 @@
 	 	flashActionInit($("#intro-part-1-flash"));
 	 			
 	 	$("#backGround").addClass("tween-backGround-shake");
-	 			
-	 	// $("#introPunchCloud").get(0).addEventListener("webkitAnimationEnd", event_punchCloud, false);
-	 	// $("#introPunchCloud").get(0).addEventListener("animationend", event_punchCloud, false);
 	 	
 	 	animationEventManager("#introPunchCloud", "ANIMATION", "event_punchCloud");
 	 	
@@ -245,30 +199,36 @@
 	 			$("#babyCont .baby").remove();
 	 			$("#bossCont1").remove();
 	 					
+	 			// clean up
+	 			
+/*
 	 			tweenDelay = setTimeout(function()
 	 			{ 
 	 				$("#introPunchCloud").removeClass("tween-punchCloud-down").addClass("tween-punchCloud-rise");
 	 			}, 0.5 * 1000);
+*/
 	 			
-	 			// $("#stage-startIntro").removeClass("position1").addClass("position2");		
+	 			
+		 		tweenDelay = new AnimationTimer();
+		 			
+		 		timerList_add(tweenDelay);
+		 			
+		 		tweenDelay.time(0.5, function()
+		 		{
+			 		$("#introPunchCloud").removeClass("tween-punchCloud-down").addClass("tween-punchCloud-rise");
+				 });		
 	 					
 		 		break;
 	 		}
 	 				
 	 		case "tweenPunchCloudRiseFrames":
-	 		{
-		 		// $("#introPunchCloud").get(0).removeEventListener("webkitAnimationEnd", event_punchCloud, false);
-		 		// $("#introPunchCloud").get(0).removeEventListener("animationend", event_punchCloud, false);			 				
-		 		
-				if($(event.target).attr("data-animationlink"))
+	 		{		 				
+		 		if($(event.target).attr("data-animationlink"))
 				{
 					animationEventKill($(event.target).attr("data-animationlink"));
 				}		 		
 		 				
 		 		$(".punchCloud-boss-inside").css("opacity", 1);
-		 				
-		 		// $(".punchCloud-boss-inside").get(0).addEventListener("webkitTransitionEnd", event_innerPunchCloud, false);
-		 		// $(".punchCloud-boss-inside").get(0).addEventListener("transitionend", event_innerPunchCloud, false);
 		 		
 		 		animationEventManager(".punchCloud-boss-inside", "TRANSITION", "event_innerPunchCloud");
 		 				
@@ -277,10 +237,7 @@
 	 				
 	 		case "tweenPunchCloudGiantFoot":
 	 		{
-		 		// $(".punchCloud-giantFoot").get(0).removeEventListener("webkitAnimationEnd", event_punchCloud, false);
-				// $(".punchCloud-giantFoot").get(0).removeEventListener("animationend", event_punchCloud, false);
-		 		
-				if($(event.target).attr("data-animationlink"))
+		 		if($(event.target).attr("data-animationlink"))
 				{
 					animationEventKill($(event.target).attr("data-animationlink"));
 				}
@@ -290,10 +247,6 @@
 		 		$("#foreGround").addClass("tween-foreGround-fall");
 		 		
 		 		flashActionInit($("#intro-part-1-flash"));
-		 		/* $(":root").addClass("tween-introflash"); */
-		 		
-		 		// $("#foreGround").get(0).addEventListener("webkitAnimationEnd", endPart1, false);
-		 		// $("#foreGround").get(0).addEventListener("animationend", endPart1, false);
 		 		
 		 		animationEventManager("#foreGround", "ANIMATION", "endPart1");
 		 		
@@ -320,10 +273,7 @@
 	 			
 	 	if(TWEEN_CALLER != null || TWEEN_CALLER != undefined)
 	 	{
-		 	// $("." + TWEEN_CALLER).get(0).removeEventListener("webkitTransitionEnd", event_innerPunchCloud, false);
-		 	// $("." + TWEEN_CALLER).get(0).removeEventListener("transitionend", event_innerPunchCloud, false);
-		 	
-			if($(event.target.classList[0]).attr("data-animationlink"))
+		 	if($(event.target.classList[0]).attr("data-animationlink"))
 			{
 				animationEventKill($(event.target.classList[0]).attr("data-animationlink"));
 			}	
@@ -341,22 +291,29 @@
 				 				};
 				 						
 				 	$(".punchCloud-boss").css(new_css);
-				 			
-			 		// $(".punchCloud-boss").get(0).addEventListener("webkitTransitionEnd", event_innerPunchCloud, false);
-			 		// $(".punchCloud-boss").get(0).addEventListener("transitionend", event_innerPunchCloud, false);
 			 		
 			 		animationEventManager(".punchCloud-boss", "TRANSITION", "event_innerPunchCloud");
 			 	}
 			 			
 			 	else if(introBossCloud.intoGiant)
 			 	{
+/*
 				 	action_delay = setTimeout(function()
 				 	{
 				 		$(".punchCloud-giantFoot").addClass("tween-punchCloud-giantFoot");
 				 	}, 0.5 * 1000);
-				 			
-				 	// $(".punchCloud-giantFoot").get(0).addEventListener("webkitAnimationEnd", event_punchCloud, false);
-				 	// $(".punchCloud-giantFoot").get(0).addEventListener("animationend", event_punchCloud, false);
+*/
+				 	
+		 			action_delay = new AnimationTimer();
+		 			
+		 			timerList_add(action_delay);
+		 			
+		 			action_delay.time(0.5, function()
+		 			{
+			 			$(".punchCloud-giantFoot").addClass("tween-punchCloud-giantFoot");
+				 	});
+				 	
+				 	
 				 	
 				 	animationEventManager(".punchCloud-giantFoot", "ANIMATION", "event_punchCloud");
 				 	
@@ -375,6 +332,7 @@
 			 		introBossCloud.intoGiant = true;
 			 		
 			 		// clean up		
+/*
 			 		action_delay = setTimeout(function()
 			 		{
 					 	new_css = 	{
@@ -382,23 +340,36 @@
 						 				"transform"				: "translateY(40px)"
 					 				};
 					 						
-					 	$(".punchCloud-boss").css(new_css);
-					 			
-				 		// $(".punchCloud-boss").get(0).addEventListener("webkitTransitionEnd", event_innerPunchCloud, false);
-				 		// $(".punchCloud-boss").get(0).addEventListener("transitionend", event_innerPunchCloud, false);		 					
+					 	$(".punchCloud-boss").css(new_css);		 					
 				 		
 				 		animationEventManager(".punchCloud-boss", "TRANSITION", "event_innerPunchCloud");
 		 			
 		 			}, 2 * 1000);
+*/
+		 			
+		 			
+		 			
+		 			action_delay = new AnimationTimer();
+		 			
+		 			timerList_add(action_delay);
+		 			
+		 			action_delay.time(2, function()
+		 			{
+		 				new_css = 	{
+						 				"-webkit-transform" 	: "translateY(40px)",
+						 				"transform"				: "translateY(40px)"
+					 				};
+					 						
+					 	$(".punchCloud-boss").css(new_css);		 					
+				 		
+				 		animationEventManager(".punchCloud-boss", "TRANSITION", "event_innerPunchCloud"); 
+				 	});
 		 				
 		 		}
 		 				
 		 		else if(introBossCloud.intoGiant)
 		 		{
 			 		$(".punchCloud-boss-inside").css("opacity", 0);
-			 				
-			 		// $(".punchCloud-boss-inside").get(0).addEventListener("webkitTransitionEnd", event_innerPunchCloud, false);
-			 		// $(".punchCloud-boss-inside").get(0).addEventListener("transitionend", event_innerPunchCloud, false);
 			 		
 			 		animationEventManager(".punchCloud-boss-inside", "TRANSITION", "event_innerPunchCloud");
 		 		}
@@ -415,17 +386,13 @@
  	
  	function endPart1(event)
  	{
- 		// $("#foreGround").get(0).removeEventListener("webkitAnimationEnd", endPart1, false);
-		// $("#foreGround").get(0).removeEventListener("animationend", endPart1, false);
 		
 		if($(event.target).attr("data-animationlink"))
 		{
 			animationEventKill($(event.target).attr("data-animationlink"));
 		}		
 		
-		globalFade_IN("white", formPart2);
-	 	
-	 	/* $(":root").removeClass("tween-introflash"); */ 	
+		globalFade_IN("white", formPart2);	
  	}
 
  	function formPart2()
@@ -442,9 +409,6 @@
 		
 		
 		$(":root").removeClass("color-intro").addClass("color-night");
-		
-		
-		// $("#introPart1").html("");
 		
 		$(INTRO.part1_id).remove();
 		
@@ -465,11 +429,7 @@
 		
 		INTRO.part2_delay.time(0.5, init_part2);
 		
-		// alert("formPart2();");
-		
-		snowingInit("#introPart2 #snow-intro-part2", "punchCloudPixels", "snowFlake-pink"); 
-		
-		//init_part2();
+		snowingInit("#introPart2 #snow-intro-part2", "punchCloudPixels", "snowFlake-pink");
  	}
 
  	
@@ -505,33 +465,17 @@
 		 				"transition"			: "-webkit-transform 0.3s linear"
 	 				};
 	 				
-	 	$("#bossCont2").css(boss_css);		
-		
-		// $("#bossCont2").get(0).addEventListener("webkitTransitionEnd", bossAttackEnd, false);
-		// $("#bossCont2").get(0).addEventListener("transitionend", bossAttackEnd, false);
+	 	$("#bossCont2").css(boss_css);
 		
 		animationEventManager("#bossCont2", "TRANSITION", "bossAttackEnd");
-		
-		
-		//$("#bossCont2 .boss").addClass("tween-boss-attack");
-	
-		//$("#bossCont2 .boss").get(0).addEventListener("webkitAnimationEnd", bossAttackEnd, false);
-		//$("#bossCont2 .boss").get(0).addEventListener("animationend", bossAttackEnd, false);
 	}
 	
 	function bossAttackEnd(event)
 	{
-		// $("#bossCont2").get(0).removeEventListener("webkitTransitionEnd", bossAttackEnd, false);
-		// $("#bossCont2").get(0).removeEventListener("transitionend", bossAttackEnd, false);
-		
 		if($(event.target).attr("data-animationlink"))
 		{
 			animationEventKill($(event.target).attr("data-animationlink"));
-		}		
-		
-		
-		//$("#bossCont2 .boss").get(0).removeEventListener("webkitAnimationEnd", bossAttackEnd, false);
-		//$("#bossCont2 .boss").get(0).removeEventListener("animationend", bossAttackEnd, false);
+		}
 		
 		flashActionInit($("#intro-part-2-flash"));
 		
@@ -551,10 +495,6 @@
 		var cloudDisplayDelay = new AnimationTimer();
 		timerList_add(cloudDisplayDelay);
 		cloudDisplayDelay.time(2, cloudDisplay);
-		
-		// cloudDisplay();
-		
-		//endIntroBattle();
 	}
 	
 	function endIntroBattle()
@@ -568,17 +508,11 @@
 	{
 		$("#bossCont2 .boss-legR").addClass("tween-boss-legR-bash");
 	
-		// $("#bossCont2 .boss-legR").get(0).addEventListener("webkitAnimationEnd", boss_finishHimEnd, false);
-		// $("#bossCont2 .boss-legR").get(0).addEventListener("animationend", boss_finishHimEnd, false);
-	
 		animationEventManager("#bossCont2 .boss-legR", "ANIMATION", "boss_finishHimEnd");
 	}
 	
 	function boss_finishHimEnd(event)
-	{
-		// $("#bossCont2 .boss-legR").get(0).removeEventListener("webkitAnimationEnd", boss_finishHimEnd, false);
-		// $("#bossCont2 .boss-legR").get(0).removeEventListener("animationend", boss_finishHimEnd, false);		
-		
+	{	
 		if($(event.target).attr("data-animationlink"))
 		{
 			animationEventKill($(event.target).attr("data-animationlink"));
@@ -587,18 +521,12 @@
 		flashActionInit($("#intro-part-2-flash"));
 		
 		$("#worldEdge-btm").addClass("tween-worldEdge-btm-drop-a");
-	
-		// $("#worldEdge-btm").get(0).addEventListener("webkitAnimationEnd", goat_finished, false);
-		// $("#worldEdge-btm").get(0).addEventListener("animationend", goat_finished, false);
 		
 		animationEventManager("#worldEdge-btm", "ANIMATION", "goat_finished");
 	}
 	
 	function goat_finished(event)
 	{
-		// $("#worldEdge-btm").get(0).removeEventListener("webkitAnimationEnd", goat_finished, false);
-		// $("#worldEdge-btm").get(0).removeEventListener("animationend", goat_finished, false);
-		
 		if($(event.target).attr("data-animationlink"))
 		{
 			animationEventKill($(event.target).attr("data-animationlink"));
@@ -606,17 +534,11 @@
 		
 		$("#worldEdge-btm").addClass("tween-worldEdge-btm-drop-b");
 		
-		// $("#worldEdge-btm").get(0).addEventListener("webkitAnimationEnd", endPart2Init, false);
-		// $("#worldEdge-btm").get(0).addEventListener("animationend", endPart2Init, false);
-		
 		animationEventManager("#worldEdge-btm", "ANIMATION", "endPart2Init");		
 	}
 	
 	function endPart2Init(event)
 	{
-		// $("#worldEdge-btm").get(0).removeEventListener("webkitAnimationEnd", endPart2Init, false);
-		// $("#worldEdge-btm").get(0).removeEventListener("animationend", endPart2Init, false);
-		
 		if($(event.target).attr("data-animationlink"))
 		{
 			animationEventKill($(event.target).attr("data-animationlink"));
@@ -649,9 +571,7 @@
 		
 		INTRO = null;
 		
-		introFinishWithNotice();
-		
-		// purge_intro();	 	
+		introFinishWithNotice();	 	
  	}
  	
  	function purge_intro()
@@ -680,10 +600,6 @@
 		$("#stage-startIntro").append($("#memory").html());
 		$("#memory").html("");
 		
-		
-		// INTRO REPLACE
-		// NoticeSetup(Logic.dat_ROM["_NOTICE_AFT_INTRO"]);
-		
 		noticeDataGet(0);
 		
 		$(":root").removeClass("color-night").addClass("color-notice");
@@ -693,12 +609,7 @@
 	}
 
 	function introFullyFinished()
-	{
-		// INTRO REPLACE
-		// show notice
-		
-		//NoticeShow();		
-	
+	{	
 		noticeStart();
 	} 
  	
@@ -707,10 +618,6 @@
 		$(".noticeWrapper").remove();
 		
 		start_bitmapAdventure();
-		
-		// gameAreaClear();
-		
-		// prepGameMapInit();
 	}
  	
 	
@@ -720,8 +627,6 @@
 		
 		$(flashDiv).get(0).addEventListener("webkitAnimationEnd", flashActionPurge, false);
 		$(flashDiv).get(0).addEventListener("animationend", flashActionPurge, false);
-	
-		//animationEventManager(flashDiv, "ANIMATION", "flashActionPurge");
 	}
 	
 	function flashActionPurge(event)
@@ -729,14 +634,7 @@
 		var TARG = event.target.id;
 		
 		$("#" + TARG).get(0).removeEventListener("webkitAnimationEnd", flashActionPurge, false);
-		$("#" + TARG).get(0).removeEventListener("animationend", flashActionPurge, false);
-		
-/*
-		if($(event.target).attr("data-animationlink"))
-		{
-			animationEventKill($(event.target).attr("data-animationlink"));
-		}	
-*/	
+		$("#" + TARG).get(0).removeEventListener("animationend", flashActionPurge, false);	
 		
 		$("#" + TARG).removeClass("tween-FX_Flash");
 	}

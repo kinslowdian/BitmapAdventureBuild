@@ -987,7 +987,7 @@
 		
 		// clear arrays objects (Wind, Snow, Stars, Textures)
 		
-		
+		// CALL ONCE?
 		$("#wrapper-roam").html(mapSnapShot_html);
 		
 		trace(window);

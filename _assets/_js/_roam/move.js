@@ -12,6 +12,8 @@
 	
 	var portalTravelType = "";
 	
+	var playerLevelTravel = false;
+	
 	
 	function controlNewLevel()
 	{
@@ -32,7 +34,11 @@
 		
 		else
 		{
-			mapPlayerEntry(true);
+			// alert("mapPlayerStartQuest(); " + portalTravelType);
+			
+			moveStageTest();
+			
+			// mapPlayerEntry(true);
 		}
 	}
 	
@@ -90,9 +96,53 @@
 		
 		else
 		{
-			MAP_PLAYER.x = MAP_PLAYER.portalObj.x; 
-			MAP_PLAYER.y = MAP_PLAYER.portalObj.y; 
-			MAP_PLAYER.entry_d = MAP_PLAYER.portalObj.exit;
+			// alert("USE??? " + portalTravelType);
+			
+			if(portalTravelType === "STAGE")
+			{
+				MAP_PLAYER.x = MAP_PLAYER.portalObj.x; 
+				MAP_PLAYER.y = MAP_PLAYER.portalObj.y; 
+				MAP_PLAYER.entry_d = MAP_PLAYER.portalObj.exit;	
+			}
+			
+			if(portalTravelType === "LEVEL")
+			{
+				for(var i in portals)
+				{
+					if(portals[i].id === "level" + GAME.mapLevel + "_portal" + GAME.portalEnterThrough)
+					{
+						MAP_PLAYER.portalObj = portals[i];
+					}
+				}
+				
+				// TRY
+				// playerInPortal = false;
+				// portalTravelType = "";
+				
+				// PORTAL EXIT CHECK
+				// playerExitPortal = true;
+				
+				
+/*
+			if(portalTravelType === "LEVEL")
+			{
+				playerInPortal = false;
+				portalTravelType = "";
+				
+				// PORTAL EXIT CHECK
+				playerExitPortal = true;
+				
+				exitFrame = setTimeout(mapPlayerEntry, 1000, true);
+			}
+*/
+				
+				
+				MAP_PLAYER.x = MAP_PLAYER.portalObj.x; 
+				MAP_PLAYER.y = MAP_PLAYER.portalObj.y; 
+				MAP_PLAYER.entry_d = MAP_PLAYER.portalObj.exit;
+				
+				$(".player-area").css("opacity", 0);	// 0			
+			}
 			
 			revert_XY();			
 		}
@@ -349,6 +399,11 @@
 				
 				// portalExitDelay = setTimeout(mapPlayerEntry, 1000, true);
 			}
+			
+			if(portalTravelType === "LEVEL")
+			{
+				// moveStageTest();
+			}
 		}
 	}
 	
@@ -386,6 +441,10 @@
 			playerInPortal = true;
 			
 			portalEntry(hit_register.hit_portal_target);
+			
+			// SMOOTH
+			// portalPlayerFadeOut();
+			$(".player-area").css("opacity", 0); // 0
 			
 			// alert("PORTAL " + hit_register.hit_portal_target);
 		}
@@ -588,7 +647,15 @@
 		
 		questEntryCheck();
 		
-		moveStageTest();
+		if(portalTravelType === "LEVEL")
+		{
+			
+		}
+		
+		else
+		{
+			moveStageTest();
+		}
 		
 		if(playerInPortal)
 		{
@@ -673,7 +740,37 @@
 			{
 				// ADD BACK IN
 				// exitFrame = setTimeout(portalTravelExit, 1000);
-			}	
+			}
+			
+/*
+			if(portalTravelType === "LEVEL")
+			{
+				playerInPortal = false;
+				portalTravelType = "";
+				
+				// PORTAL EXIT CHECK
+				playerExitPortal = true;
+				
+				exitFrame = setTimeout(mapPlayerEntry, 1000, true);
+			}
+*/
+
+
+
+			// TRY
+			
+			if(portalTravelType === "LEVEL")
+			{
+				playerInPortal = false;
+				portalTravelType = "";
+				
+				// PORTAL EXIT CHECK
+				playerExitPortal = true;
+				
+				exitFrame = setTimeout(mapPlayerEntry, 1000, true);
+			}
+
+	
 		}
 	}
 	
@@ -713,7 +810,22 @@
 		
 		if(playerInPortal)
 		{
+			// alert("if(playerInPortal)");
+			
 			if(portalTravelType === "STAGE")
+			{
+				playerInPortal = false;
+				portalTravelType = "";
+				
+				// PORTAL EXIT CHECK
+				playerExitPortal = true;
+				
+				exitFrame = setTimeout(mapPlayerEntry, 1000, true);
+			}
+			
+			// TRY
+			
+			if(portalTravelType === "LEVEL")
 			{
 				playerInPortal = false;
 				portalTravelType = "";
@@ -773,6 +885,10 @@
 				if(portals[i].j_type === "LEVEL")
 				{
 					portalTravelType = "LEVEL";
+					
+					
+					GAME.portalEnterThrough = portals[i].j_to_num;
+					GAME.mapLevel = portals[i].j_to;
 				}
 				
 				if(portals[i].j_type === "STAGE")
@@ -808,6 +924,10 @@
 			trace("portalTravelSort(); " + "LEVEL");
 			trace(MAP_PLAYER);
 			
+			// exitFrame = setTimeout(globalFade_IN, 20, "white", refreshRebuildLevel);
+			
+			globalFade_IN("white", refreshRebuildLevel);
+			
 			// level change	
 		}
 		
@@ -817,9 +937,11 @@
 			trace(MAP_PLAYER);
 			// stage shift
 			
-			portalPlayerFadeOut();
+			// SMOOTH
+			// portalPlayerFadeOut();
 			
-			// mapPlayerPlace();
+			// SMOOTH
+			mapPlayerPlace();
 		}
 	}
 	
@@ -828,7 +950,7 @@
 		$(".player-area")[0].addEventListener("webkitTransitionEnd", portalPlayerFadeOutEnd, false);
 		$(".player-area")[0].addEventListener("transitionend", portalPlayerFadeOutEnd, false);
 		
-		$(".player-area").css("opacity", 0);
+		$(".player-area").css("opacity", 0); 
 	}
 	
 	function portalPlayerFadeOutEnd(event)
@@ -836,6 +958,7 @@
 		$(".player-area")[0].removeEventListener("webkitTransitionEnd", portalPlayerFadeOutEnd, false);
 		$(".player-area")[0].removeEventListener("transitionend", portalPlayerFadeOutEnd, false);
 		
-		mapPlayerPlace();		
+		// SMOOTH
+		// mapPlayerPlace();		
 	}	
 	
