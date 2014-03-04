@@ -96,22 +96,25 @@
 	{
 		var dynamicFunction;
 					
-		$(div).attr("data-animationlink", div);
-		$(div).attr("data-animationtype", anim_t);
-		$(div).attr("data-animationfunction", anim_f);
-					
-		dynamicFunction = window[anim_f];
-					
-		if(anim_t === "TRANSITION")
+		if(div != undefined || div != null || div)
 		{
-			$(div)[0].addEventListener("webkitTransitionEnd", dynamicFunction, false); 
-			$(div)[0].addEventListener("transitionend", dynamicFunction, false);
-		}
-				    
-		if(anim_t === "ANIMATION")
-		{
-			$(div)[0].addEventListener("webkitAnimationEnd", dynamicFunction, false); 
-			$(div)[0].addEventListener("animationend", dynamicFunction, false); 
+			$(div).attr("data-animationlink", div);
+			$(div).attr("data-animationtype", anim_t);
+			$(div).attr("data-animationfunction", anim_f);
+						
+			dynamicFunction = window[anim_f];
+						
+			if(anim_t === "TRANSITION")
+			{
+				$(div)[0].addEventListener("webkitTransitionEnd", dynamicFunction, false); 
+				$(div)[0].addEventListener("transitionend", dynamicFunction, false);
+			}
+					    
+			if(anim_t === "ANIMATION")
+			{
+				$(div)[0].addEventListener("webkitAnimationEnd", dynamicFunction, false); 
+				$(div)[0].addEventListener("animationend", dynamicFunction, false); 
+			}
 		}
 	}
 				

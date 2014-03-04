@@ -379,6 +379,27 @@
 		background-size: 1200px 800px;
 	}
 	
+	.pixels_battleArena
+	{
+		background-image: url(../_img/_battleArena/battleIsland_1x.png);
+		background-repeat: no-repeat;
+		background-size: 280px 280px;
+	}
+	
+	.pixels_battleArenaStars
+	{
+		background-image: url(../_img/_battleArena/battleStars_1x.png);
+		background-repeat: repeat;
+		background-size: 240px 240px;
+	}
+	
+	.pixels_battleArenaTrees
+	{
+		background-image: url(../_img/_battleArena/tile_battleArenaTrees_1x.png);
+		background-repeat: repeat;
+		background-size: 240px 240px;		
+	}
+	
 	
 
 /* 1x */
@@ -596,6 +617,21 @@
 		{
 			background-image: url(../_img/_mapBlend/landPixelDecay_1x.png);
 		}
+		
+		.pixels_battleArena
+		{
+			background-image: url(../_img/_battleArena/battleIsland_1x.png);
+		}
+		
+		.pixels_battleArenaStars
+		{
+			background-image: url(../_img/_battleArena/battleStars_1x.png);
+		}
+		
+		.pixels_battleArenaTrees
+		{
+			background-image: url(../_img/_battleArena/tile_battleArenaTrees_1x.png);	
+		}		
 
 		
 /*
@@ -834,6 +870,21 @@
 		{
 			background-image: url(../_img/_mapBlend/landPixelDecay_2x.png);
 		}
+		
+		.pixels_battleArena
+		{
+			background-image: url(../_img/_battleArena/battleIsland_2x.png);
+		}
+		
+		.pixels_battleArenaStars
+		{
+			background-image: url(../_img/_battleArena/battleStars_2x.png);
+		}
+		
+		.pixels_battleArenaTrees
+		{
+			background-image: url(../_img/_battleArena/tile_battleArenaTrees_2x.png);	
+		}	
 		
 /*
 		@-webkit-keyframes pixels_tweenRainFrames

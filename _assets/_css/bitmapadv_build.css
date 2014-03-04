@@ -8,6 +8,8 @@
 
 @import url(tools.css);
 
+@import url(enemy.css);
+
 
 /* LIST */
 
@@ -34,6 +36,8 @@
 	/* PORTAL */
 	
 	/* MAP PLAYER */
+	
+	/* BATTLE ARENA */
 
 /* LIST */
 
@@ -394,12 +398,26 @@
 		
 		position: absolute;
 		
-		background: #20202a; /* rgb(229, 255, 178); */
+		/* background: #20202a; */ /* rgb(229, 255, 178); */
 	
 		overflow: hidden;
 		
 		-webkit-transition	: background 0.8s ease; 
 		transition			: background 0.8s ease; 
+		
+		z-index: 1;
+	}
+	
+	.START-fill
+	{
+		width: inherit;
+		height: inherit;
+		
+		background: #20202a;
+		
+		position: absolute;
+		
+		z-index: 0;
 	}
 	
 	#START a, #START a:hover, #START a:link, #START a:active
@@ -460,6 +478,20 @@
 	{
 		-webkit-transition  : -webkit-transform 1.8s ease-in-out;
 		transition  		: -webkit-transform 1.8s ease-in-out;
+	}
+	
+	.START-trees
+	{
+		width: 100%;
+		height: 200%;
+				
+		position: absolute;
+				
+		top: 0; left: 0; right: 0; bottom: 0;
+				
+		margin: 0;
+				
+		z-index: 0;
 	}
 	
 	#introDetail0
@@ -2716,6 +2748,27 @@
 		z-index: 0;
 	}
 	
+	.tween-battle-cloud
+	{
+		-webkit-transition	: -webkit-transform 1s ease-in-out;
+		transition			: -webkit-transform 1s ease-in-out;
+	}
+	
+	.battle-cloud-hide
+	{
+		-webkit-transform	: translateY(-211px);
+		transform			: translateY(-211px);		
+	}
+	
+	.battle-cloud-show
+	{
+		-webkit-transform	: translateY(0px);
+		transform			: translateY(0px);		
+	}
+	
+	
+	/* ---------------------------------- BIN */
+	
 	.tween-battle-cloud-show
 	{
 		-webkit-animation	: tweenBattleCloudShowFrames 1s ease-in-out forwards;
@@ -2751,7 +2804,8 @@
 		from 	{ transform: translateY(0px); }
 		to		{ transform: translateY(-211px); }
 	}
-				
+	
+	/* ---------------------------------- BIN */			
 				
 	#battle-nav
 	{
@@ -2889,13 +2943,20 @@
 		
 		top: 0; bottom: 0; left: 0; right: 0;
 		
-		margin: 0 auto;
+		margin: 50px auto 0 auto;
+		
+		/* visibility: hidden; */
+		
+		-webkit-transform	: translateY(-211px);
+		transform			: translateY(-211px);
 		
 		z-index: 1;
-		
+	}
+	
+	.tween-battle-nav-fight
+	{
 		-webkit-transition	: -webkit-transform 0.4s ease-in-out;
-		transition			: transform 0.4s ease-in-out;	
-		
+		transition			: transform 0.4s ease-in-out;			
 	}
 	
 	
@@ -5451,5 +5512,173 @@
 /* ------------------------------------------------------------------- MAP PLAYER */
 
 
+
+
+/* ------------------------------------------------------------------- BATTLE ARENA */
+/* ------------------------------------------------------------------- BATTLE ARENA */
+
+
+	#wrapper-battleArena
+	{
+		background: #20202a;
+				
+		overflow: hidden;		
+	}
+	
+	#battleArena-player1
+	{
+		width: 26px;
+		height: 43px;
+				
+		position: absolute;
+		
+		top: 0; left: 0; right: 0; bottom: 0;
+		
+		margin: 79px auto 0 auto;
+				
+		z-index: 1;
+	}
+	
+	.battleArena-island
+	{
+		width: 280px;
+		height: 203px;
+				
+		position: absolute;
+				
+		top: 0; left: 0; right: 0; bottom: 0;
+				
+		margin: auto;
+			
+		z-index: 2;		
+	}
+	
+	.tween-battleArena-island
+	{
+		-webkit-animation	: tweenBattleArenaIsland 8s ease-in-out infinite;
+		animation			: tweenBattleArenaIsland 8s ease-in-out infinite;		
+	}
+	
+	@-webkit-keyframes tweenBattleArenaIsland
+	{
+		0%		{ -webkit-transform: translateY(0px); }
+		50%		{ -webkit-transform: translateY(60px); }
+		100%	{ -webkit-transform: translateY(0px); }
+	}
+			
+	@keyframes tweenBattleArenaIsland
+	{
+		0%		{ transform: translateY(0px); }
+		50%		{ transform: translateY(60px); }
+		100%	{ transform: translateY(0px); }
+	}
+	
+	.battleArena-floor
+	{
+		width: 280px;
+		height: 180px;
+		
+		background-position: 0px 0px;
+		
+		position: absolute;
+		
+		left: 0;
+		bottom: 0;
+		
+		z-index: 0;
+	}
+	
+	.battleArena-ground
+	{
+		width: 100%;
+		height: 100px;
+				
+		position: absolute;
+				
+		left: 0;
+		bottom: 0;
+				
+		z-index: 2;		
+	}
+	
+	.battleArena-ground-sprite
+	{
+		width: 60px;
+		height: 100px;
+				
+		position: absolute;
+				
+		z-index: 0;		
+	}
+	
+	.battleArena-ground-L
+	{
+		background-position: 0px -180px;
+				
+		left: 0;
+		bottom: 0;		
+	}
+	
+	.battleArena-ground-R
+	{
+		background-position: -60px -180px;
+				
+		right: 0;
+		bottom: 0;		
+	}
+	
+	.battleArena-stars
+	{
+		width: 100%;
+		height: 200%;
+				
+		position: absolute;
+				
+		top: 0; left: 0; right: 0; bottom: 0;
+				
+		margin: 0;
+				
+		z-index: 0;
+	}
+	
+	.tween-battleArena-stars
+	{
+		-webkit-animation	: tweenBattleArenaStarsFrames 1s linear infinite;
+		animation			: tweenBattleArenaStarsFrames 1s linear infinite;
+	}
+			
+	@-webkit-keyframes tweenBattleArenaStarsFrames
+	{
+		from	{ -webkit-transform: translateY(0px); }
+		to		{ -webkit-transform: translateY(-240px); }
+	}
+			
+	@keyframes tweenBattleArenaStarsFrames
+	{
+		from	{ transform: translateY(0px); }
+		to		{ transform: translateY(-240px); }
+	}
+	
+	.tween-battleArena-trees
+	{
+		-webkit-animation	: tweenBattleArenaTreesFrames 1s linear infinite;
+		animation			: tweenBattleArenaTreesFrames 1s linear infinite;
+	}
+			
+	@-webkit-keyframes tweenBattleArenaTreesFrames
+	{
+		from	{ -webkit-transform: translateY(0px); }
+		to		{ -webkit-transform: translateY(240px); }
+	}
+			
+	@keyframes tweenBattleArenaTreesFrames
+	{
+		from	{ transform: translateY(0px); }
+		to		{ transform: translateY(240px); }
+	}
+
+
+/* ------------------------------------------------------------------- BATTLE ARENA */
+/* ------------------------------------------------------------------- BATTLE ARENA */
 
 

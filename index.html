@@ -7,7 +7,7 @@
 		
 		<meta name="description" content="A tale of rock, paper, and scissors eternally told...">
 		<meta name="keywords" content="kinslowdian, Simon Kinslow, browser game" />
-		<meta name="revised" content="Simon Kinslow, 17/02/2014" />
+		<meta name="revised" content="Simon Kinslow, 25/02/2014" />
 	
 		<title>BITMAP ADVENTURE by Simon Kinslow</title>
 	
@@ -16,26 +16,26 @@
 		<link rel="apple-touch-icon" sizes="72x72" href="iPad.png" />
 		<link rel="apple-touch-icon" sizes="114x114" href="iPhone4.png" />
 		
-		<!-- <link href="_assets/_css/bitmapAdventure.css" rel="stylesheet" type="text/css"> -->
 		<link href="_assets/_css/bitmapadv_build.css" rel="stylesheet" type="text/css">
+		
+		<script type="text/javascript" src="_assets/_js/debug_trace.js"></script>
 		
 		<script type="text/javascript" src="_assets/_js/_jquery/jquery-2.0.3.js"></script>
 		<script type="text/javascript" src="_assets/_js/_collision/jquery-collision.js"></script>
-	
+		
 		<script type="text/javascript" src="_assets/_js/BitmapAdventure.js"></script>
 		
-		<script type="text/javascript" src="_assets/_js/animationEventManager.js"></script>
+		<script type="text/javascript" src="_assets/_js/AnimationEventManager.js"></script>
 		
-		<script type="text/javascript" src="_assets/_js/_battle/Intro.js"></script>
-		<script type="text/javascript" src="_assets/_js/_battle/Nav.js"></script>
-		<script type="text/javascript" src="_assets/_js/_battle/Notice.js"></script>
+		<script type="text/javascript" src="_assets/_js/Intro.js"></script>
+		<script type="text/javascript" src="_assets/_js/Nav.js"></script>
+		<script type="text/javascript" src="_assets/_js/Notice.js"></script>
 		
-		<!-- <script type="text/javascript" src="_assets/_js/_roam/Control.js"></script> -->
-		<script type="text/javascript" src="_assets/_js/_roam/move.js"></script>
-		<script type="text/javascript" src="_assets/_js/_roam/Portal.js"></script>
-		<script type="text/javascript" src="_assets/_js/_roam/Tile.js"></script>
-		<script type="text/javascript" src="_assets/_js/_roam/Time.js"></script>
-		<script type="text/javascript" src="_assets/_js/_roam/Weather.js"></script>
+		<script type="text/javascript" src="_assets/_js/Move.js"></script>
+		<script type="text/javascript" src="_assets/_js/Tile.js"></script>
+		<script type="text/javascript" src="_assets/_js/Weather.js"></script>
+		
+		<script type="text/javascript" src="_assets/_js/BattleScene.js"></script>
 	
 	</head>
 
@@ -72,7 +72,9 @@
 		
 				<div id="stage-startIntro" class="stage viewer"> <!-- class="viewer" -->
 					
+					
 					<div id="START">
+						
 						
 						<div id="START-goat" class="startPixels tween-start-goat"></div>
 						
@@ -109,8 +111,15 @@
 							
 						</div>
 						
+							
+							
+							
 						
 					</div> <!-- #START -->
+					
+					<div class="START-fill start-extras"></div>
+					
+					<div class="START-trees tween-battleArena-stars pixels_battleArenaTrees start-extras"></div>
 					
 				</div> <!-- #stage -->
 			

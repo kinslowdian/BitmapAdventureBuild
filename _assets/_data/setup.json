@@ -26,6 +26,11 @@
 			"file"		: "roam.html"	
 		},
 		
+		"file_battle_arena":
+		{
+			"file"		: "battle_arena.html"	
+		},
+		
 		"file_lib":
 		{
 			"file"		: "lib.html"

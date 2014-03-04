@@ -7,12 +7,16 @@
 	
 	var listenForQuestEntry = true;
 	
+	var playerInBattle = false;
+	
 	var playerInPortal = false;
 	var playerExitPortal = false;
 	
 	var portalTravelType = "";
 	
 	var playerLevelTravel = false;
+	
+	var html_snapShot_preBattle;
 	
 	
 	function controlNewLevel()
@@ -420,6 +424,8 @@
 	
 		hit_register = hitTest_init();
 		
+		// EDGES
+		
 		if(!hit_register.hit_field)
 		{
 			mapPlayerMoveX();
@@ -433,6 +439,8 @@
 			
 			revert_XY();
 		}
+		
+		// PORTAL
 		
 		if(hit_register.hit_portal)
 		{
@@ -448,6 +456,18 @@
 			
 			// alert("PORTAL " + hit_register.hit_portal_target);
 		}
+		
+		// ENEMY
+		
+		if(hit_register.hit_enemy)
+		{
+			controlsCancel(false);
+			
+			// battleMode_init();
+		
+			playerInBattle = true;
+		}
+		
 		
 		// alert("preHitTest(); " + hit_register.hit_field);
 	}
@@ -471,8 +491,9 @@
 		var register = {};
 		
 		register.hit_field	= false;
-		register.hit_nav	= false;
+		register.hit_enemy	= false;
 		register.hit_portal	= false;
+		register.hit_nav	= false;
 		register.hit_portal_target = "";
 		
 		// EDGES
@@ -482,6 +503,10 @@
 		// PORTALS
 		
 		PORTAL_COM.hits = $(".collideCheck-player").collision(".collideCheck-portal");
+		
+		// ENEMY
+		
+		ROM.hits = $(".collideCheck-player").collision(".collideCheck-enemy");
 		
 		// PLAYER HITS EDGE BLOCKS 
 		
@@ -509,10 +534,28 @@
 			register.hit_portal	= false;
 		}
 		
+		// PLAYER HITS ENEMY
+		
+		if(ROM.hits[0] != undefined || ROM.hits[0] != null)
+		{
+			register.hit_enemy	= true;
+		}
+		
+		else
+		{
+			register.hit_enemy	= false;
+		}
+		
 		
 		return register;
-	}	
+	}
 	
+	function battleMode_init()
+	{
+		html_snapShot_preBattle = $("#gameDisp").html();
+		
+		globalFade_IN("white", battleMode_fromMap);
+	}
 	
 	// X MOVE
 	
@@ -588,6 +631,11 @@
 			// control plug
 			
 			controlPort(true);
+		}
+		
+		if(playerInBattle)
+		{
+			battleMode_init();
 		}				
 	}
 	
@@ -676,6 +724,11 @@
 			// control plug
 			
 			controlPort(true);
+		}
+		
+		if(playerInBattle)
+		{
+			battleMode_init();
 		}		
 		
 		// moveStageTest();		

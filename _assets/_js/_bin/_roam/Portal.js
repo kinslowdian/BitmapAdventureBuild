@@ -3,10 +3,6 @@
 	
 	var portals;
 	
-	var PORTAL_TRAVEL;
-	
-	var PORTAL_LEVEL_TRAVEL;
-	
 	var Portal = function(div)
 	{
 		this.id			= $(div).attr("id");
@@ -117,14 +113,7 @@
 		this.d = setTimeout(starApply, 20, this);
 	};
 	
-	function portalTravelCheckReset()
-	{
-		alert("portalTravelCheckReset();");
-		
-		PORTAL_TRAVEL = false;
-	
-		PORTAL_LEVEL_TRAVEL = false;		
-	}
+	//////////////////////////////////////////////////////////////////////////////////
 	
 	function readPortals()
 	{
@@ -138,10 +127,6 @@
 		
 			portals.push(p);
 		});
-		
-		trace(portals);
-		trace("portals.length == " + portals.length);
-		
 	}
 	
 	function starConstruct(obj)
@@ -223,211 +208,6 @@
 		}
 	}
 	
-	
-	function portalTravel(obj)
-	{
-		PORTAL_TRAVEL = {};
-		
-		PORTAL_TRAVEL = obj;
-		
-		$(".player-area .player-x").removeClass("tween-map-goat-tile");
-		$(".player-area .player-y").removeClass("tween-map-goat-tile");
-		
-		$(".player-area .player-x")[0].removeEventListener("webkitTransitionEnd", controlEnd_x, false);
-		$(".player-area .player-x")[0].removeEventListener("transitionend", controlEnd_x, false);
-		$(".player-area .player-y")[0].removeEventListener("webkitTransitionEnd", controlEnd_y, false);
-		$(".player-area .player-y")[0].removeEventListener("transitionend", controlEnd_y, false);
-		
-
-		$(".player-area")[0].addEventListener("webkitTransitionEnd", portalTravelEventCheck, false);
-		$(".player-area")[0].addEventListener("transitionend", portalTravelEventCheck, false);
-		
-		$(".player-area").css("opacity", 0);
-		
-		$("#dev_fu").text("portalTravel();");
-	}
-	
-	function portalTravelEventCheck(event)
-	{
-		var fadeDelay;
-		
-		if(event.propertyName === "opacity")
-		{
-			$(".player-area")[0].removeEventListener("webkitTransitionEnd", portalTravelEventCheck, false);
-			$(".player-area")[0].removeEventListener("transitionend", portalTravelEventCheck, false);
-			
-			if(MAP_PLAYER.changeLevel)
-			{
-				fadeDelay = setTimeout(globalFade_IN, 20, "white", refreshRebuildLevel);
-				//globalFade_OUT(refreshRebuildLevel);
-				
-				// FADE EDIT
-				// map_fadeOutInit(false);
-				// fadeDelay = setTimeout(map_fadeOutRun, 20, 1, "LOAD_NEW_LEVEL");
-			}
-			
-			else
-			{
-				portalTravelTo();
-			}
-		}
-	}
-	
-	
-	function portalTravelTo()
-	{
-			
-			var travel_css_x;
-			var travel_css_y;
-			
-			$(".player-area")[0].removeEventListener("webkitTransitionEnd", portalTravelTo, false);
-			$(".player-area")[0].removeEventListener("transitionend", portalTravelTo, false);
-			
-			
-			travel_css_x = 	{
-								"-webkit-transform"	: "translateX(" + PORTAL_TRAVEL.x + "px)",
-								"transform"			: "translateX(" + PORTAL_TRAVEL.x + "px)"
-							};
-						
-						
-			travel_css_y = 	{
-								"-webkit-transform"	: "translateY(" + PORTAL_TRAVEL.y + "px)",
-								"transform"			: "translateY(" + PORTAL_TRAVEL.y + "px)"
-							};
-							
-			$(".player-area .player-x").css(travel_css_x);
-			$(".player-area .player-y").css(travel_css_y);				
-			
-			// CONTROL UPDATER
-			
-			// MAP_PLAYER.current_x = MAP_PLAYER.x = PORTAL_TRAVEL.x;	
-			// MAP_PLAYER.current_y = MAP_PLAYER.y = PORTAL_TRAVEL.y;
-			
-			moveStageTest();
-			
-			alert("CONFLICT");
-	}
-	
-	function portalTravelExit()
-	{
-		var x;
-		var y;
-		var exit_css_x;
-		var exit_css_y;
-		var exit_css_h;
-		
-		// CONTROL UPDATER
-		
-		switch(PORTAL_TRAVEL.exit)
-		{
-			case "UP":
-			{
-/*
-				x = PORTAL_TRAVEL.x;
-				y = PORTAL_TRAVEL.y - (MAP_PLAYER.moveUnit * 0.5);
-*/
-				
-				break;
-			}
-			
-			case "DOWN":
-			{
-/*
-				x = PORTAL_TRAVEL.x;
-				y = PORTAL_TRAVEL.y + MAP_PLAYER.moveUnit;
-*/
-								
-				break;
-			}
-			
-			case "LEFT":
-			{
-/*
-				x = PORTAL_TRAVEL.x - (MAP_PLAYER.moveUnit * 0.5);
-				y = PORTAL_TRAVEL.y;
-*/
-								
-				break;
-			}
-			
-			case "RIGHT":
-			{
-/*
-				x = PORTAL_TRAVEL.x + MAP_PLAYER.moveUnit;
-				y = PORTAL_TRAVEL.y;
-*/
-								
-				break;
-			}
-		}
-		
-		
-		exit_css_x = 	{
-							"-webkit-transform"	: "translateX(" + x + "px)",
-							"transform"			: "translateX(" + x + "px)"
-						};
-					
-		exit_css_y =	{
-							"-webkit-transform"	: "translateY(" + y + "px)",
-							"transform"			: "translateY(" + y + "px)"			
-						};
-						
-		exit_css_h =	{
-							"-webkit-transform"	: "translate(" + x + "px, " + y + "px)",
-							"transform"			: "translate(" + x + "px, " + y + "px)"		
-						};
-		
-		$(".player-area .player-x").addClass("tween-map-goat-tile");
-		$(".player-area .player-y").addClass("tween-map-goat-tile");
-		
-		$(".player-area .player-x").css(exit_css_x);
-		$(".player-area .player-y").css(exit_css_y);
-		$(".preHitTest .preHitTestBlock").css(exit_css_h);
-		
-		PORTAL_TRAVEL.save_x = x;
-		PORTAL_TRAVEL.save_y = y;
-	
-		$(".player-area").css("opacity", 1);
-	
-		$(".player-area")[0].addEventListener("webkitTransitionEnd", portalTravelExitEnd, false);
-		$(".player-area")[0].addEventListener("transitionend", portalTravelExitEnd, false);
-		
-		$("#dev_fu").text("portalTravelExit();");
-	}
-	
-	function portalTravelExitEnd(event)
-	{
-		var exitFrame;
-		
-		if(event.propertyName === "opacity")
-		{
-			$(".player-area")[0].removeEventListener("webkitTransitionEnd", portalTravelExitEnd, false);
-			$(".player-area")[0].removeEventListener("transitionend", portalTravelExitEnd, false);
-			
-			
-			// CONTROL UPDATER
-			
-			// MAP_PLAYER.current_x = MAP_PLAYER.x = PORTAL_TRAVEL.save_x;	
-			// MAP_PLAYER.current_y = MAP_PLAYER.y = PORTAL_TRAVEL.save_y;
-			
-			exitFrame = setTimeout(portalComplete, 20);
-			
-			$("#dev_fu").text("portalTravelExitEnd(); bare 2");
-		}	
-	}
-	
-	function portalComplete()
-	{
-		controlReset();
-		
-		controlPlug();
-		
-		$("#dev_fu").text("portalComplete();");
-		
-		alert("portalComplete();");		
-	}
-	
-	
 	function portalClear()
 	{
 		var checkStar = true;
@@ -438,9 +218,6 @@
 			if(checkStar)
 			{
 				checkStar = false;
-				
-				trace("!!! --- checkStar:");
-				trace(BUILD_PORTAL[i]);
 			}
 			
 			BUILD_PORTAL[i].starArea.starCont_run = false;
@@ -457,4 +234,14 @@
 		
 		portals.length = 0;
 	}
+	
+	//////////////////////////////////////////////////////////////////////////////////
+	
+
+	
+	
+
+	
+	
+
 	

@@ -102,6 +102,10 @@
 	{
 		timerList_stopAll();
 		animationEventKillAll("#introPart1");
+		
+		// OPTIMIZED?
+		timerList_destroy();
+		
 		globalFade_IN("white", formPart2);
 	}
 	
@@ -198,16 +202,6 @@
 	 		{
 	 			$("#babyCont .baby").remove();
 	 			$("#bossCont1").remove();
-	 					
-	 			// clean up
-	 			
-/*
-	 			tweenDelay = setTimeout(function()
-	 			{ 
-	 				$("#introPunchCloud").removeClass("tween-punchCloud-down").addClass("tween-punchCloud-rise");
-	 			}, 0.5 * 1000);
-*/
-	 			
 	 			
 		 		tweenDelay = new AnimationTimer();
 		 			
@@ -297,14 +291,7 @@
 			 			
 			 	else if(introBossCloud.intoGiant)
 			 	{
-/*
-				 	action_delay = setTimeout(function()
-				 	{
-				 		$(".punchCloud-giantFoot").addClass("tween-punchCloud-giantFoot");
-				 	}, 0.5 * 1000);
-*/
-				 	
-		 			action_delay = new AnimationTimer();
+				 	action_delay = new AnimationTimer();
 		 			
 		 			timerList_add(action_delay);
 		 			
@@ -330,22 +317,6 @@
 		 		if(!introBossCloud.intoGiant)
 		 		{
 			 		introBossCloud.intoGiant = true;
-			 		
-			 		// clean up		
-/*
-			 		action_delay = setTimeout(function()
-			 		{
-					 	new_css = 	{
-						 				"-webkit-transform" 	: "translateY(40px)",
-						 				"transform"				: "translateY(40px)"
-					 				};
-					 						
-					 	$(".punchCloud-boss").css(new_css);		 					
-				 		
-				 		animationEventManager(".punchCloud-boss", "TRANSITION", "event_innerPunchCloud");
-		 			
-		 			}, 2 * 1000);
-*/
 		 			
 		 			
 		 			
@@ -579,6 +550,9 @@
 		snowingHardEnd();
 		
 		INTRO = null;
+		
+		// OPTIMIZED?
+		timerList_destroy();
 		
 		introFinishWithNotice();	 	
  	} 	

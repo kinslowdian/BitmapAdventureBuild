@@ -1,29 +1,6 @@
 	/* @kinslowdian -- http://www.simonkinslow.com -- 2013 */
 	
-	var trace = function(str){ console.log(str); };
-	
 	$(document).ready(function(){ JS_READY(); });
-	
- 	// --------------------------------------------- TIMER
- 	
-/*
- 	var AnimationTimer = function()
- 	{
- 		this._AT;
- 	};
- 			
- 	AnimationTimer.prototype.time = function(s, f, p)
- 	{
- 		p == undefined ? this._AT = setTimeout(f, s * 1000) : this._AT = setTimeout(f, s * 1000, p);
- 	};
- 			
- 	AnimationTimer.prototype.cancel = function()
- 	{
-	 	clearTimeout(this._AT);	
- 	};
-*/
-	
-	// --------------------------------------------- TIMER
 	
 	// --------------------------------------------- GAME OBJECT
 	
@@ -371,6 +348,9 @@
 		$("#START").removeAttr('style');
 		$("#START").html("");
 		$("#START").css("visibility", "hidden");
+		
+		$(".start-extras").remove();
+		
 /*
 		$("#START").html(" ");
 		
