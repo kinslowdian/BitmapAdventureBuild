@@ -1,4 +1,22 @@
 	
+	
+	function enemySearch(hitEnemy)
+	{
+		trace("enemySearch();");
+		trace(enemies);
+		
+		for(var i in enemies)
+		{
+			if(enemies[i].buildData.id === hitEnemy)
+			{
+				GAME.enemy = enemies[i];
+				
+				trace("enemySearch(); == " + hitEnemy);
+				trace(GAME.enemy);	
+			}
+		}		
+	}
+	
 	function battleMode_fromMap()
 	{
 		// clear weather

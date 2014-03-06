@@ -2971,7 +2971,20 @@
  	{
 	 	background-position: -36px -209px;
  	}
-			
+ 	
+ 	/* TEMP */
+ 	
+ 	.battleCute-warrior-head-griz
+ 	{
+	 	background-position: -72px -209px;
+ 	}
+ 	
+  	.battleCute-warrior-head-bird
+ 	{
+	 	background-position: -108px -209px;
+ 	}
+	
+	/* TEMP */		
 			
 	/* GENERAL */
 			
@@ -5505,6 +5518,20 @@
 		
 		outline: 1px solid black;
 */
+	}
+	
+	.preHitTestBlock-inner
+	{
+		width: 12px;
+		height: 21px;
+		
+		position: absolute;
+		
+		left: 0; top: 0; bottom: 0; right: 0;
+		
+		margin: auto;
+		
+		background: rgba(0, 255, 0, 0.5);
 	}
 	
 	

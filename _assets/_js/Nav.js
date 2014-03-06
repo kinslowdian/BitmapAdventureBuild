@@ -209,7 +209,7 @@
 	{
 		$("#battle-nav").html(battleNav_HTML);
 	
-		battleInfo("BOSS", true, 1000);
+		battleInfo(GAME.enemy.buildData.charHead, false, 1000);
 	}
 	
 	function battleInfo(ID, SUPER, LEVEL)
@@ -496,6 +496,24 @@
 				
 				break;
 			}
+			
+			// TEMP
+			
+			case "GRIZ":
+			{
+				$("#battle-nav-player2 .battleCute-warrior-head").addClass("battleCute-warrior-head-griz");
+				
+				break;
+			}
+			
+			case "BIRD":
+			{
+				$("#battle-nav-player2 .battleCute-warrior-head").addClass("battleCute-warrior-head-bird");
+				
+				break;
+			}
+			
+			// TEMP
 		}
 		
 		// EYES

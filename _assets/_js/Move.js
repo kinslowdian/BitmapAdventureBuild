@@ -466,6 +466,8 @@
 			// battleMode_init();
 		
 			playerInBattle = true;
+		
+			enemySearch(hit_register.hit_enemy_target);
 		}
 		
 		
@@ -506,7 +508,9 @@
 		
 		// ENEMY
 		
-		ROM.hits = $(".collideCheck-player").collision(".collideCheck-enemy");
+		// ROM.hits = $(".collideCheck-player").collision(".collideCheck-enemy");
+		
+		ROM.hits = $(".collideCheck-player-inner").collision(".collideCheck-enemy");
 		
 		// PLAYER HITS EDGE BLOCKS 
 		
@@ -539,6 +543,14 @@
 		if(ROM.hits[0] != undefined || ROM.hits[0] != null)
 		{
 			register.hit_enemy	= true;
+			
+			register.hit_enemy_parent = $(ROM.hits[0])[0].parentNode;
+			
+			register.hit_enemy_target = $(register.hit_enemy_parent).attr("id");
+			
+			trace("!!!! ---------------------- HIT ENEMY " + register.hit_enemy_target);
+			// trace(ROM.hits[0]);
+			// trace($(ROM.hits[0])[0].parentNode);
 		}
 		
 		else
@@ -588,9 +600,14 @@
 						"-webkit-transform"	: "translateX(" + MAP_PLAYER.x + "px)",
 						"transform"			: "translateX(" + MAP_PLAYER.x + "px)"
 					};
+
+		$("." + MAP_PLAYER.tweenClass)[0].addEventListener("webkitTransitionEnd", mapPlayerAxisX_End, false);
+		$("." + MAP_PLAYER.tweenClass)[0].addEventListener("transitionend", mapPlayerAxisX_End, false);
 					
+/*
 		$(".player-area .player-x")[0].addEventListener("webkitTransitionEnd", mapPlayerAxisX_End, false);
 		$(".player-area .player-x")[0].addEventListener("transitionend", mapPlayerAxisX_End, false);
+*/
 		
 		$(".player-area .player-x").css(css_x);
 		
@@ -602,8 +619,13 @@
 	
 	function mapPlayerAxisX_End(event)
 	{
+		$("." + MAP_PLAYER.tweenClass)[0].removeEventListener("webkitTransitionEnd", mapPlayerAxisX_End, false);
+		$("." + MAP_PLAYER.tweenClass)[0].removeEventListener("transitionend", mapPlayerAxisX_End, false);
+
+/*
 		$(".player-area .player-x")[0].removeEventListener("webkitTransitionEnd", mapPlayerAxisX_End, false);
 		$(".player-area .player-x")[0].removeEventListener("transitionend", mapPlayerAxisX_End, false);
+*/
 		
 		$(".player-area .player-x").removeClass(MAP_PLAYER.tweenClass);
 		$(".player-block .map-goat-legs").removeClass(MAP_PLAYER.walkClass);
@@ -672,8 +694,13 @@
 						"transform"			: "translateY(" + MAP_PLAYER.y + "px)"
 					};
 					
+		$("." + MAP_PLAYER.tweenClass)[0].addEventListener("webkitTransitionEnd", mapPlayerAxisY_End, false);
+		$("." + MAP_PLAYER.tweenClass)[0].addEventListener("transitionend", mapPlayerAxisY_End, false);
+
+/*
 		$(".player-area .player-y")[0].addEventListener("webkitTransitionEnd", mapPlayerAxisY_End, false);
 		$(".player-area .player-y")[0].addEventListener("transitionend", mapPlayerAxisY_End, false);
+*/
 		
 		$(".player-area .player-y").css(css_y);
 		
@@ -685,8 +712,13 @@
 	
 	function mapPlayerAxisY_End(event)
 	{
+		$("." + MAP_PLAYER.tweenClass)[0].removeEventListener("webkitTransitionEnd", mapPlayerAxisY_End, false);
+		$("." + MAP_PLAYER.tweenClass)[0].removeEventListener("transitionend", mapPlayerAxisY_End, false);
+
+/*
 		$(".player-area .player-y")[0].removeEventListener("webkitTransitionEnd", mapPlayerAxisY_End, false);
 		$(".player-area .player-y")[0].removeEventListener("transitionend", mapPlayerAxisY_End, false);
+*/
 		
 		$(".player-area .player-x").removeClass(MAP_PLAYER.tweenClass);
 		$(".player-block .map-goat-legs").removeClass(MAP_PLAYER.walkClass);
@@ -738,6 +770,18 @@
 	{
 		MAP_PLAYER.allowControl = false;
 		
+/*
+		if(MAP_PLAYER.tweenClass)
+		{
+			$("." + MAP_PLAYER.tweenClass)[0].removeEventListener("webkitTransitionEnd", mapPlayerAxisX_End, false);
+			$("." + MAP_PLAYER.tweenClass)[0].removeEventListener("transitionend", mapPlayerAxisX_End, false);	
+			
+			$("." + MAP_PLAYER.tweenClass)[0].removeEventListener("webkitTransitionEnd", mapPlayerAxisY_End, false);
+			$("." + MAP_PLAYER.tweenClass)[0].removeEventListener("transitionend", mapPlayerAxisY_End, false);
+		}
+*/
+
+
 		$(".player-area .player-x")[0].removeEventListener("webkitTransitionEnd", mapPlayerAxisX_End, false);
 		$(".player-area .player-x")[0].removeEventListener("transitionend", mapPlayerAxisX_End, false);	
 		

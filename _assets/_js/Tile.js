@@ -13,6 +13,8 @@
 	var PORTAL_COM;
 	var portals;
 	
+	var enemies;
+	
 	
 	//////////////////// OBJECTS - TILE + BUILD
 	
@@ -134,6 +136,7 @@
 		this.buildData.block_h	= this.settings.h * 80;
 		this.buildData.id		= this.settings.n;
 		this.buildData.charType = this.settings.t;
+		this.buildData.charHead = this.settings.head;
 		this.buildData.html 	= html_data_use(this.library, "_" + this.buildData.charType);
 		
 		delete this.settings;
@@ -155,6 +158,8 @@
 		
 		
 		$("#" + this.buildData.id).css(this.buildData.css);
+		
+		enemies.push(this);
 
 	};
 	
@@ -634,6 +639,8 @@
 			
 			c.create();
 		});			
+		
+		enemies = new Array();
 		
 		// MAP ENEMY
 		$.each(Logic.dat_ROM["level" + GAME.mapLevel]["enemyPlayers"]["ENEMY"], function(item)

@@ -552,7 +552,8 @@
 					"w": 1,
 					"h": 1,
 					"n": "level0_griz0",
-					"t": "griz"
+					"t": "griz",
+					"head": "BIRD"
 				},
 				
 				"ENEMY_1":
@@ -562,7 +563,8 @@
 					"w": 1,
 					"h": 1,
 					"n": "level0_griz1",
-					"t": "griz"
+					"t": "griz",
+					"head": "GRIZ"
 				}		
 			}
 		},
