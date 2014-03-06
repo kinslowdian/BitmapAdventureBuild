@@ -343,6 +343,8 @@
 		
 		var gameLogic = Math.floor(Math.random() * 100);
 		
+		// enemy leveling = 0 , 5, 10, 1000 (SUPER)
+		
 		// LOSE
 		if(gameLogic >= Logic.dat_ROM["_LOGIC"]["player2_Level_" + ME.player2_LEVEL].rangeL[0] && gameLogic <= Logic.dat_ROM["_LOGIC"]["player2_Level_" + ME.player2_LEVEL].rangeL[1])
 		{
