@@ -139,6 +139,10 @@
 		this.buildData.charHead = this.settings.head;
 		this.buildData.html 	= html_data_use(this.library, "_" + this.buildData.charType);
 		
+		this.area = GAME.mapLevel;
+		this.alive = true;
+		this.level = this.settings.l;
+		
 		delete this.settings;
 		delete this.library;
 		

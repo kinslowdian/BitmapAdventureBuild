@@ -164,9 +164,9 @@
 		{
 			"txt_BEG"	:	"ATTACK",
 			"txt_STR"	:	"FIGHT",
-			"txt_WIN"	:	"FUDGE NO!",
+			"txt_LOSE"	:	"FUDGE NO!",
 			"txt_DRAW"	:	"A DRAW!",
-			"txt_LOSE"	:	"FUDGE YES!",
+			"txt_WIN"	:	"FUDGE YES!",
 			"txt_AGN"	:	"TRY AGAIN"
 		}
 	},
@@ -553,6 +553,7 @@
 					"h": 1,
 					"n": "level0_griz0",
 					"t": "griz",
+					"l": 0,
 					"head": "BIRD"
 				},
 				
@@ -564,6 +565,7 @@
 					"h": 1,
 					"n": "level0_griz1",
 					"t": "griz",
+					"l": 0,
 					"head": "GRIZ"
 				}		
 			}

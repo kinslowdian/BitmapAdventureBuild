@@ -9,10 +9,12 @@
 		{
 			if(enemies[i].buildData.id === hitEnemy)
 			{
-				GAME.enemy = enemies[i];
+				// GAME.enemy = enemies[i];
+				
+				ROM.enemy = enemies[i];
 				
 				trace("enemySearch(); == " + hitEnemy);
-				trace(GAME.enemy);	
+				trace(ROM.enemy);
 			}
 		}		
 	}
@@ -87,6 +89,33 @@
 		// cloudDisplayDelay.time(2, cloudDisplay);
 		
 		cloudDisplayDelay.time(2, function(){cloudDisplay(); addChoiceButtons();});
+	}
+	
+	function endBattleSceneAnimation()
+	{
+		if(battleEndStatus === "WIN")
+		{
+			
+		}
+		
+		if(battleEndStatus === "LOSE")
+		{
+			
+		}
+		
+		// MOVE TO END OF END ANIMATION
+		
+		fadeOutBattleScene();
+	}
+	
+	function fadeOutBattleScene()
+	{
+		globalFade_IN("white", returnToBattleField);	
+	}
+	
+	function returnToBattleField()
+	{
+		
 	}
 		
 		

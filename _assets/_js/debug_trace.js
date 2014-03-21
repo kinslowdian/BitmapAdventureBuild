@@ -4,3 +4,6 @@
 				{ 
 					console.log(str); 
 				};
+				
+				
+	var cheatMode = true;
