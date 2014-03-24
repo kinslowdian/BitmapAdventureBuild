@@ -1,4 +1,5 @@
 	
+	var savedGameMapState;
 	
 	function enemySearch(hitEnemy)
 	{
@@ -32,6 +33,8 @@
 		// $(window).off("resize", screenUpdate);
 		
 		screenUpdateCancel();
+		
+		savedGameMapState = $("#gameDisp").html();
 		
 		$("#gameDisp").html("");
 		
@@ -115,7 +118,29 @@
 	
 	function returnToBattleField()
 	{
+		var killList;
 		
+		$("#gameDisp").html("");
+		$("#gameDisp").html(savedGameMapState);
+		
+		savedGameMapState = "";
+		
+		// killList = battleEngine.enemyDeadCheck(enemyArray, GAME_LEVEL);
+		
+		for(var i in enemies)
+		{
+			if(!enemies[i].alive)
+			{
+				$("#" + enemies[i].buildData.id).remove();
+			}
+		}
+		
+		globalFade_OUT(returnToBattleContinue);
+	}
+	
+	function returnToBattleContinue()
+	{
+		controlPort(true);
 	}
 		
 		

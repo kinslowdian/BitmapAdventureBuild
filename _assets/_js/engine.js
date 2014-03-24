@@ -234,6 +234,26 @@ var battleEngine = 	{
 							return battleData;
 						},
 						
+/*
+						enemyDeadCheck : function(checkArray, area)
+						{
+							var deathData = new Array();
+							
+							for(var i in checkArray)
+							{
+								if(enemyArray[i].area === area)
+								{
+									if(!checkArray[i].alive)
+									{
+										deathData.push(checkArray[i].id);
+									}
+								}
+							}
+							
+							return deathData;	
+						},
+*/
+						
 						enemyAllDeadCheck : function(checkArray, ignore_id, area)
 						{
 							var deathData = {};
@@ -246,7 +266,7 @@ var battleEngine = 	{
 							{
 								if(checkArray[i]._id != ignore_id)
 								{
-									if(enemyArray[i].area === area)
+									if(checkArray[i].area === area)
 									{
 /*
 										if(checkArray[i].alive || checkArray[i].active)
