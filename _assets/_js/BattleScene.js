@@ -3,7 +3,7 @@
 	
 	function enemySearch(hitEnemy)
 	{
-		trace("enemySearch();");
+		trace("enemySearch();" + hitEnemy + " (sent from hit test)");
 		trace(enemies);
 		
 		for(var i in enemies)
@@ -28,7 +28,9 @@
 		
 		// clear portals
 		
-		portalClear();
+		portalClear(false);
+		
+		// portalStarsHold();
 		
 		// $(window).off("resize", screenUpdate);
 		
@@ -132,14 +134,28 @@
 			if(!enemies[i].alive)
 			{
 				$("#" + enemies[i].buildData.id).remove();
+				
+				// alert(enemies[i].buildData.id + " === DEAD");
 			}
 		}
+		
+		trace("ENEMY FAIL------------------------------------");
+		trace(enemies);
+		trace("ENEMY FAIL------------------------------------");
+		
+		// readPortals();
+		
+		// portalStarsContinue();
+		
+		rebuildStarsInit();
 		
 		globalFade_OUT(returnToBattleContinue);
 	}
 	
 	function returnToBattleContinue()
 	{
+		playerInBattle = false;
+		
 		controlPort(true);
 	}
 		

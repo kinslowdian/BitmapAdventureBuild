@@ -4613,7 +4613,9 @@
 	
 		/* background: #dfdfd5; */
 		
-		background: #7d7d76;
+		/* background: #7d7d76; */
+		
+		background: #6bd0ad;
 	}
 	
 	.stageCenter-x, .stageCenter-y
@@ -5512,12 +5514,6 @@
 		height: 40px;
 		
 		position: absolute;
-		
-/*
-		background: rgba(255, 0, 51, 0.5);
-		
-		outline: 1px solid black;
-*/
 	}
 	
 	.preHitTestBlock-inner
@@ -5530,8 +5526,6 @@
 		left: 0; top: 0; bottom: 0; right: 0;
 		
 		margin: auto;
-		
-		background: rgba(0, 255, 0, 0.5);
 	}
 	
 	

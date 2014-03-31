@@ -344,11 +344,20 @@
 		
 		this.use_starOpacityDepth ? this.star_opacity = this.star_opacity : this.star_opacity = 1;
 		
+/*
 		this.star_outer_css	= 	{
 									"-webkit-transform"		: "translate3d(0," + this.star_sy + "px, 0)",
 									"transform"				: "translate3d(0," + this.star_sy + "px, 0)",
 									"opacity"			: this.star_opacity,
 									"z-index"			: this.star_id
+								};
+*/
+
+		this.star_outer_css	= 	{
+									"-webkit-transform"		: "translateY(" + this.star_sy + "px)",
+									"transform"				: "translateY(" + this.star_sy + "px)",
+									"opacity"				: this.star_opacity,
+									"z-index"				: this.star_id
 								};
 								
 		this.star_inner_css	=	{
@@ -356,16 +365,32 @@
 									"height"				: this.star_size + "px"
 								};
 								
+/*
 		this.star_engine_css =	{
 									"-webkit-transform"		: "translate3d(" + this.ux + "px, 0, 0)",
 									"transform"				: "translate3d(" + this.ux + "px, 0, 0)",
 									"-webkit-transition" 	: "-webkit-transform " + this.star_speed  + "s linear",
 									"transition" 			: "transform " + this.star_speed  + "s linear"				
 								};
+*/
+
+		this.star_engine_css =	{
+									"-webkit-transform"		: "translateX(" + this.ux + "px)",
+									"transform"				: "translateX(" + this.ux + "px)",
+									"-webkit-transition" 	: "-webkit-transform " + this.star_speed  + "s linear",
+									"transition" 			: "transform " + this.star_speed  + "s linear"				
+								};
 								
+/*
 		this.move_css		=	{
 									"-webkit-transform"		: "translate3d(" + this.star_ex + "px, 0, 0)",
 									"transform"				: "translate3d(" + this.star_ex + "px, 0, 0)"									
+								};
+*/
+
+		this.move_css		=	{
+									"-webkit-transform"		: "translateX(" + this.star_ex + "px)",
+									"transform"				: "translateX(" + this.star_ex + "px)"									
 								};
 								
 		this.html			= '<div id="' + this.star_id + '" class="starSpace-starHolder"><div class="starSpace-starSprite starSpace-starSprite-fill-basic"></div></div>';
@@ -777,7 +802,9 @@
 		
 		// clear portals
 		
-		portalClear();
+		// portalClear();
+		
+		portalClear(true);
 		
 		// clear arrays objects (Wind, Snow, Stars, Textures)
 		
@@ -963,6 +990,56 @@
 		}
 	}
 	
+	function rebuildStarsInit()
+	{
+		for(var i in BUILD_PORTAL)
+		{
+			reBuildStars(BUILD_PORTAL[i]);
+		}
+	}
+		
+		
+	function reBuildStars(portal_obj)
+	{
+		portal_obj.starArea = new StarCont(portal_obj.buildData.id, $("#" + portal_obj.buildData.id).width(), $("#" + portal_obj.buildData.id).height(), portal_obj.buildData.starMass);
+			
+		starConstruct(portal_obj);			
+	}
+	
+/*
+	function portalStarsHold()
+	{
+		for(var i in BUILD_PORTAL)
+		{
+			BUILD_PORTAL[i].starArea.starCont_run = false;
+			
+			for(var j in BUILD_PORTAL[i].star_ARR)
+			{
+				starCancel(BUILD_PORTAL[i].star_ARR[j]);
+			}
+		}
+	}
+*/
+	
+/*
+	function portalStarsContinue()
+	{
+		for(var i in BUILD_PORTAL)
+		{
+			BUILD_PORTAL[i].starArea.starCont_run = true;
+			
+			for(var j in BUILD_PORTAL[i].star_ARR)
+			{
+				starApply(BUILD_PORTAL[i].star_ARR[j]);
+			}
+		}
+		
+	}
+*/
+
+// ORIGINAL
+	
+/*
 	function portalClear()
 	{
 		var checkStar = true;
@@ -988,6 +1065,43 @@
 		BUILD_PORTAL.length = 0;
 		
 		portals.length = 0;
+	}	
+*/
+
+
+	function portalClear(fullClear)
+	{
+		var checkStar = true;
+		
+		
+		for(var i in BUILD_PORTAL)
+		{
+			if(checkStar)
+			{
+				checkStar = false;
+			}
+			
+			BUILD_PORTAL[i].starArea.starCont_run = false;
+			
+			for(var j in BUILD_PORTAL[i].star_ARR)
+			{
+				starCancel(BUILD_PORTAL[i].star_ARR[j]);
+			}
+			
+			BUILD_PORTAL[i].star_ARR.length = 0;
+		
+			if(!fullClear)
+			{
+				$("#" + BUILD_PORTAL[i].starArea.starCont_id + " .starSpace").html("");
+			}
+		}
+		
+		if(fullClear)
+		{
+			BUILD_PORTAL.length = 0;
+		
+			portals.length = 0;	
+		}
 	}	
 	
 	

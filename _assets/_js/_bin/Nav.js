@@ -1,16 +1,67 @@
+	/* @kinslowdian -- http://www.simonkinslow.com -- 2013 */
+	
+	// --------------------------------------------- PLAYER OBJECT
+	
+	var Player1 = function()
+	{
+		this.button_0;
+		this.button_1;
+		this.button_2;
+		
+		this.player2_ID;
+		this.player2_SUPER;
+		this.player2_LEVEL;
+		this.player2_EVENT;
+		
+		this.player1_STRIKE;
+		this.player2_STRIKE;
+	};
+			
+	Player1.prototype.connect = function()
+	{
+		this.button_0 		= $("#battle-stone");
+		this.button_1 		= $("#battle-paper");
+		this.button_2 		= $("#battle-scissors");
+	};
+	
+	Player1.prototype.setupBattle = function(ID, SUPER, LEVEL)
+	{
+		this.player2_ID			= ID;
+		this.player2_SUPER		= SUPER;
+		this.player2_LEVEL		= LEVEL;
+		this.player2_EVENT		= "";		
+	};
+			
+	// --------------------------------------------- PLAYER OBJECT
+	
+	// --------------------------------------------- JSON TOOL
+	
+	var json_local_root = "_assets/_data/";
+	
+	function get_JSON(obj)
+	{
+		var json_request = new XMLHttpRequest();
+		var json_method = "GET"; //other option is POST
+		var json_url = json_local_root + obj.dat_FILE; //file
+		var json_async = true;
+		
+		json_request.open(json_method, json_url, json_async);
+			
+		json_request.onload = function()
+		{
+			obj.dat_ROM = JSON.parse(this.responseText);
+				
+			obj.dat_COMPLETE();
+		};
+			
+		json_request.send();
+	}
+	
+	// --------------------------------------------- JSON TOOL
 	
 	var ROM;
 	
-	// reference as ME.
-	var player_1 = {};
-	
-	var player_2;
-	
-	var battleNavButtonARR = new Array();
-	
-	var finalBattle = false;
-	
-	var navExist = false;
+	var ME;
 	
 	var battleNavButtonARR = new Array();
 	
@@ -21,13 +72,21 @@
 	var battleNav_HTML;
 	var battleNavFight_HTML;
 	
-	var y_hide;
-	var y_show;
+	var navExist = false;
 	
-	var y_hide_css;
-	var y_show_css;
+	var y_hide = -211;
+	var y_show = 0;
 	
-	var battleEndStatus;
+	var y_hide_css = 	{
+							"-webkit-transform"	: "translateY(" + y_hide + "px)",
+							"transform"			: "translateY(" + y_hide + "px)"
+						};
+						
+	var y_show_css = 	{
+							"-webkit-transform"	: "translateY(" + y_show + "px)",
+							"transform"			: "translateY(" + y_show + "px)"
+						};
+	
 	
 	function NEW_GAME()
 	{
@@ -35,27 +94,7 @@
 		
 		ROM.pressPlayOnTape();
 		
-		battleNavCreate_css();
-		
-		battleNavInit();
-		
 		navExist ? setup_Nav() : create_Nav();
-	}
-	
-	function battleNavCreate_css()
-	{
-		y_hide = -211;
-		y_show = 0;
-		
-		y_hide_css = 	{
-							"-webkit-transform"	: "translateY(" + y_hide + "px)",
-							"transform"			: "translateY(" + y_hide + "px)"
-						};
-							
-		y_show_css = 	{
-							"-webkit-transform"	: "translateY(" + y_show + "px)",
-							"transform"			: "translateY(" + y_show + "px)"
-						};		
 	}
 	
 	function create_Nav()
@@ -86,6 +125,8 @@
 		
 		battleNavFight_HTML = $("#battle-nav-fight").html();
 		$("#battle-nav-fight").html("");
+		
+		// init_difficulty_data();
 	}
 	
 	function init_difficulty_data()
@@ -111,130 +152,19 @@
 		}
 		
 		prepIntroDataInit();
-	}
-	
-	
-	function battleNavInit()
-	{
-		// alert("battleNavInit()!!!!!");
 		
-		// JSON
-		// total areas, easy, med, hard, super, boss rounds
-		battleEngine.init(3, 0, 40, 80, 120, 3);
-		
-		player_1_init();
+		// cloudDisplay();
 	}
-	
-	function player_1_init()
-	{
-		player_1.level 			= 0;
-		player_1.attack 		= 0;
-		player_1.battle_class 	= "";
-		player_1.win 			= false;
-		player_1.status 		= "";				
 			
-		battleEngine.playerLevelSort(player_1);
-	}
-	
-	function player_1_connect()
-	{
-		player_1.button_0 		= $("#battle-stone");
-		player_1.button_1 		= $("#battle-paper");
-		player_1.button_2 		= $("#battle-scissors");
-	}
-	
-	function player_1_purge()
-	{
-		player_1.attack = 0;
-		player_1.win = false;		
-	}
-	
-	function player_1_player_2_battle(player_e)
-	{
-		var result;
-		
-		battleEngine.playerLevelSort(player_e);
-		
-		// TO DETECT BOSS FIGHTS:
-		finalBattle ? result = battleEngine.battle(player_1, player_e, true) : result = battleEngine.battle(player_1, player_e, false);
-	
-		
-		trace("BATTLE CHECK!!! == ");
-		trace(result);
-		
-		if(result.status_player)
-		{
-			StonePaperScissorsEndLogic(result.status_player);
-		}
-	
-		else
-		{
-			trace("BATTLE OBJECT RETRUNED A FAULT");
-		}
-		
-		
-/*
-		switch(result.status_player)
-		{
-			case "WIN":
-			{
-				// send signal WIN to cloud
-				
-				break;
-			}
-			
-			case "DRAW":
-			{
-				// send signal DRAW to cloud
-				
-				break;
-			}
-			
-			case "LOSE":
-			{
-				// send signal LOSE to cloud
-				
-				break;
-			}
-			
-			default:
-			{
-				trace("BATTLE OBJECT RETRUNED A FAULT");
-			}	
-		}
-*/
-	}
-	
-	function battleCompleteTrackker()
-	{
-		var allDead = battleEngine.enemyAllDeadCheck(enemyArray, "boss", GAME_LEVEL);
-		
-		if(allDead.enemy_level_dead)
-		{
-			// LEVEL CLEARED	
-		}
-		
-		if(allDead.enemy_game_dead)
-		{
-			if(!finalBattle)
-			{
-				finalBattle = true;
-				
-				// PATH TO BOSS IS OPEN	
-			}				
-		}
-	}
-	
-	
-	
-	
-	
-	
-	/// clean
-	
 	function cloudDisplay()
 	{
+		/* $("#battle-cloud").addClass("tween-battle-cloud"); */
+		
 		$("#info-cloud p").text(Logic.dat_ROM["_LOGIC"]["messages"]["txt_BEG"]);
+		
+		// $("#battle-cloud").addClass("tween-battle-cloud-show");
+		
+		// $("#battle-cloud").removeClass("battle-cloud-hide").addClass("battle-cloud-show");
 		
 		$("#battle-cloud").css(y_show_css);
 		
@@ -243,26 +173,34 @@
 		$("#eventFill").css("visibility", "visible");
 		$("#eventFill").css("opacity", "1");
 		
+
+		// ANIMATION TYPE SWAP				
+/*
+		$("#battle-cloud")[0].addEventListener("webkitAnimationEnd", StonePaperScissorsCloudInPlace, false);
+		$("#battle-cloud")[0].addEventListener("animationend", StonePaperScissorsCloudInPlace, false);
+*/
+
+		// EVENT FIX
+		// $("#battle-cloud")[0].addEventListener("webkitTransitionEnd", StonePaperScissorsCloudInPlace, false);
+		// $("#battle-cloud")[0].addEventListener("transitionend", StonePaperScissorsCloudInPlace, false);
+		
 		$(".tween-battle-cloud")[0].addEventListener("webkitTransitionEnd", StonePaperScissorsCloudInPlace, false);
 		$(".tween-battle-cloud")[0].addEventListener("transitionend", StonePaperScissorsCloudInPlace, false);		
 		
 		if(introBattle)
 		{
-			// alert("if(introBattle)");
+			// introBattle = false;
 			
 			// hard written setting
-			//battleInfo("BOSS", true, 1000); //1000
-			
-			// player_1_player_2_battle(player_e);
-			
-			// fake boss
-			ROM.enemy = {};
-			ROM.enemy.buildData = {};
-			ROM.enemy.buildData.charHead = "BOSS";
+			battleInfo("BOSS", true, 1000); //1000
 		}
 		
 		else
 		{
+			// QUICK HACK FULLY EDIT WITH JSON
+			
+			// $("#battle-nav").html(battleNav_HTML);
+			
 			normalBattle();
 		}
 	}
@@ -270,29 +208,35 @@
 	function normalBattle()
 	{
 		$("#battle-nav").html(battleNav_HTML);
-		
-		// BREAK_POINT
-		// player_1_player_2_battle(ROM.enemy);
-		
-		// BY-PASS
-		// battleInfo(GAME.enemy.buildData.charHead, false, 1000);
+	
+		battleInfo(GAME.enemy.buildData.charHead, false, 1000);
 	}
 	
-	// BY-PASS
-/*
 	function battleInfo(ID, SUPER, LEVEL)
 	{
 		ME = new Player1();
 		
 		ME.setupBattle(ID, SUPER, LEVEL);
 	}
-*/
 			
 	function StonePaperScissorsCloudInPlace(event)
 	{
-		// ME.connect();
+		ME.connect();
+				
+		trace(ME);
+				
+		trace(ME.length);
+				
+		// ANIMATION TYPE SWAP	
 		
-		player_1_connect();	
+		
+		// $("#battle-cloud")[0].removeEventListener("webkitAnimationEnd", StonePaperScissorsCloudInPlace, false);
+		// $("#battle-cloud")[0].removeEventListener("animationend", StonePaperScissorsCloudInPlace, false);
+		
+		
+		// EVENT FIX
+		// $("#battle-cloud")[0].removeEventListener("webkitTransitionEnd", StonePaperScissorsCloudInPlace, false);
+		// $("#battle-cloud")[0].removeEventListener("transitionend", StonePaperScissorsCloudInPlace, false);		
 		
 		$(".tween-battle-cloud")[0].removeEventListener("webkitTransitionEnd", StonePaperScissorsCloudInPlace, false);
 		$(".tween-battle-cloud")[0].removeEventListener("transitionend", StonePaperScissorsCloudInPlace, false);	
@@ -302,23 +246,30 @@
 			
 	function StonePaperScissorsControls(run)
 	{
+		trace("StonePaperScissorsControls(); " + run);
+		
+		trace(ME);
+		
 		if(run)
 		{
 			for(var i = 0; i < 3; i++)
 			{
+			
+				trace(i);
+				
 				if(OS === "MOUSE_TOUCH")
 				{
-					$(player_1["button_" + i]).css("cursor", "pointer");
+					$(ME["button_" + i]).css("cursor", "pointer");
 					
-					$(player_1["button_" + i])[0].addEventListener("click", StonePaperScissorsEvent, false);
+					$(ME["button_" + i])[0].addEventListener("click", StonePaperScissorsEvent, false);
 					
-					$(player_1["button_" + i])[0].addEventListener("mouseover", StonePaperScissorsMouseEvent, false);
-					$(player_1["button_" + i])[0].addEventListener("mouseout", StonePaperScissorsMouseEvent, false);
+					$(ME["button_" + i])[0].addEventListener("mouseover", StonePaperScissorsMouseEvent, false);
+					$(ME["button_" + i])[0].addEventListener("mouseout", StonePaperScissorsMouseEvent, false);
 				}
 						
 				if(OS === "TOUCH" || OS === "TOUCH_TABLET")
 				{
-					$(player_1["button_" + i])[0].addEventListener("touchend", StonePaperScissorsEvent, false);
+					$(ME["button_" + i])[0].addEventListener("touchend", StonePaperScissorsEvent, false);
 				}
 			}
 		}
@@ -329,17 +280,17 @@
 			{
 				if(OS === "MOUSE_TOUCH")
 				{
-					$(player_1["button_" + j]).css("cursor", "default");
+					$(ME["button_" + j]).css("cursor", "default");
 					
-					$(player_1["button_" + j])[0].removeEventListener("click", StonePaperScissorsEvent, false);
+					$(ME["button_" + j])[0].removeEventListener("click", StonePaperScissorsEvent, false);
 					
-					$(player_1["button_" + j])[0].removeEventListener("mouseover", StonePaperScissorsMouseEvent, false);
-					$(player_1["button_" + j])[0].removeEventListener("mouseout", StonePaperScissorsMouseEvent, false);
+					$(ME["button_" + j])[0].removeEventListener("mouseover", StonePaperScissorsMouseEvent, false);
+					$(ME["button_" + j])[0].removeEventListener("mouseout", StonePaperScissorsMouseEvent, false);
 				}
 						
 				if(OS === "TOUCH" || OS === "TOUCH_TABLET")
 				{
-					$(player_1["button_" + j])[0].removeEventListener("touchend", StonePaperScissorsEvent, false);
+					$(ME["button_" + j])[0].removeEventListener("touchend", StonePaperScissorsEvent, false);
 				}
 			}			
 		}
@@ -352,6 +303,10 @@
 			
 	function StonePaperScissorsEvent(event)
 	{
+		trace(event);
+				
+		trace("?? - " + event.target.parentElement.id);
+		
 		StonePaperScissorsControls(false);
 		
 		$(event.target).css("opacity", "1");
@@ -364,32 +319,14 @@
 		$("#" + ID + " div[class*='battleNavSprite-']").addClass("tween-battle-selected");
 		
 		
-		// ME.player1_STRIKE = workable_ID(ID);
+		ME.player1_STRIKE = workable_ID(ID);
 		
-		player_1.selection = workable_ID(ID);
-		
-		if(introBattle)
-		{
-			StonePaperScissorsEndLogic("LOSE");
-		}
-		
-		else
-		{
-			player_1_player_2_battle(ROM.enemy);
-		}
-		
-/*
-		if(!introBattle)
-		{
-			player_1_player_2_battle(ROM.enemy);	
-		}
-*/
-		
+		trace(ME.player1_STRIKE);
 		
 		var choiceDelay = new AnimationTimer();
 		choiceDelay.time(1, removeChoiceButtons);
 		
-		// StonePaperScissorsLogic();		
+		StonePaperScissorsLogic();		
 	}
 	
 	function workable_ID(mess)
@@ -400,64 +337,6 @@
 		return b;
 	}
 	
-	function StonePaperScissorsEndLogic(result_id)
-	{
-		battleEndStatus = result_id;
-		
-		player_2 = {};
-		
-		switch(result_id)
-		{
-			case "WIN":
-			{
-				if(player_1.selection === "STONE")
-				{
-					player_2.selection = "SCISSORS";
-				}
-				
-				if(player_1.selection === "PAPER")
-				{
-					player_2.selection = "STONE";
-				}
-				
-				if(player_1.selection === "SCISSORS")
-				{
-					player_2.selection = "PAPER";
-				}
-				
-				break;
-			}
-			
-			case "LOSE":
-			{
-				if(player_1.selection === "STONE")
-				{
-					player_2.selection = "PAPER";
-				}
-				
-				if(player_1.selection === "PAPER")
-				{
-					player_2.selection = "SCISSORS";
-				}
-				
-				if(player_1.selection === "SCISSORS")
-				{
-					player_2.selection = "STONE";
-				}
-				
-				break;
-			}
-			
-			case "DRAW":
-			{
-				player_2.selection = player_1.selection;
-				
-				break;
-			}
-		}
-	}
-	
-/*
 	function StonePaperScissorsLogic()
 	{
 		// Figure out main outcome
@@ -552,7 +431,6 @@
 		
 		trace("ME == " + ME.player1_STRIKE + " THEM == " + ME.player2_STRIKE);
 	}
-*/
 	
 	function addChoiceButtons()
 	{
@@ -612,7 +490,7 @@
 		$("#battle-nav-player1 .battleCute-warrior-head").addClass("battleCute-warrior-head-goat");
 		
 		// P2 HEAD
-		switch(ROM.enemy.buildData.charHead)
+		switch(ME.player2_ID)
 		{
 			case "BOSS":
 			{
@@ -646,14 +524,12 @@
 		
 		$("#battle-nav-player2 .battleCute-warrior-head .battleCute-eyes-sprite").addClass("battleCute-eyes-look-L");
 		
-		alert("P1 = " + player_1.selection + " P2 = " + player_2.selection);
-		
 		// P1 SPEECH
 		
-		populateResultsDisplay(player_1.selection, "#battle-nav-player1");
+		populateResultsDisplay(ME.player1_STRIKE, "#battle-nav-player1");
 			
 		// P2 SPEECH
-		populateResultsDisplay(player_2.selection, "#battle-nav-player2");
+		populateResultsDisplay(ME.player2_STRIKE, "#battle-nav-player2");
 				
 		$("#battle-nav-fight").addClass("tween-battle-nav-fight");
 		
@@ -664,8 +540,6 @@
 	
 	function populateResultsDisplay(store, id)
 	{
-		trace(id + " " + store);
-		
 		switch(store)
 		{
 			case "STONE":
@@ -767,7 +641,7 @@
 	
 	function clearedStage(event)
 	{
-	 	$("#info-cloud p").text(Logic.dat_ROM["_LOGIC"]["messages"]["txt_" + battleEndStatus]);
+	 	$("#info-cloud p").text(Logic.dat_ROM["_LOGIC"]["messages"]["txt_" + ME.player2_EVENT]);
 	 	
 	 	$("#battle-nav-playerBird")[0].removeEventListener("webkitAnimationEnd", clearedStage, false);
 	 	$("#battle-nav-playerBird")[0].removeEventListener("animationend", clearedStage, false);		
@@ -790,11 +664,10 @@
 		$("#battle-nav-player1 .battleCute-warrior-head .battleCute-eyes-sprite").removeClass("battleCute-eyes-look-R").addClass("battleCute-eyes-look-C");
 		$("#battle-nav-player2 .battleCute-warrior-head .battleCute-eyes-sprite").removeClass("battleCute-eyes-look-L").addClass("battleCute-eyes-look-C");
 		
-		alert(battleEndStatus);
 		
-		switch(battleEndStatus)
+		switch(ME.player2_EVENT)
 		{
-			case "LOSE":
+			case "WIN":
 			{
 				$("#battle-nav-player1 .battleCute-cloud").css("opacity", "1").addClass("tween-battleCute-Cloud");	 			
 	 			$("#battle-nav-player1 .battleCute-tears").css("opacity", "1");
@@ -805,7 +678,7 @@
 				break;
 			}
 			
-			case "WIN":
+			case "LOSE":
 			{
 				$("#battle-nav-player2 .battleCute-cloud").css("opacity", "1").addClass("tween-battleCute-Cloud");	 			
 	 			$("#battle-nav-player2 .battleCute-tears").css("opacity", "1");
@@ -843,19 +716,28 @@
 		$("#info-cloud")[0].removeEventListener("webkitTransitionEnd", battleResultsEnd, false);
 		$("#info-cloud")[0].removeEventListener("transitionend", battleResultsEnd, false);
 		
-		if(battleEndStatus === "WIN" || battleEndStatus === "LOSE")
+		if(ME.player2_EVENT === "WIN" || ME.player2_EVENT === "LOSE")
 		{
-			battleEndStatus === "WIN" ? ROM.battle_RESULT = "WIN" : ROM.battle_RESULT = "LOSE";
+			ME.player2_EVENT === "WIN" ? ROM.battle_RESULT = "LOST" : ROM.battle_RESULT = "WON";
 			
 			battleOver();
+			
+			trace(ROM);
+		}
+		
+		else if(ME.player2_EVENT === "DRAW")
+		{
+			// $("#battle-nav-fight").removeClass("battle-nav-show").addClass("battle-nav-hide");
+			
+			$("#battle-nav-fight").css(y_hide_css);
+			
+			$(".tween-battle-nav-fight")[0].addEventListener("webkitTransitionEnd", anotherRound, false);
+			$(".tween-battle-nav-fight")[0].addEventListener("transitionend", anotherRound, false);
 		}
 		
 		else
 		{
-			$("#battle-nav-fight").css(y_hide_css);
 			
-			$(".tween-battle-nav-fight")[0].addEventListener("webkitTransitionEnd", anotherRound, false);
-			$(".tween-battle-nav-fight")[0].addEventListener("transitionend", anotherRound, false);			
 		}
 	}
 	
@@ -883,9 +765,7 @@
 		
 		$("#info-cloud").css("opacity", "1");
 		
-		// ME.connect();
-		
-		player_1_connect();
+		ME.connect();
 		
 		StonePaperScissorsControls(true);
 	}
@@ -966,13 +846,6 @@
 			else
 			{
 				alert("NORMAL GAME RESULT");
-				
-				trace("ENEMY STATUS == ");
-				trace(ROM.enemy);
-				trace("PLAYER STATUS == ");
-				trace(player_1);
-				
-				endBattleSceneAnimation();
 			}
 			
 			
@@ -981,15 +854,6 @@
 			$("#eventFill").css("visibility", "hidden");
 		}
 	}
-	
-	
-	
-	
-	
-	
-	
-	
-	
 	
 	
 	

@@ -455,6 +455,10 @@
 			$(".player-area").css("opacity", 0); // 0
 			
 			// alert("PORTAL " + hit_register.hit_portal_target);
+			
+			trace("!----------------------------------------------------- PORTAL FAIL TEST");
+			trace(hit_register.hit_portal_target);
+			trace("!----------------------------------------------------- PORTAL FAIL TEST");
 		}
 		
 		// ENEMY
@@ -506,22 +510,37 @@
 		
 		PORTAL_COM.hits = $(".collideCheck-player").collision(".collideCheck-portal");
 		
-		// ENEMY
-		
-		// ROM.hits = $(".collideCheck-player").collision(".collideCheck-enemy");
-		
-		ROM.hits = $(".collideCheck-player-inner").collision(".collideCheck-enemy");
-		
-		// PLAYER HITS EDGE BLOCKS 
+		// PLAYER HITS EDGE BLOCK OR ENEMY
 		
 		if(HIT_TEST.hits[0] != undefined || HIT_TEST.hits[0] != null)
 		{
-			register.hit_field = true;
+			var hit_id = $(HIT_TEST.hits[0]).attr("id");
+			
+			// PLAYER HITS ENEMY
+			
+			if($("#" + hit_id).attr("data-npc") === "enemy")
+			{
+				register.hit_enemy	= true;
+				
+				register.hit_enemy_target = hit_id;
+				
+				// register.hit_enemy_parent = $(HIT_TEST.hits[0])[0].parentNode;
+				
+				// register.hit_enemy_target = $(register.hit_enemy_parent).attr("id");
+			}
+			
+			// PLAYER HITS EDGE
+			
+			else
+			{
+				register.hit_field = true;	
+			}
 		}
 		
 		else
 		{
 			register.hit_field = false;
+			register.hit_enemy	= false;
 		}
 		
 		// PLAYER HITS PORTAL
@@ -537,27 +556,6 @@
 		{
 			register.hit_portal	= false;
 		}
-		
-		// PLAYER HITS ENEMY
-		
-		if(ROM.hits[0] != undefined || ROM.hits[0] != null)
-		{
-			register.hit_enemy	= true;
-			
-			register.hit_enemy_parent = $(ROM.hits[0])[0].parentNode;
-			
-			register.hit_enemy_target = $(register.hit_enemy_parent).attr("id");
-			
-			trace("!!!! ---------------------- HIT ENEMY " + register.hit_enemy_target);
-			// trace(ROM.hits[0]);
-			// trace($(ROM.hits[0])[0].parentNode);
-		}
-		
-		else
-		{
-			register.hit_enemy	= false;
-		}
-		
 		
 		return register;
 	}
@@ -975,6 +973,11 @@
 	
 	function portalEntry(hitPortal)
 	{
+		trace("!----------------------------------------------------- PORTAL FAIL TEST");
+		trace(portals);
+		trace("!----------------------------------------------------- PORTAL FAIL TEST");
+		
+		
 		for(var i in portals)
 		{
 			if(portals[i].id === hitPortal)
@@ -1001,6 +1004,11 @@
 	
 	function portalExit(portalObj)
 	{
+		trace("!----------------------------------------------------- PORTAL FAIL TEST");
+		trace(portalObj);
+		trace("!----------------------------------------------------- PORTAL FAIL TEST");
+		
+		
 		// NEXT PORTAL FIND
 			
 		for(var i in portals)
