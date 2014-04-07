@@ -134,26 +134,79 @@
 			if(!enemies[i].alive)
 			{
 				$("#" + enemies[i].buildData.id).remove();
-				
-				// alert(enemies[i].buildData.id + " === DEAD");
 			}
 		}
 		
-		trace("ENEMY FAIL------------------------------------");
-		trace(enemies);
-		trace("ENEMY FAIL------------------------------------");
+		// check draw
 		
-		// readPortals();
+		if(battleEndStatus === "WIN")
+		{
+			globalFade_OUT(returnToBattleContinue);
+			
+			reset_battleEndStatus();
+		}
 		
-		// portalStarsContinue();
+		else
+		{
+			playerFallPosition();
+		}
 		
 		rebuildStarsInit();
+	}
+	
+	function playerFallPosition()
+	{
+		var fall_css_x;
+		var fall_css_y;
+		var fall_css_h;
+		
+		var fx;
+		var fy;
+		
+		mapPlayerAxisEventCancel();
+		
+		fx = LEVEL_MAIN.buildData.fall_x * MAP_PLAYER.moveUnit;
+		fy = LEVEL_MAIN.buildData.fall_y * MAP_PLAYER.moveUnit;
+		
+		
+		fall_css_x	=	{
+							"-webkit-transform" : "translateX(" + fx + "px)",
+							"transform"			: "translateX(" + fx + "px)"
+						};
+						
+		fall_css_y	=	{
+							"-webkit-transform" : "translateY(" + fy + "px)",
+							"transform"			: "translateY(" + fy + "px)"
+						};
+						
+		fall_css_h	=	{
+							"-webkit-transform"	: "translate(" + fx + "px, " + fy + "px)",
+							"transform"			: "translate(" + fx + "px, " + fy + "px)" 
+						};
+		
+		
+		MAP_PLAYER.x = MAP_PLAYER.current_x = fx;
+		MAP_PLAYER.y = MAP_PLAYER.current_y = fy;
+
+		
+		$(".player-area .player-x").css(fall_css_x);
+		$(".player-area .player-y").css(fall_css_y);
+		$(".preHitTest .preHitTestBlock").css(fall_css_h);
+		// $(".preHitTest .preHitTestBlock").css(css_h);
+			
+		// alert(px + " " + py);
+			
+		// controlConvert_XY(false);
+			
+		revert_XY();
 		
 		globalFade_OUT(returnToBattleContinue);
 	}
 	
 	function returnToBattleContinue()
 	{
+		moveStageTest();
+		
 		playerInBattle = false;
 		
 		controlPort(true);

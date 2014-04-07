@@ -8,6 +8,8 @@
 				
 	var cheatMode = true;
 	
+	var autoLose = true;
+	
 	var nonAlert = 	function(str)
 					{
 						if($("#CONTROL_CHECK"))

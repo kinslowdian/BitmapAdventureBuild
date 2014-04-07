@@ -4631,7 +4631,15 @@
 		margin: 0 auto;
 	}
 	
+/*
 	.stageCenter-x
+	{
+		-webkit-transition	: -webkit-transform 0.4s ease-in-out;
+		transition 			: transform 0.4s ease-in-out;
+	}
+*/
+
+	.tween-stageCenter-x
 	{
 		-webkit-transition	: -webkit-transform 0.4s ease-in-out;
 		transition 			: transform 0.4s ease-in-out;
@@ -5385,6 +5393,8 @@
 		position: absolute;
 		
 		/* outline: 1px solid white; */
+		
+		outline: 1px solid rgba(0, 255, 0, 0.8);
 	}
 	
 	.map-goat
@@ -5526,6 +5536,8 @@
 		left: 0; top: 0; bottom: 0; right: 0;
 		
 		margin: auto;
+		
+		background: rgba(0, 255, 0, 0.8);
 	}
 	
 	

@@ -982,6 +982,11 @@
 		}
 	}
 	
+	function reset_battleEndStatus()
+	{
+		battleEndStatus = "";
+	}
+	
 	
 	
 	

@@ -1,7 +1,9 @@
 	
 	var MAP_PLAYER;
 	
-	var HIT_TEST;
+	/////////////////////////////////// -- CHROME FIX
+	// var HIT_TEST;
+	/////////////////////////////////// -- CHROME FIX
 	
 	var introFallIntoMap = true;
 	
@@ -31,6 +33,9 @@
 	{
 		if(introFallIntoMap)
 		{
+			// CHROME-REPAIR
+			// introFallIntoMap = false;
+			
 			introFallIntoMap = false;
 			
 			mapPlayerEntry(false);
@@ -251,8 +256,27 @@
 			
 			
 			
+			// CHROME
+			// preHitTest();
+			
+			// CHROME-REPAIR
+/*
+			if(introFallIntoMap)
+			{
+				introFallIntoMap = false;
+				
+				mapPlayerMoveX();
+				mapPlayerMoveY();
+			}
+			
+			else
+			{
+				preHitTest();
+			}
+*/
 			
 			preHitTest();
+			
 		/* } */	
 	}
 	
@@ -421,7 +445,17 @@
 						};
 						
 		$(".preHitTest .preHitTestBlock").css(css_ht);
+		
+		hitTest_init();
+		
+		// HACK!
+			// mapPlayerMoveX();
+			// mapPlayerMoveY();		
+		// HACK!
+		
+/////////////////////////////////// -- CHROME FIX
 	
+/*
 		hit_register = hitTest_init();
 		
 		// EDGES
@@ -430,6 +464,10 @@
 		{
 			mapPlayerMoveX();
 			mapPlayerMoveY();
+			
+			nonAlert("SAFE");
+			
+			// alert("if");
 		}
 		
 		else
@@ -438,10 +476,16 @@
 			MAP_PLAYER.y = MAP_PLAYER.current_y;
 			
 			revert_XY();
+			
+			nonAlert("HIT EDGE === " + hit_register.hit_id);
+			
+			// alert("else");
 		}
+*/
 		
 		// PORTAL
 		
+/*
 		if(hit_register.hit_portal)
 		{
 			controlsCancel(false);
@@ -459,10 +503,14 @@
 			trace("!----------------------------------------------------- PORTAL FAIL TEST");
 			trace(hit_register.hit_portal_target);
 			trace("!----------------------------------------------------- PORTAL FAIL TEST");
+			
+			nonAlert("PORTAL!");
 		}
+*/
 		
 		// ENEMY
 		
+/*
 		if(hit_register.hit_enemy)
 		{
 			controlsCancel(false);
@@ -472,7 +520,12 @@
 			playerInBattle = true;
 		
 			enemySearch(hit_register.hit_enemy_target);
+			
+			nonAlert("ENEMY!");
 		}
+*/
+
+/////////////////////////////////// -- CHROME FIX
 		
 		
 		// alert("preHitTest(); " + hit_register.hit_field);
@@ -485,13 +538,18 @@
 		MAP_PLAYER.block_x = MAP_PLAYER.x / MAP_PLAYER.moveUnit;
 		MAP_PLAYER.block_y = MAP_PLAYER.y / MAP_PLAYER.moveUnit;		
 	}
-	
+
+/////////////////////////////////// -- CHROME FIX	
+
+/*
 	function hitTest_build()
 	{
 		HIT_TEST = {};
 		HIT_TEST.hits = null;		
 	}
+*/
 	
+/*
 	function hitTest_init()
 	{
 		var register = {};
@@ -516,8 +574,12 @@
 		{
 			var hit_id = $(HIT_TEST.hits[0]).attr("id");
 			
-			// PLAYER HITS ENEMY
+			// CHROME
+			register.hit_id = hit_id;
 			
+			// PLAYER HITS ENEMY
+
+// CHROME			
 			if($("#" + hit_id).attr("data-npc") === "enemy")
 			{
 				register.hit_enemy	= true;
@@ -535,7 +597,10 @@
 			{
 				register.hit_field = true;	
 			}
+
+			// register.hit_field = true;
 		}
+
 		
 		else
 		{
@@ -559,6 +624,8 @@
 		
 		return register;
 	}
+*/
+/////////////////////////////////// -- CHROME FIX
 	
 	function battleMode_init()
 	{
@@ -706,6 +773,7 @@
 		{
 			$(".player-area").css("opacity", 1);
 		}
+		
 	}
 	
 	function mapPlayerAxisY_End(event)
@@ -850,7 +918,16 @@
 			}
 */
 
-
+			if(battleEndStatus === "LOSE")
+			{
+				MAP_PLAYER.allowControl = true;
+				
+				$(".player-area .player-x").addClass(MAP_PLAYER.tweenClass); 
+				
+				$(".player-area .player-y").addClass(MAP_PLAYER.tweenClass);
+				
+				reset_battleEndStatus();
+			}	
 
 			// TRY
 			
@@ -930,6 +1007,17 @@
 				
 				exitFrame = setTimeout(mapPlayerEntry, 1000, true);
 			}
+		}
+		
+		if(battleEndStatus === "LOSE")
+		{
+			MAP_PLAYER.allowControl = true;
+			
+			$(".player-area .player-x").addClass(MAP_PLAYER.tweenClass); 
+			
+			$(".player-area .player-y").addClass(MAP_PLAYER.tweenClass);
+			
+			reset_battleEndStatus();
 		}	
 	}
 	

@@ -34,6 +34,8 @@
 		this.buildData.useTime		= this.settings.t;
 		this.buildData.entry_x		= this.settings.entry_x;
 		this.buildData.entry_y		= this.settings.entry_y;
+		this.buildData.fall_x		= this.settings.fall_x;
+		this.buildData.fall_y		= this.settings.fall_y;
 		this.buildData.entry_d		= this.settings.entry_d;
 		this.buildData.act			= this.settings.act;
 		this.buildData.title		= this.settings.title;

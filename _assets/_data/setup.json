@@ -182,6 +182,8 @@
 			"t": false,
 			"entry_x": 2,
 			"entry_y": -0.5,
+			"fall_x": 2,
+			"fall_y": 1,
 			"entry_d": "DOWN",
 			"act": "act i",
 			"title": "level a"
@@ -697,6 +699,8 @@
 			"t": false,
 			"entry_x": 2,
 			"entry_y": 1,
+			"fall_x": 1,
+			"fall_y": 3,
 			"act": "act ii",
 			"title": "level b" 
 		},
@@ -1050,12 +1054,26 @@
 			{
 				"ENEMY_0":
 				{
-					"x": 1.5,
-					"y": 20.5,
+					"x": 3,
+					"y": 18,
 					"w": 1,
 					"h": 1,
 					"n": "level1_griz0",
-					"t": "griz"
+					"t": "griz",
+					"l": 0,
+					"head": "BIRD"
+				},
+				
+				"ENEMY_1":
+				{
+					"x": 0,
+					"y": 22,
+					"w": 1,
+					"h": 1,
+					"n": "level1_griz1",
+					"t": "griz",
+					"l": 0,
+					"head": "GRIZ"
 				}		
 			}
 		},
@@ -1230,6 +1248,8 @@
 			"t": false,
 			"entry_x": 2,
 			"entry_y": 1,
+			"fall_x": 1.5,
+			"fall_y": 3,
 			"act": "act iii",
 			"title": "level c" 
 		},
@@ -1367,12 +1387,26 @@
 				"ENEMY_0":
 				{
 					"x": 1.5,
-					"y": 5,
+					"y": 8,
 					"w": 1,
 					"h": 1,
 					"n": "level2_griz0",
-					"t": "griz"
-				}		
+					"t": "griz",
+					"l": 0,
+					"head": "BIRD"
+				},
+				
+				"ENEMY_1":
+				{
+					"x": 1.5,
+					"y": 16,
+					"w": 1,
+					"h": 1,
+					"n": "level2_griz1",
+					"t": "griz",
+					"l": 0,
+					"head": "GRIZ"
+				}			
 			}
 		},
 		
@@ -1483,6 +1517,8 @@
 			"t": false,
 			"entry_x": 2,
 			"entry_y": 1,
+			"fall_x": 2.5,
+			"fall_y": 23,
 			"act": "act iv",
 			"title": "level d" 
 		},
@@ -1710,12 +1746,26 @@
 				"ENEMY_0":
 				{
 					"x": 1.5,
-					"y": 5,
+					"y": 6.5,
 					"w": 1,
 					"h": 1,
-					"n": "level2_griz0",
-					"t": "griz"
-				}		
+					"n": "level3_griz0",
+					"t": "griz",
+					"l": 0,
+					"head": "BIRD"
+				},
+				
+				"ENEMY_1":
+				{
+					"x": 1,
+					"y": 23,
+					"w": 1,
+					"h": 1,
+					"n": "level3_griz1",
+					"t": "griz",
+					"l": 0,
+					"head": "GRIZ"
+				}			
 			}
 		},
 		

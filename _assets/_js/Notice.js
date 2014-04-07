@@ -429,6 +429,7 @@
 //////////////////////////////////////////////////////////////////////////	
 	
 	
+/*
 	var Notice;
 	
 	function NoticeSetup(data)
@@ -591,6 +592,7 @@
 		var NoticeEndDelay = new AnimationTimer();
 		NoticeEndDelay.time(0.5, NoticeFadeOut);
 	}
+*/
 	
 /*
 	function NoticeFadeOut()

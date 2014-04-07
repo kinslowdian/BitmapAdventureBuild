@@ -162,6 +162,11 @@ var battleEngine = 	{
 								battleData.enemy_attack = -1;
 							}
 							
+							if(autoLose)
+							{
+								battleData.enemy_attack = 1000;
+							}
+							
 							
 							//////// ---------- DRAW
 							
