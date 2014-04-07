@@ -401,6 +401,14 @@
 	}
 	
 	
+	.pixels_touch-ui
+	{
+		background-image: url(../_img/_nav/touch-ui.svg);
+		background-repeat: no-repeat;
+		background-position: 0 0;
+		background-size: 120px 120px;
+	}
+	
 
 /* 1x */
 	

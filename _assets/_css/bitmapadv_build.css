@@ -23,6 +23,8 @@
 	
 	/* NAV */
 	
+	/* TOUCH */
+	
 	/* NOTICE */
 	
 	/* LEVEL NOTICE */
@@ -3628,6 +3630,149 @@
 /* ------------------------------------------------------------------- NAV */
 
 
+/* ------------------------------------------------------------------- TOUCH */
+/* ------------------------------------------------------------------- TOUCH */
+
+
+#touchPad
+{
+	width: 120px;
+	height: 120px;
+	
+	position: absolute;
+	
+	left : 20px;
+	bottom: 20px;
+	
+	z-index: 100;
+}
+
+#touchPad div
+{
+	pointer-events: none;
+}
+
+
+#touchPad .touchPad-surface
+{
+	width: inherit;
+	height: inherit;
+	
+	position: absolute;
+	
+	left: 0;
+	top: 0;
+	
+	z-index: 1;
+}
+
+#touchPad .touchPad-surface .touchPad-area
+{
+	pointer-events: auto;
+	
+	position: absolute;
+	z-index: 0;
+	
+	cursor: pointer;
+}
+
+
+#touchPad .touchPad-surface .touchPad-area:active .touch-ind
+{
+	width: 20px;
+	height: 20px;
+	
+	background: #161620; /* #ff0055 */
+	
+	-webkit-border-radius: 10px;
+	border-radius: 10px;
+	
+	-webkit-box-shadow	: 0px 0px 0px 4px #fff;
+	box-shadow			: 0px 0px 0px 4px #fff;
+}
+
+#touchPad .touchPad-surface #touchPad-U
+{
+	width: 42px;
+	height: 34px;
+	
+	left: 39px;
+	top: 4px;
+}
+
+#touchPad .touchPad-surface #touchPad-D
+{
+	width: 42px;
+	height: 34px;
+	
+	left: 39px;
+	top: 82px;
+}
+
+#touchPad .touchPad-surface #touchPad-L
+{
+	width: 34px;
+	height: 42px;
+	
+	left: 4px;
+	top: 39px;
+}
+
+#touchPad .touchPad-surface #touchPad-R
+{
+	width: 34px;
+	height: 42px;
+	
+	left: 82px;
+	top: 39px;
+}
+
+#touchPad .touchPad-surface .touch-ind
+{
+	width: 6px;
+	height: 6px;
+	
+	border: 2px;
+	
+	background: none;
+	
+	-webkit-border-radius: 3px;
+	border-radius: 3px;
+	
+	-webkit-box-shadow	: 0px 0px 0px 2px #161620;
+	box-shadow			: 0px 0px 0px 2px #161620;
+	
+	-webkit-transition	: all 0.2s ease-in-out;
+	transition			: all 0.2s ease-in-out;
+	
+	-webkit-transform-origin: 50% 50%;
+	transform-origin: 50% 50%;
+	
+	position: absolute;
+	top: 0; left: 0; right: 0; bottom: 0;
+	
+	margin: auto;
+	
+}
+
+#touchPad .touchPad-base
+{
+	width: 120px;
+	height: 120px;
+	
+	position: absolute;
+	left: 0;
+	top: 0;
+	
+	z-index: 0;
+}
+
+
+/* ------------------------------------------------------------------- TOUCH */
+/* ------------------------------------------------------------------- TOUCH */
+
+
+
 
 
 /* ------------------------------------------------------------------- NOTICE */
@@ -5164,127 +5309,6 @@
 	.fieldEdge-L
 	{
 		left: -40px;
-	}
-	
-	
-	#touchPad
-	{
-		width: 130px;
-		height: 150px;
-		
-		position: absolute;
-		
-		left: 10px;
-		bottom: 10px;
-		
-		z-index: 100;
-		
-		/* background: rgba(0, 255, 0, 0.5); */
-		
-		-webkit-transition: opacity 0.4s ease;	
-		transition: opacity 0.4s ease;		
-	}
-	
-	.touchPad-surface
-	{
-		width: 130px;
-		height: 150px;
-		
-		position: absolute;
-		
-		z-index: 2;			
-	}
-	
-	.touchPad-surface div
-	{
-		width: 50px;
-		height: 50px;
-		
-		/* background: red; */
-		
-		-webkit-border-radius: 25px;
-		border-radius: 25px;
-		
-		-webkit-touch-callout: none;
-		-webkit-user-select: none;
-		
-		touch-callout: none;
-		user-select: none;
-		
-		position: absolute;		
-	}
-	
-	#touchPad-U
-	{
-		-webkit-transform	: translate(40px, 25px);
-		transform			: translate(40px, 25px);	
-	}
-	
-	#touchPad-D
-	{
-		-webkit-transform	: translate(40px, 95px);
-		transform			: translate(40px, 95px);	
-	}
-	
-	#touchPad-L
-	{
-		-webkit-transform	: translate(5px, 60px);
-		transform			: translate(5px, 60px);	
-	}
-	
-	#touchPad-R
-	{
-		-webkit-transform	: translate(75px, 60px);
-		transform			: translate(75px, 60px);	
-	}
-	
-	#touchPad-U, #touchPad-D, #touchPad-L, #touchPad-R
-	{
-		pointer-events: auto;
-	}
-	
-	.touchPad-crab-body
-	{
-		width: 130px;
-		height: 150px;
-		
-		background-position: 0 0;
-		
-		position: absolute;
-		
-		z-index: 1;		
-	}
-	
-	.touchPad-crab-eyes
-	{
-		width: 130px;
-		height: 150px;
-		
-		background-position: -130px 0;
-		
-		position: absolute;
-		
-		z-index: 0;			
-	}
-		
-	.tween_touchCrabEyes
-	{
-		-webkit-animation	: tweenCrabEyesFrames 0.4s ease infinite;
-		animation			: tweenCrabEyesFrames 0.4s ease infinite;
-	}
-	
-	@-webkit-keyframes tweenCrabEyesFrames
-	{
-		0%		{ -webkit-transform	: translateY(0px); }
-		50%		{ -webkit-transform	: translateY(6px); }
-		100%	{ -webkit-transform	: translateY(0px); }
-	}
-	
-	@keyframes tweenCrabEyesFrames
-	{
-		0%		{ transform	: translateY(0px); }
-		50%		{ transform	: translateY(6px); }
-		100%	{ transform	: translateY(0px); }		
 	}
 	
 	

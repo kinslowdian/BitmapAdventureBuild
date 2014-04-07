@@ -1,9 +1,7 @@
 	
 	var MAP_PLAYER;
 	
-	/////////////////////////////////// -- CHROME FIX
-	// var HIT_TEST;
-	/////////////////////////////////// -- CHROME FIX
+	var HIT_TEST;
 	
 	var introFallIntoMap = true;
 	
@@ -25,17 +23,12 @@
 	{
 		initMapPlayer();
 		hitTest_build();
-		
-		// mapPlayerPlace();
 	}
 	
 	function mapPlayerStartQuest()
 	{
 		if(introFallIntoMap)
 		{
-			// CHROME-REPAIR
-			// introFallIntoMap = false;
-			
 			introFallIntoMap = false;
 			
 			mapPlayerEntry(false);
@@ -43,11 +36,7 @@
 		
 		else
 		{
-			// alert("mapPlayerStartQuest(); " + portalTravelType);
-			
 			moveStageTest();
-			
-			// mapPlayerEntry(true);
 		}
 	}
 	
@@ -105,8 +94,6 @@
 		
 		else
 		{
-			// alert("USE??? " + portalTravelType);
-			
 			if(portalTravelType === "STAGE")
 			{
 				MAP_PLAYER.x = MAP_PLAYER.portalObj.x; 
@@ -123,27 +110,6 @@
 						MAP_PLAYER.portalObj = portals[i];
 					}
 				}
-				
-				// TRY
-				// playerInPortal = false;
-				// portalTravelType = "";
-				
-				// PORTAL EXIT CHECK
-				// playerExitPortal = true;
-				
-				
-/*
-			if(portalTravelType === "LEVEL")
-			{
-				playerInPortal = false;
-				portalTravelType = "";
-				
-				// PORTAL EXIT CHECK
-				playerExitPortal = true;
-				
-				exitFrame = setTimeout(mapPlayerEntry, 1000, true);
-			}
-*/
 				
 				
 				MAP_PLAYER.x = MAP_PLAYER.portalObj.x; 
@@ -215,69 +181,32 @@
 			}
 		}
 		
-/*
-		if(x && y)
+			
+		MAP_PLAYER.allowControl = true;
+			
+		if(update_x)
+		{ 
+			x *= moveVal;
+				
+			$(".player-area .player-x").addClass(MAP_PLAYER.tweenClass); 
+		}
+			
+		if(update_y)
 		{
-*/
-			// BUGGY?
-			
-			MAP_PLAYER.allowControl = true;
-			
-			if(update_x)
-			{ 
-				x *= moveVal;
+			y *= moveVal;
 				
-				$(".player-area .player-x").addClass(MAP_PLAYER.tweenClass); 
-			}
-			
-			if(update_y)
-			{
-				y *= moveVal;
-				
-				$(".player-area .player-y").addClass(MAP_PLAYER.tweenClass);
-			}
+			$(".player-area .player-y").addClass(MAP_PLAYER.tweenClass);
+		}
 			
 			
-			MAP_PLAYER.x = x;
-			MAP_PLAYER.y = y;
+		MAP_PLAYER.x = x;
+		MAP_PLAYER.y = y;
 			
-			$(".player-block .map-goat-legs").addClass(MAP_PLAYER.walkClass);
+		$(".player-block .map-goat-legs").addClass(MAP_PLAYER.walkClass);
 			
-			// alert("entry set to == " + x + " " + y);
+		revert_XY();	
 			
-			// CONVERSION BACK TO BLOCKS AFTER ENTRY
-			
-			revert_XY();
-			
-			// alert(MAP_PLAYER.block_x + " " + MAP_PLAYER.block_y);
-			
-			
-			
-			
-			
-			
-			// CHROME
-			// preHitTest();
-			
-			// CHROME-REPAIR
-/*
-			if(introFallIntoMap)
-			{
-				introFallIntoMap = false;
-				
-				mapPlayerMoveX();
-				mapPlayerMoveY();
-			}
-			
-			else
-			{
-				preHitTest();
-			}
-*/
-			
-			preHitTest();
-			
-		/* } */	
+		preHitTest();
 	}
 	
 	function controlPort(ON)
@@ -359,7 +288,7 @@
 	
 	function registerTouch(event)
 	{
-		
+		event.preventDefault();
 	}
 	
 	function controlConvert_XY(send)
@@ -377,8 +306,6 @@
 		
 		if(send)
 		{
-			// controlConvert_check();
-		
 			preHitTest();
 		}
 		
@@ -419,18 +346,11 @@
 			if(portalTravelType === "STAGE")
 			{
 				moveStageTest();
-				
-				// playerInPortal = false;
-				// portalTravelType = "";
-				
-				// FAULT
-				
-				// portalExitDelay = setTimeout(mapPlayerEntry, 1000, true);
 			}
 			
 			if(portalTravelType === "LEVEL")
 			{
-				// moveStageTest();
+
 			}
 		}
 	}
@@ -447,88 +367,102 @@
 		$(".preHitTest .preHitTestBlock").css(css_ht);
 		
 		hitTest_init();
-		
-		// HACK!
-			// mapPlayerMoveX();
-			// mapPlayerMoveY();		
-		// HACK!
-		
-/////////////////////////////////// -- CHROME FIX
+	}
 	
-/*
-		hit_register = hitTest_init();
+	function hitTest_build()
+	{
+		HIT_TEST = {};
+		HIT_TEST.hits = null;
 		
-		// EDGES
+		HIT_TEST.hit_enemy_target = "";
+		HIT_TEST.hit_portal_target = "";
 		
-		if(!hit_register.hit_field)
+		HIT_TEST.hit_edge = false;
+		HIT_TEST.hit_enemy = false;	
+		HIT_TEST.hit_portal = false;	
+	}
+	
+	function hitTest_init()
+	{
+		var hit_id = "";
+		
+		// SETUP - INIT
+		
+		HIT_TEST.hits = $(".preHitTest .collideCheck-player").collision(".collideCheck-field");
+		
+		if(HIT_TEST.hits[0] != undefined || HIT_TEST.hits[0] != null)
 		{
-			mapPlayerMoveX();
-			mapPlayerMoveY();
+			hit_id = $(HIT_TEST.hits[0]).attr("id");
 			
-			nonAlert("SAFE");
+			// PLAYER HITS ENEMY
+						
+			if($("#" + hit_id).attr("data-npc") === "enemy")
+			{
+				HIT_TEST.hit_enemy	= true;
+				
+				HIT_TEST.hit_enemy_target = hit_id;
+				
+				nonAlert("HIT ENEMY " + HIT_TEST.hit_enemy_target);
+				
+				controlsCancel(false);
+				
+				playerInBattle = true;
 			
-			// alert("if");
+				enemySearch(HIT_TEST.hit_enemy_target);
+				
+				mapPlayerMoveX();
+				mapPlayerMoveY();
+			}
+			
+			// PLAYER HITS PORTAL
+			else if($("#" + hit_id).attr("data-gameObject") === "portal")
+			{
+				HIT_TEST.hit_portal	= true;
+				
+				HIT_TEST.hit_portal_target = $(HIT_TEST.hits[0]).attr("id");
+				
+				controlsCancel(false);
+				
+				playerInPortal = true;
+				
+				portalEntry(HIT_TEST.hit_portal_target);
+				
+				$(".player-area").css("opacity", 0);
+				
+				mapPlayerMoveX();
+				mapPlayerMoveY();
+				
+				
+				nonAlert("HIT PORTAL " + HIT_TEST.hit_portal_target);				
+			}
+			
+			// PLAYER HITS EDGE
+			
+			else
+			{
+				HIT_TEST.hit_edge = true;
+				
+				MAP_PLAYER.x = MAP_PLAYER.current_x;
+				MAP_PLAYER.y = MAP_PLAYER.current_y;
+				
+				revert_XY();	
+			
+				nonAlert("HIT EDGE");
+			}
 		}
+
 		
 		else
 		{
-			MAP_PLAYER.x = MAP_PLAYER.current_x;
-			MAP_PLAYER.y = MAP_PLAYER.current_y;
+			HIT_TEST.hit_edge = false;
+			HIT_TEST.hit_enemy = false;
+			HIT_TEST.hit_portal	= false;
 			
-			revert_XY();
+			mapPlayerMoveX();
+			mapPlayerMoveY();
 			
-			nonAlert("HIT EDGE === " + hit_register.hit_id);
-			
-			// alert("else");
+			nonAlert("HIT NOTHING");
 		}
-*/
-		
-		// PORTAL
-		
-/*
-		if(hit_register.hit_portal)
-		{
-			controlsCancel(false);
-			
-			playerInPortal = true;
-			
-			portalEntry(hit_register.hit_portal_target);
-			
-			// SMOOTH
-			// portalPlayerFadeOut();
-			$(".player-area").css("opacity", 0); // 0
-			
-			// alert("PORTAL " + hit_register.hit_portal_target);
-			
-			trace("!----------------------------------------------------- PORTAL FAIL TEST");
-			trace(hit_register.hit_portal_target);
-			trace("!----------------------------------------------------- PORTAL FAIL TEST");
-			
-			nonAlert("PORTAL!");
-		}
-*/
-		
-		// ENEMY
-		
-/*
-		if(hit_register.hit_enemy)
-		{
-			controlsCancel(false);
-			
-			// battleMode_init();
-		
-			playerInBattle = true;
-		
-			enemySearch(hit_register.hit_enemy_target);
-			
-			nonAlert("ENEMY!");
-		}
-*/
-
-/////////////////////////////////// -- CHROME FIX
-		
-		
-		// alert("preHitTest(); " + hit_register.hit_field);
 	}
 	
 	function revert_XY()
@@ -538,94 +472,6 @@
 		MAP_PLAYER.block_x = MAP_PLAYER.x / MAP_PLAYER.moveUnit;
 		MAP_PLAYER.block_y = MAP_PLAYER.y / MAP_PLAYER.moveUnit;		
 	}
-
-/////////////////////////////////// -- CHROME FIX	
-
-/*
-	function hitTest_build()
-	{
-		HIT_TEST = {};
-		HIT_TEST.hits = null;		
-	}
-*/
-	
-/*
-	function hitTest_init()
-	{
-		var register = {};
-		
-		register.hit_field	= false;
-		register.hit_enemy	= false;
-		register.hit_portal	= false;
-		register.hit_nav	= false;
-		register.hit_portal_target = "";
-		
-		// EDGES
-		
-		HIT_TEST.hits = $(".collideCheck-player").collision(".collideCheck-field");
-		
-		// PORTALS
-		
-		PORTAL_COM.hits = $(".collideCheck-player").collision(".collideCheck-portal");
-		
-		// PLAYER HITS EDGE BLOCK OR ENEMY
-		
-		if(HIT_TEST.hits[0] != undefined || HIT_TEST.hits[0] != null)
-		{
-			var hit_id = $(HIT_TEST.hits[0]).attr("id");
-			
-			// CHROME
-			register.hit_id = hit_id;
-			
-			// PLAYER HITS ENEMY
-
-// CHROME			
-			if($("#" + hit_id).attr("data-npc") === "enemy")
-			{
-				register.hit_enemy	= true;
-				
-				register.hit_enemy_target = hit_id;
-				
-				// register.hit_enemy_parent = $(HIT_TEST.hits[0])[0].parentNode;
-				
-				// register.hit_enemy_target = $(register.hit_enemy_parent).attr("id");
-			}
-			
-			// PLAYER HITS EDGE
-			
-			else
-			{
-				register.hit_field = true;	
-			}
-
-			// register.hit_field = true;
-		}
-
-		
-		else
-		{
-			register.hit_field = false;
-			register.hit_enemy	= false;
-		}
-		
-		// PLAYER HITS PORTAL
-		
-		if(PORTAL_COM.hits[0] != undefined || PORTAL_COM.hits[0] != null)
-		{
-			register.hit_portal	= true;
-			
-			register.hit_portal_target = $(PORTAL_COM.hits[0]).attr("id");
-		}
-		
-		else
-		{
-			register.hit_portal	= false;
-		}
-		
-		return register;
-	}
-*/
-/////////////////////////////////// -- CHROME FIX
 	
 	function battleMode_init()
 	{
@@ -668,11 +514,6 @@
 
 		$("." + MAP_PLAYER.tweenClass)[0].addEventListener("webkitTransitionEnd", mapPlayerAxisX_End, false);
 		$("." + MAP_PLAYER.tweenClass)[0].addEventListener("transitionend", mapPlayerAxisX_End, false);
-					
-/*
-		$(".player-area .player-x")[0].addEventListener("webkitTransitionEnd", mapPlayerAxisX_End, false);
-		$(".player-area .player-x")[0].addEventListener("transitionend", mapPlayerAxisX_End, false);
-*/
 		
 		$(".player-area .player-x").css(css_x);
 		
@@ -686,11 +527,6 @@
 	{
 		$("." + MAP_PLAYER.tweenClass)[0].removeEventListener("webkitTransitionEnd", mapPlayerAxisX_End, false);
 		$("." + MAP_PLAYER.tweenClass)[0].removeEventListener("transitionend", mapPlayerAxisX_End, false);
-
-/*
-		$(".player-area .player-x")[0].removeEventListener("webkitTransitionEnd", mapPlayerAxisX_End, false);
-		$(".player-area .player-x")[0].removeEventListener("transitionend", mapPlayerAxisX_End, false);
-*/
 		
 		$(".player-area .player-x").removeClass(MAP_PLAYER.tweenClass);
 		$(".player-block .map-goat-legs").removeClass(MAP_PLAYER.walkClass);
@@ -761,11 +597,6 @@
 					
 		$("." + MAP_PLAYER.tweenClass)[0].addEventListener("webkitTransitionEnd", mapPlayerAxisY_End, false);
 		$("." + MAP_PLAYER.tweenClass)[0].addEventListener("transitionend", mapPlayerAxisY_End, false);
-
-/*
-		$(".player-area .player-y")[0].addEventListener("webkitTransitionEnd", mapPlayerAxisY_End, false);
-		$(".player-area .player-y")[0].addEventListener("transitionend", mapPlayerAxisY_End, false);
-*/
 		
 		$(".player-area .player-y").css(css_y);
 		
@@ -780,11 +611,6 @@
 	{
 		$("." + MAP_PLAYER.tweenClass)[0].removeEventListener("webkitTransitionEnd", mapPlayerAxisY_End, false);
 		$("." + MAP_PLAYER.tweenClass)[0].removeEventListener("transitionend", mapPlayerAxisY_End, false);
-
-/*
-		$(".player-area .player-y")[0].removeEventListener("webkitTransitionEnd", mapPlayerAxisY_End, false);
-		$(".player-area .player-y")[0].removeEventListener("transitionend", mapPlayerAxisY_End, false);
-*/
 		
 		$(".player-area .player-x").removeClass(MAP_PLAYER.tweenClass);
 		$(".player-block .map-goat-legs").removeClass(MAP_PLAYER.walkClass);
@@ -827,25 +653,12 @@
 		if(playerInBattle)
 		{
 			battleMode_init();
-		}		
-		
-		// moveStageTest();		
+		}			
 	}
 	
 	function mapPlayerAxisEventCancel()
 	{
 		MAP_PLAYER.allowControl = false;
-		
-/*
-		if(MAP_PLAYER.tweenClass)
-		{
-			$("." + MAP_PLAYER.tweenClass)[0].removeEventListener("webkitTransitionEnd", mapPlayerAxisX_End, false);
-			$("." + MAP_PLAYER.tweenClass)[0].removeEventListener("transitionend", mapPlayerAxisX_End, false);	
-			
-			$("." + MAP_PLAYER.tweenClass)[0].removeEventListener("webkitTransitionEnd", mapPlayerAxisY_End, false);
-			$("." + MAP_PLAYER.tweenClass)[0].removeEventListener("transitionend", mapPlayerAxisY_End, false);
-		}
-*/
 
 
 		$(".player-area .player-x")[0].removeEventListener("webkitTransitionEnd", mapPlayerAxisX_End, false);
@@ -901,22 +714,8 @@
 		{				
 			if(MAP_PLAYER.enterPortal)
 			{
-				// ADD BACK IN
-				// exitFrame = setTimeout(portalTravelExit, 1000);
+
 			}
-			
-/*
-			if(portalTravelType === "LEVEL")
-			{
-				playerInPortal = false;
-				portalTravelType = "";
-				
-				// PORTAL EXIT CHECK
-				playerExitPortal = true;
-				
-				exitFrame = setTimeout(mapPlayerEntry, 1000, true);
-			}
-*/
 
 			if(battleEndStatus === "LOSE")
 			{
@@ -976,14 +775,11 @@
 		
 		if(MAP_PLAYER.enterPortal)
 		{
-			// ADD BACK IN
-			// exitFrame = setTimeout(portalTravelExit, 1000);
+
 		}
 		
 		if(playerInPortal)
 		{
-			// alert("if(playerInPortal)");
-			
 			if(portalTravelType === "STAGE")
 			{
 				playerInPortal = false;
@@ -1021,13 +817,8 @@
 		}	
 	}
 	
-	
-	
-/*
 	function portalEntry(hitPortal)
 	{
-		var foundPortal;
-		
 		for(var i in portals)
 		{
 			if(portals[i].id === hitPortal)
@@ -1035,45 +826,6 @@
 				if(portals[i].j_type === "LEVEL")
 				{
 					portalTravelType = "LEVEL";
-				}
-				
-				if(portals[i].j_type === "STAGE")
-				{
-					portalTravelType = "STAGE";
-				}	
-			}
-			
-			// NEXT PORTAL FIND
-			
-			for(var j in portals)
-			{
-				trace(portals[i].travel + " " + portals[j].name);
-				
-				
-				if(portals[i].travel === portals[j].name)
-				{
-					MAP_PLAYER.portalObj = portals[j];	
-				}
-			}
-		}
-	}
-*/
-	
-	function portalEntry(hitPortal)
-	{
-		trace("!----------------------------------------------------- PORTAL FAIL TEST");
-		trace(portals);
-		trace("!----------------------------------------------------- PORTAL FAIL TEST");
-		
-		
-		for(var i in portals)
-		{
-			if(portals[i].id === hitPortal)
-			{
-				if(portals[i].j_type === "LEVEL")
-				{
-					portalTravelType = "LEVEL";
-					
 					
 					GAME.portalEnterThrough = portals[i].j_to_num;
 					GAME.mapLevel = portals[i].j_to;
@@ -1092,17 +844,10 @@
 	
 	function portalExit(portalObj)
 	{
-		trace("!----------------------------------------------------- PORTAL FAIL TEST");
-		trace(portalObj);
-		trace("!----------------------------------------------------- PORTAL FAIL TEST");
-		
-		
 		// NEXT PORTAL FIND
 			
 		for(var i in portals)
 		{
-			// trace(portals[i].travel + " " + portals[j].name);
-				
 			if(portalObj.travel === portals[i].name)
 			{
 				MAP_PLAYER.portalObj = portals[i];	
@@ -1114,11 +859,6 @@
 	{
 		if(portalTravelType === "LEVEL")
 		{
-			trace("portalTravelSort(); " + "LEVEL");
-			trace(MAP_PLAYER);
-			
-			// exitFrame = setTimeout(globalFade_IN, 20, "white", refreshRebuildLevel);
-			
 			globalFade_IN("white", refreshRebuildLevel);
 			
 			// level change	
@@ -1127,13 +867,6 @@
 		if(portalTravelType === "STAGE")
 		{
 			trace("portalTravelSort(); " + "STAGE");
-			trace(MAP_PLAYER);
-			// stage shift
-			
-			// SMOOTH
-			// portalPlayerFadeOut();
-			
-			// SMOOTH
 			mapPlayerPlace();
 		}
 	}
@@ -1149,9 +882,6 @@
 	function portalPlayerFadeOutEnd(event)
 	{
 		$(".player-area")[0].removeEventListener("webkitTransitionEnd", portalPlayerFadeOutEnd, false);
-		$(".player-area")[0].removeEventListener("transitionend", portalPlayerFadeOutEnd, false);
-		
-		// SMOOTH
-		// mapPlayerPlace();		
+		$(".player-area")[0].removeEventListener("transitionend", portalPlayerFadeOutEnd, false);		
 	}	
 	

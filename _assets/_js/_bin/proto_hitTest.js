@@ -17,13 +17,9 @@
 	{
 		var hit_id = "";
 		
-		// EDGES
+		// SETUP - INIT
 		
 		HIT_TEST.hits = $(".preHitTest .collideCheck-player").collision(".collideCheck-field");
-		
-		// PORTALS
-		
-		PORTAL_COM.hits = $(".collideCheck-player").collision(".collideCheck-portal");
 		
 		if(HIT_TEST.hits[0] != undefined || HIT_TEST.hits[0] != null)
 		{
@@ -49,6 +45,28 @@
 				mapPlayerMoveY();
 			}
 			
+			// PLAYER HITS PORTAL
+			else if($("#" + hit_id).attr("data-gameObject") === "portal")
+			{
+				HIT_TEST.hit_portal	= true;
+				
+				HIT_TEST.hit_portal_target = $(HIT_TEST.hits[0]).attr("id");
+				
+				controlsCancel(false);
+				
+				playerInPortal = true;
+				
+				portalEntry(HIT_TEST.hit_portal_target);
+				
+				$(".player-area").css("opacity", 0);
+				
+				mapPlayerMoveX();
+				mapPlayerMoveY();
+				
+				
+				nonAlert("HIT PORTAL " + HIT_TEST.hit_portal_target);				
+			}
+			
 			// PLAYER HITS EDGE
 			
 			else
@@ -69,37 +87,11 @@
 		{
 			HIT_TEST.hit_edge = false;
 			HIT_TEST.hit_enemy = false;
+			HIT_TEST.hit_portal	= false;
 			
 			mapPlayerMoveX();
 			mapPlayerMoveY();
 			
 			nonAlert("HIT NOTHING");
 		}
-		
-		// PLAYER HITS PORTAL
-		
-		if(PORTAL_COM.hits[0] != undefined || PORTAL_COM.hits[0] != null)
-		{
-			HIT_TEST.hit_portal	= true;
-			
-			HIT_TEST.hit_portal_target = $(PORTAL_COM.hits[0]).attr("id");
-			
-			controlsCancel(false);
-			
-			playerInPortal = true;
-			
-			portalEntry(HIT_TEST.hit_portal_target);
-			
-			$(".player-area").css("opacity", 0);
-			
-			
-			nonAlert("HIT PORTAL " + HIT_TEST.hit_portal_target);
-		}
-		
-		else
-		{
-			HIT_TEST.hit_portal	= false;
-			
-			// nonAlert("HIT NOTHING");
-		}		
 	}
