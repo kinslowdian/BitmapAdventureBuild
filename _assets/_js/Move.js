@@ -18,11 +18,17 @@
 	
 	var html_snapShot_preBattle;
 	
+	var TOUCH_UI;
+	
 	
 	function controlNewLevel()
 	{
 		initMapPlayer();
 		hitTest_build();
+		
+		// SET IF USER IS ON A TOUCH DEVICE
+		
+		initTouchUI();
 	}
 	
 	function mapPlayerStartQuest()
@@ -75,6 +81,14 @@
 		MAP_PLAYER.walkClass 	= "tween-map-goat-legs";
 		
 		MAP_PLAYER.allowControl	= false;
+	}
+	
+	function initTouchUI()
+	{
+		TOUCH_UI = {};
+		
+		TOUCH_UI.userTouchPad = false;
+		TOUCH_UI.storeEvent = null;
 	}
 	
 	
@@ -224,7 +238,7 @@
 			$("#touchPad #touchPad-U")[0].addEventListener("touchend", registerTouch, false);
 			$("#touchPad #touchPad-D")[0].addEventListener("touchend", registerTouch, false);
 			$("#touchPad #touchPad-L")[0].addEventListener("touchend", registerTouch, false);
-			$("#touchPad #touchPad-R")[0].addEventListener("touchend", registerTouch, false);			
+			$("#touchPad #touchPad-R")[0].addEventListener("touchend", registerTouch, false);		
 		}
 		
 		else
@@ -239,7 +253,15 @@
 			$("#touchPad #touchPad-U")[0].removeEventListener("touchend", registerTouch, false);
 			$("#touchPad #touchPad-D")[0].removeEventListener("touchend", registerTouch, false);
 			$("#touchPad #touchPad-L")[0].removeEventListener("touchend", registerTouch, false);
-			$("#touchPad #touchPad-R")[0].removeEventListener("touchend", registerTouch, false);			
+			$("#touchPad #touchPad-R")[0].removeEventListener("touchend", registerTouch, false);
+			
+/*
+			if(TOUCH_UI)
+			{
+				TOUCH_UI.userTouchPad = false;
+				TOUCH_UI.storeEvent = null;
+			}
+*/			
 		}
 	}
 	
@@ -289,6 +311,82 @@
 	function registerTouch(event)
 	{
 		event.preventDefault();
+		
+		var fakeEvent = {};
+		
+		if(MAP_PLAYER.allowControl)
+		{
+			if(event.type === "touchstart")
+			{
+				TOUCH_UI.userTouchPad = true;
+				
+				fakeEvent.keyCode = sortTouchDirection(event.target.id);
+				
+				TOUCH_UI.storeEvent = fakeEvent;
+				
+				registerKey(fakeEvent);
+			}
+			
+			else
+			{
+				TOUCH_UI.userTouchPad = false;
+				// TOUCH_UI.storeEvent = null;
+			}	
+		}
+		
+		else
+		{
+			TOUCH_UI.userTouchPad = false;
+		}
+	}
+	
+	function sortTouchDirection(str)
+	{
+		var c;
+		
+		switch(str)
+		{
+			case "touchPad-U":
+			{
+				//c = "UP";
+				
+				c = 38;
+				
+				break;
+			}
+			
+			case "touchPad-D":
+			{
+				//c = "DOWN";
+				
+				c = 40;
+				
+				break;
+			}
+			
+			case "touchPad-L":
+			{
+				//c = "LEFT";
+				
+				c = 37;
+				
+				break;
+			}
+			
+			case "touchPad-R":
+			{
+				// c = "RIGHT";
+				
+				c = 39;
+				
+				break;
+			}
+		}
+		
+		if(c)
+		{
+			return c;
+		}
 	}
 	
 	function controlConvert_XY(send)
@@ -542,7 +640,13 @@
 		
 		else
 		{
-			MAP_PLAYER.allowControl = true;			
+			MAP_PLAYER.allowControl = true;
+			
+			// TOUCH - KEYDOWN HACK
+			if(TOUCH_UI.userTouchPad)
+			{
+				registerKey(TOUCH_UI.storeEvent);
+			}				
 		}
 		
 		if(playerExitPortal)
@@ -554,12 +658,28 @@
 			// control plug
 			
 			controlPort(true);
+			
+/*
+			// TOUCH - KEYDOWN HACK
+			if(TOUCH_UI.userTouchPad)
+			{
+				registerKey(TOUCH_UI.storeEvent);
+			}
+*/
 		}
 		
 		if(playerInBattle)
 		{
 			battleMode_init();
-		}				
+		}
+		
+/*
+		// TOUCH - KEYDOWN HACK
+		if(TOUCH_UI.userTouchPad)
+		{
+			registerKey(TOUCH_UI.storeEvent);
+		}
+*/				
 	}
 	
 	
@@ -637,6 +757,12 @@
 		else
 		{
 			MAP_PLAYER.allowControl = true;
+			
+			// TOUCH - KEYDOWN HACK
+			if(TOUCH_UI.userTouchPad)
+			{
+				registerKey(TOUCH_UI.storeEvent);
+			}	
 		}
 		
 		if(playerExitPortal)
@@ -648,12 +774,28 @@
 			// control plug
 			
 			controlPort(true);
+			
+/*
+			// TOUCH - KEYDOWN HACK
+			if(TOUCH_UI.userTouchPad)
+			{
+				registerKey(TOUCH_UI.storeEvent);
+			}
+*/
 		}
 		
 		if(playerInBattle)
 		{
 			battleMode_init();
-		}			
+		}
+		
+/*
+		// TOUCH - KEYDOWN HACK
+		if(TOUCH_UI.userTouchPad)
+		{
+			registerKey(TOUCH_UI.storeEvent);
+		}	
+*/		
 	}
 	
 	function mapPlayerAxisEventCancel()
@@ -668,7 +810,10 @@
 		$(".player-area .player-y")[0].removeEventListener("transitionend", mapPlayerAxisY_End, false);
 		
 		$(".player-area .player-x").removeClass(MAP_PLAYER.tweenClass);
-		$(".player-area .player-y").removeClass(MAP_PLAYER.tweenClass);	
+		$(".player-area .player-y").removeClass(MAP_PLAYER.tweenClass);
+		
+		// TOUCH_UI.userTouchPad = false;
+		// TOUCH_UI.storeEvent = null;	
 	}
 	
 	
@@ -869,6 +1014,8 @@
 			trace("portalTravelSort(); " + "STAGE");
 			mapPlayerPlace();
 		}
+		
+		initTouchUI();
 	}
 	
 	function portalPlayerFadeOut()
