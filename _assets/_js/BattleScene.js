@@ -200,6 +200,9 @@
 			
 		revert_XY();
 		
+		// MOBILE-FIX
+		screenUpdateInit();
+		
 		globalFade_OUT(returnToBattleContinue);
 	}
 	

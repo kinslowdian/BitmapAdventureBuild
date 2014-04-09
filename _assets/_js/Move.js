@@ -91,6 +91,21 @@
 		TOUCH_UI.storeEvent = null;
 	}
 	
+	function controlTouchUI(show)
+	{
+		if(show)
+		{
+			$("#touchPad").css("opacity", "1");
+			$(".touchPad-area").css("pointer-events", "auto");
+		}
+		
+		else
+		{
+			$("#touchPad").css("opacity", "0");
+			$(".touchPad-area").css("pointer-events", "none");
+		}
+	}
+	
 	
 	function mapPlayerPlace()
 	{
@@ -130,7 +145,8 @@
 				MAP_PLAYER.y = MAP_PLAYER.portalObj.y; 
 				MAP_PLAYER.entry_d = MAP_PLAYER.portalObj.exit;
 				
-				$(".player-area").css("opacity", 0);	// 0			
+				$(".player-area").css("opacity", 0);	// 0
+				controlTouchUI(false);			
 			}
 			
 			revert_XY();			
@@ -526,6 +542,7 @@
 				portalEntry(HIT_TEST.hit_portal_target);
 				
 				$(".player-area").css("opacity", 0);
+				controlTouchUI(false);
 				
 				mapPlayerMoveX();
 				mapPlayerMoveY();
@@ -618,6 +635,7 @@
 		if(playerExitPortal)
 		{
 			$(".player-area").css("opacity", 1);
+			controlTouchUI(true);
 		}
 	}
 	
@@ -723,6 +741,7 @@
 		if(playerExitPortal)
 		{
 			$(".player-area").css("opacity", 1);
+			controlTouchUI(true);
 		}
 		
 	}
@@ -1023,7 +1042,9 @@
 		$(".player-area")[0].addEventListener("webkitTransitionEnd", portalPlayerFadeOutEnd, false);
 		$(".player-area")[0].addEventListener("transitionend", portalPlayerFadeOutEnd, false);
 		
-		$(".player-area").css("opacity", 0); 
+		$(".player-area").css("opacity", 0);
+		
+		controlTouchUI(false); 
 	}
 	
 	function portalPlayerFadeOutEnd(event)

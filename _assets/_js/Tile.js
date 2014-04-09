@@ -758,6 +758,9 @@
 		$("#stage-levelNotice .levelNotice_text_title")[0].removeEventListener("webkitTransitionEnd", levelInfoDisplayTextRemoveEnd, false);
 		$("#stage-levelNotice .levelNotice_text_title")[0].removeEventListener("transitionend", levelInfoDisplayTextRemoveEnd, false);
 		
+		// MOBILE-FIX
+		screenUpdate(null);
+		
 		var fullRemoveDelay = setTimeout(levelInfoDisplayRemove, 500);		
 	}
 	
